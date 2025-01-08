@@ -19,11 +19,11 @@ void testCreateStringFromCharCode()
     if (! stringsAreEqual(&expected1, &result1)) { fails = true; }
     
     struct String result2 = createStringFromCharCode(364);
-    struct String expected2 = { 0, "" };
+    struct String expected2 = createEmptyString();
     if (! stringsAreEqual(&expected2, &result2)) { fails = true ; }
     
     struct String result3 = createStringFromCharCode(-1);
-    struct String expected3 = { 0, "" };
+    struct String expected3 = createEmptyString();
     if (! stringsAreEqual(&expected3, &result3)) { fails = true ; }
     
     if (fails) {
