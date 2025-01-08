@@ -56,11 +56,20 @@ function showOpenMessage() {
     console.log("  Usage: baseone myFile\n")
     console.log("  Usage: baseone myFile --name=myOtherName --clearscreen\n")
     console.log("  Note: don't write the '.bo' extension\n")
-    console.log("  Help: https://github.com/JoanaBLate/baseone-lang\n") // TODO: fix the address
+    console.log("  Help: https://github.com/JoanaBLate/baseone-lang\n") 
 }
 
 function cliError(msg) {
     console.log("ERROR:", msg)
     exitProgram()
+}
+
+// unused
+function __figletBaseOne() {
+    console.log("  ____                  ___              ")
+    console.log(" | __ )  __ _ ___  ___ / _ \\ _ __   ___  ")
+    console.log(" |  _ \\ / _` / __|/ _ \\ | | | '_ \\ / _ \\")
+    console.log(" | |_) | (_| \\__ \\  __/ |_| | | | |  __/ ")
+    console.log(" |____/ \\__,_|___/\\___|\\___/|_| |_|\\___|")
 }
 
