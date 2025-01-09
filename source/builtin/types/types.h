@@ -4,8 +4,8 @@ typedef unsigned short bool;
 const unsigned short true = 1;
 const unsigned short false = 0;
 
-struct String {
+typedef struct {
     int size;
     char *data;    
-};
+} String;
 
