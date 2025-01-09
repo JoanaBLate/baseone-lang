@@ -1,49 +1,55 @@
 
-void testCharCodeAt() 
+void testStringCharCodeAt() 
 {
-    struct String source = { 6, "He@llo" };
+    printf("- testing stringCharCodeAt\n"); 
+    
+    String source = { 6, "He@llo" };
     bool fails = false;
     if (stringCharCodeAt(&source, 3) != 64)   { fails = true; }
     if (stringCharCodeAt(&source, 333) != -1) { fails = true; }
     if (stringCharCodeAt(&source, -33) != -1) { fails = true; }
     
     if (fails) { 
-        printf("testCharCodeAt FAILS!\n"); 
+        printf("stringCharCodeAt FAILS!\n"); 
         exit(1);
     }
 }
 
 void testStringsAreEquals()
 {
+    printf("- testing stringsAreEqual\n"); 
+    
     bool fails = false;
 
-    struct String source1 = { 16, "Life is ∆ rock" };
-    struct String source2 = { 16, "Life is ∆ rock" };
-    struct String source3 = { 12, "Life is ∆ " };
+    String source1 = { 16, "Life is ∆ rock" };
+    String source2 = { 16, "Life is ∆ rock" };
+    String source3 = { 12, "Life is ∆ " };
 
-    if (! stringsAreEqual(&source1, &source2)) { fails = true; };
-    if (stringsAreEqual(&source1, &source3))   { fails = true; };
+    if (! stringsAreEqual(&source1, &source2)) { fails = true; }
+    if (stringsAreEqual(&source1, &source3))   { fails = true; }
     
-    struct String empty1 = createEmptyString();    
-    struct String empty2 = createEmptyString();
+    String empty1 = createEmptyString();    
+    String empty2 = createEmptyString();
     
-    if (! stringsAreEqual(&empty1, &empty2)) { fails = true; };
-    if (stringsAreEqual(&empty1, &source1))  { fails = true; };
+    if (! stringsAreEqual(&empty1, &empty2)) { fails = true; }
+    if (stringsAreEqual(&empty1, &source1))  { fails = true; }
     
     if (fails) { 
-        printf("testStringsAreEqual FAILS!\n");
+        printf("stringsAreEqual FAILS!\n");
         exit(1);
     }
 }
 
 void testStringContains()
 {
+    printf("- testing stringContains\n"); 
+    
     bool fails = false;
 
-    struct String empty = createEmptyString();    
-    struct String source1 = { 16, "Life is ∆ rock" };
-    struct String source2 = {  7, " ∆ ro" };
-    struct String source3 = {  6, "ck ∆" };
+    String empty = createEmptyString();    
+    String source1 = { 16, "Life is ∆ rock" };
+    String source2 = {  7, " ∆ ro" };
+    String source3 = {  6, "ck ∆" };
     
     if (! stringContains(&source1, &source1)) { fails = true; }
     if (! stringContains(&source1, &source2)) { fails = true; }
@@ -52,19 +58,21 @@ void testStringContains()
     if (stringContains(&empty, &source1))   { fails = true; }
 
     if (fails) { 
-        printf("testStringContains FAILS!\n"); 
+        printf("stringContains FAILS!\n"); 
         exit(1);
     }
 }
 
 void testStringStartsWith()
 {
+    printf("- testing stringStartsWith\n"); 
+    
     bool fails = false;
 
-    struct String empty = createEmptyString();  
-    struct String source1 = { 16, "Life is ∆ rock" };  
-    struct String source2 = { 11, "Life is ∆" };
-    struct String source3 = { 10, "Life rocks" };
+    String empty = createEmptyString();  
+    String source1 = { 16, "Life is ∆ rock" };  
+    String source2 = { 11, "Life is ∆" };
+    String source3 = { 10, "Life rocks" };
     
     if (stringStartsWith(&source1, &empty))   { fails = true; }
     if (stringStartsWith(&empty, &source1))   { fails = true; }
@@ -74,19 +82,21 @@ void testStringStartsWith()
     if (! stringStartsWith(&source1, &source2)) { fails = true; }
 
     if (fails) { 
-        printf("testStringStartsWith FAILS!\n");
+        printf("stringStartsWith FAILS!\n");
         exit(1);
     }
 }
 
 void testStringEndsWith()
 {
+    printf("- testing stringEndsWith\n"); 
+    
     bool fails = false;
 
-    struct String empty = createEmptyString();  
-    struct String source1 = { 16, "Life is ∆ rock" };  
-    struct String source2 = {  6, "ck ∆" };
-    struct String source3 = {  8, "∆ rock" };
+    String empty = createEmptyString();  
+    String source1 = { 16, "Life is ∆ rock" };  
+    String source2 = {  6, "ck ∆" };
+    String source3 = {  8, "∆ rock" };
     
     if (stringEndsWith(&source1, &empty))   { fails = true; }
     if (stringEndsWith(&empty, &source1))   { fails = true; }
@@ -96,19 +106,21 @@ void testStringEndsWith()
     if (! stringEndsWith(&source1, &source3)) { fails = true; }
 
     if (fails) { 
-        printf("testStringEndsWith FAILS!\n");
+        printf("stringEndsWith FAILS!\n");
         exit(1);
     }
 }
 
 void testStringIndexOf()
 {
+    printf("- testing stringIndexOf\n"); 
+    
     bool fails = false;
 
-    struct String empty = createEmptyString();  
-    struct String source1 = { 34, "Life is ∆ rock and ∆ like rock" };  
-    struct String source2 = {  8, "∆ like" };
-    struct String source3 = {  7, "and#∆" };
+    String empty = createEmptyString();  
+    String source1 = { 34, "Life is ∆ rock and ∆ like rock" };  
+    String source2 = {  8, "∆ like" };
+    String source3 = {  7, "and#∆" };
 
     if (stringIndexOf(&source1, &source1) !=  1) { fails = true; }
     if (stringIndexOf(&source1, &source2) != 22) { fails = true; }
@@ -118,19 +130,21 @@ void testStringIndexOf()
     if (stringIndexOf(&empty, &empty)     !=  0) { fails = true; }
     
     if (fails) {
-        printf("testStringIndexOf FAILS!\n");
+        printf("stringIndexOf FAILS!\n");
         exit(1);
     }
 }
 
 void testStringLastIndexOf()
 {
+    printf("- testing stringLastIndexOf\n"); 
+    
     bool fails = false;
 
-    struct String empty = createEmptyString();  
-    struct String source1 = { 34, "Life is ∆ rock and ∆ like rock" }; 
-    struct String source2 = {  3, "∆" };
-    struct String source3 = {  4, "∆#" };
+    String empty = createEmptyString();  
+    String source1 = { 34, "Life is ∆ rock and ∆ like rock" }; 
+    String source2 = {  3, "∆" };
+    String source3 = {  4, "∆#" };
 
     if (stringLastIndexOf(&source1, &source1) !=  1) { fails = true; }
     if (stringLastIndexOf(&source1, &source2) != 22) { fails = true; }
@@ -140,19 +154,21 @@ void testStringLastIndexOf()
     if (stringLastIndexOf(&empty, &empty)   !=  0) { fails = true; }    
     
     if (fails) {
-        printf("testStringLastIndexOf FAILS!\n");
+        printf("stringLastIndexOf FAILS!\n");
         exit(1);
     }
 }
 
 void testStringIndexOfAfter()
 {
+    printf("- testing stringIndexOfAfter\n"); 
+    
     bool fails = false;
 
-    struct String empty = createEmptyString();  
-    struct String source1 = { 34, "Life is ∆ rock and ∆ like rock" };  
-    struct String source2 = {  3, "∆" };
-    struct String source3 = {  4, "∆#" };
+    String empty = createEmptyString();  
+    String source1 = { 34, "Life is ∆ rock and ∆ like rock" };  
+    String source2 = {  3, "∆" };
+    String source3 = {  4, "∆#" };
     
     if (stringIndexOfAfter(&source1, &source1,  0) !=  1) { fails = true; }
     if (stringIndexOfAfter(&source1, &source1, -9) !=  1) { fails = true; }
@@ -160,56 +176,39 @@ void testStringIndexOfAfter()
     if (stringIndexOfAfter(&source1, &source2, 99) !=  0) { fails = true; }
     if (stringIndexOfAfter(&source1, &source2,  0) !=  9) { fails = true; }
     if (stringIndexOfAfter(&source1, &source3,  0) !=  0) { fails = true; }
-    if (stringIndexOfAfter(&source1, &empty, 0) !=  0) { fails = true; }  
-    if (stringIndexOfAfter(&empty, &source1, 0) !=  0) { fails = true; }  
-    if (stringIndexOfAfter(&empty, &empty,   0) !=  0) { fails = true; }  
+    if (stringIndexOfAfter(&source1, &empty, 0) != 0) { fails = true; }  
+    if (stringIndexOfAfter(&empty, &source1, 0) != 0) { fails = true; }  
+    if (stringIndexOfAfter(&empty, &empty,   0) != 0) { fails = true; }  
          
     if (fails) {
-        printf("testStringIndexOfAfter FAILS!\n");
+        printf("stringIndexOfAfter FAILS!\n");
         exit(1);
     }
 }
 
 void testStringLastIndexOfBefore()
 {
+    printf("- testing stringLastIndexOfBefore\n"); 
+    
     bool fails = false;
 
-    struct String empty = createEmptyString();  
-    struct String source1 = { 34, "Life is ∆ rock and ∆ like rock" }; 
-    struct String source2 = {  3, "∆" };
-    struct String source3 = {  4, "∆#" };
+    String empty = createEmptyString();  
+    String source1 = { 34, "Life is ∆ rock and ∆ like rock" }; 
+    String source2 = {  3, "∆" };
+    String source3 = {  4, "∆#" };
     
     if (stringLastIndexOfBefore(&source1, &source1, -1) !=  0) { fails = true; }
     if (stringLastIndexOfBefore(&source1, &source1,  3) !=  0) { fails = true; }
     if (stringLastIndexOfBefore(&source1, &source2, 22) !=  9) { fails = true; }
     if (stringLastIndexOfBefore(&source1, &source3, 99) !=  0) { fails = true; }
     if (stringLastIndexOfBefore(&source1, &source1, 99) !=  1) { fails = true; }
-    if (stringLastIndexOfBefore(&source1, &empty, 10)  !=  0) { fails = true; } 
-    if (stringLastIndexOfBefore(&empty, &source1, 10)  !=  0) { fails = true; } 
-    if (stringLastIndexOfBefore(&empty, &empty,   10)  !=  0) { fails = true; }  
+    if (stringLastIndexOfBefore(&source1, &empty, 10) !=  0) { fails = true; } 
+    if (stringLastIndexOfBefore(&empty, &source1, 10) !=  0) { fails = true; } 
+    if (stringLastIndexOfBefore(&empty, &empty,   10) !=  0) { fails = true; }  
          
     if (fails) {
-        printf("testStringLastIndexOfBefore FAILS!\n"); 
+        printf("stringLastIndexOfBefore FAILS!\n"); 
         exit(1);
     }
-}
-
-void stringInfoTest()
-{
-    printf("TESTING string info\n");
-    
-    testCharCodeAt();
-
-    testStringsAreEquals();
-
-    testStringContains();
-    testStringEndsWith();
-    testStringStartsWith();
-
-    testStringIndexOf();
-    testStringLastIndexOf();
-
-    testStringIndexOfAfter();
-    testStringLastIndexOfBefore();
 }
 

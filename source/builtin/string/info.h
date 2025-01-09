@@ -1,5 +1,10 @@
 
-int stringCharCodeAt(struct String *string, int index) // one base index
+int getStringSize(String *string)
+{        
+    return string->size;
+}
+
+int stringCharCodeAt(String *string, int index) // one base index
 {    
     if (index < 1) { return -1; }
     
@@ -10,7 +15,7 @@ int stringCharCodeAt(struct String *string, int index) // one base index
     return (int) value;
 }
 
-bool stringsAreEqual(struct String *stringA, struct String *stringB)
+bool stringsAreEqual(String *stringA, String *stringB)
 {
     if (stringA->size != stringB->size) { return false; };
     
@@ -21,7 +26,7 @@ bool stringsAreEqual(struct String *stringA, struct String *stringB)
     return true;
 }
 
-bool stringStartsWith(struct String *string, struct String *target)
+bool stringStartsWith(String *string, String *target)
 {    
     if (target->size == 0) { return false; }
     
@@ -34,7 +39,7 @@ bool stringStartsWith(struct String *string, struct String *target)
     return true;
 }
 
-bool stringEndsWith(struct String *string, struct String *target)
+bool stringEndsWith(String *string, String *target)
 {    
     if (target->size == 0) { return false; }
     
@@ -49,7 +54,7 @@ bool stringEndsWith(struct String *string, struct String *target)
     return true;
 }
 
-int stringIndexOf(struct String *string, struct String *target) // one base index
+int stringIndexOf(String *string, String *target) // one base index
 {    
     if (target->size == 0) { return 0; }
     
@@ -71,7 +76,7 @@ int stringIndexOf(struct String *string, struct String *target) // one base inde
     return 0;
 }
 
-int stringIndexOfAfter(struct String *string, struct String *target, int usedIndex) // one base index
+int stringIndexOfAfter(String *string, String *target, int usedIndex) // one base index
 {    
     if (string->size == 0) { return 0; }
 
@@ -99,7 +104,7 @@ int stringIndexOfAfter(struct String *string, struct String *target, int usedInd
     return 0;
 }
 
-int stringLastIndexOf(struct String *string, struct String *target) // one base index
+int stringLastIndexOf(String *string, String *target) // one base index
 {    
     if (target->size == 0) { return 0; }
     
@@ -121,7 +126,7 @@ int stringLastIndexOf(struct String *string, struct String *target) // one base 
     return 0;
 }
 
-int stringLastIndexOfBefore(struct String *string, struct String *target, int usedIndex) // one base index
+int stringLastIndexOfBefore(String *string, String *target, int usedIndex) // one base index
 {    
     if (target->size == 0) { return 0; }
 
@@ -147,7 +152,7 @@ int stringLastIndexOfBefore(struct String *string, struct String *target, int us
     return 0;
 }
 
-bool stringContains(struct String *string, struct String *target)
+bool stringContains(String *string, String *target)
 {    
     return (stringIndexOf(string, target) != 0);
 }

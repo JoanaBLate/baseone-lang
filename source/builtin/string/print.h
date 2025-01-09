@@ -1,5 +1,5 @@
 
-void printString(struct String *string)
+void printString(String *string)
 {
     char substitute = 26;
     
@@ -20,7 +20,7 @@ void printString(struct String *string)
     }
 }
 
-void printStringBytes(struct String *string)
+void printStringBytes(String *string)
 {    
     if (string->size == 0) { printf("{ }"); return; }
 
@@ -41,7 +41,7 @@ void printStringBytes(struct String *string)
     printf(" }");
 }
 
-void printStringRunes(struct String *string)
+void printStringRunes(String *string)
 {
     char substitute = 26;
     
