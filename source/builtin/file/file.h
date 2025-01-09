@@ -50,8 +50,13 @@ void cReadFile(char *filename, char *buffer, long fileSize)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-struct String readTextFile(struct String *filename)
+String readTextFile(String *filename)
 {
+    if (filename->size == 0) {    
+        printf("\nERROR: cannot read text file: file name is blank\n");
+        exit(1);     
+    }
+
     // c filename
     char cFilename[filename->size + 1];
     memcpy(cFilename, filename->data, filename->size);
@@ -76,7 +81,7 @@ struct String readTextFile(struct String *filename)
         exit(1);    
     }
     
-    struct String string = { fileSize, buffer };
+    String string = { fileSize, buffer };
     
     return string;
 }
