@@ -7,7 +7,8 @@
 
 #include "types/types.h"
 #include "file/file.h"
-#include "string/create.h"
+#include "string/create-clone-repeat.h"
 #include "string/info.h"
-#include "string/substr.h"
+#include "string/substr-start-end.h"
+#include "string/pad-insert.h"
 #include "string/print.h"

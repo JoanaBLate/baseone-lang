@@ -1,27 +1,45 @@
 
 #include "builtin.h"
 #include "file/file--test.h"
-#include "string/create--test.h"
+#include "string/create-clone-repeat--test.h"
 #include "string/info--test.h"
-#include "string/substr--test.h"
-//#include "string/expand--test.h"
-//#include "string/reduce--test.h"
-//#include "string/same-size--test.h"
+#include "string/substr-start-end--test.h"
+#include "string/pad-insert--test.h"
 #include "string/print--test.h"
 
 int main()
 {
-    fileTest();
+    testReadTextFile();
     
-    stringCreateTest(); 
-    stringInfoTest();
-    stringSubstrTest(); 
-//    stringExpandTest(); 
-//    stringReduceTest(); 
-   
-   
-   // stringPrintTest(); 
+    testCreateEmptyString();
+    testCreateStringFromCharCode();
+    testCreateStringFromLiteral();
+    testCreateStringClone();
+    testCreateRepeatedString();
+    
+    testCreateStringStart(); 
+    testCreateStringEnd(); 
+    testCreateSubstring(); 
         
+    testCreateAppendedString(); 
+    testCreateInsertedString(); 
+    testCreatePaddedStartString();
+    testCreatePaddedEndString();
+
+    testStringCharCodeAt();
+    testStringsAreEquals();
+    testStringContains();
+    testStringEndsWith();
+    testStringStartsWith();
+    testStringIndexOf();
+    testStringLastIndexOf();
+    testStringIndexOfAfter();
+    testStringLastIndexOfBefore();
+    
+    testPrintStringA();
+    testPrintStringB();
+    testPrintStringC();
+    
     return 0;
 }
 
