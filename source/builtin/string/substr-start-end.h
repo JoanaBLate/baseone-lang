@@ -1,3 +1,4 @@
+// # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 String createSubstring(String *string, int start, int count) // one base index
 {

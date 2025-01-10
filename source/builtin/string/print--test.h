@@ -1,3 +1,4 @@
+// # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 void testPrintStringA() 
 {
@@ -18,8 +19,10 @@ void testPrintStringA()
 
 void testPrintStringB()
 {
-    char data[] = { 226, 136, 134, 32, 226, 136, 135, 32, 240, 159, 154, 128 };
-    String string = { 12, data };
+ // char data[] = { 226, 136, 134, 32, 226, 136, 135, 32, 240, 159, 154, 128 }; // gets pedantic warnings
+ // String string = { 12, data };
+
+    String string = createStringFromLiteral("\xe2\x88\x86 \xe2\x88\x87 \xf0\x9f\x9a\x80");
      
     printf("\n- printing string: ");
     printString(&string);
