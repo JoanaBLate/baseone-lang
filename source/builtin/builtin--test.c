@@ -7,6 +7,8 @@
 #include "string/substr-start-end--test.h"
 #include "string/pad-insert--test.h"
 #include "string/remove-replace--test.h"
+#include "string/cut-trim--test.h"
+#include "string/lower-reverse-sort--test.h"
 #include "string/print--test.h"
 
 int main()
@@ -40,8 +42,22 @@ int main()
     
     testCreateStringRemove();
     testCreateStringReplaceStart();
-    testCreateStringReplace();
     testCreateStringReplaceEnd();
+    testCreateStringReplace();
+    
+    testCreateStringCutStart();
+    testCreateStringCutEnd();
+    testCreateStringCutMiddle();
+        
+    testCreateStringTrimStart();
+    testCreateStringTrimEnd();
+    testCreateStringTrim();
+    
+    testCreateStringToLower();
+    testCreateStringToUpper();
+    testCreateStringToOppositeCase();
+    testCreateReversedString();
+    testCreateSortedString();
     
     testPrintStringA();
     testPrintStringB();

@@ -2,7 +2,7 @@
 
 #include <math.h>
 #include <stdio.h>
-//#include <ctype.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -14,3 +14,5 @@
 #include "string/substr-start-end.h"
 #include "string/pad-insert.h"
 #include "string/remove-replace.h"
+#include "string/cut-trim.h"
+#include "string/lower-reverse-sort.h"
