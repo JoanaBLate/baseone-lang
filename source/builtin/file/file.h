@@ -1,3 +1,4 @@
+// # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 long cGetFileSize(char *filename)
 {
