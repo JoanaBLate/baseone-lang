@@ -1,3 +1,4 @@
+// # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 #include "builtin.h"
 #include "file/file--test.h"
@@ -5,11 +6,22 @@
 #include "string/info--test.h"
 #include "string/substr-start-end--test.h"
 #include "string/pad-insert--test.h"
+#include "string/remove-replace--test.h"
 #include "string/print--test.h"
 
 int main()
 {
     testReadTextFile();
+
+    testStringCharCodeAt();
+    testStringsAreEquals();
+    testStringContains();
+    testStringEndsWith();
+    testStringStartsWith();
+    testStringIndexOf();
+    testStringLastIndexOf();
+    testStringIndexOfAfter();
+    testStringLastIndexOfBefore();
     
     testCreateEmptyString();
     testCreateStringFromCharCode();
@@ -25,16 +37,11 @@ int main()
     testCreateInsertedString(); 
     testCreatePaddedStartString();
     testCreatePaddedEndString();
-
-    testStringCharCodeAt();
-    testStringsAreEquals();
-    testStringContains();
-    testStringEndsWith();
-    testStringStartsWith();
-    testStringIndexOf();
-    testStringLastIndexOf();
-    testStringIndexOfAfter();
-    testStringLastIndexOfBefore();
+    
+    testCreateStringRemove();
+    testCreateStringReplaceStart();
+    testCreateStringReplace();
+    testCreateStringReplaceEnd();
     
     testPrintStringA();
     testPrintStringB();
