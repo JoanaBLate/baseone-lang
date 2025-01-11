@@ -4,7 +4,7 @@
 // The name of a BaseOne file can be whatever you want since it ends with
 // ".b" (lowercase).
 
-// The package"s name must start with a lowercase letter, 
+// The name of a package must start with a lowercase letter, 
 // followed or not by letters, digits and underscores.
 
 // Each package is a directory that contains one or more BaseOne files. 
