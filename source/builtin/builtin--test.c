@@ -24,6 +24,7 @@ int main()
     testStringLastIndexOf();
     testStringIndexOfAfter();
     testStringLastIndexOfBefore();
+    testStringCountOfTarget();
     
     testCreateEmptyString();
     testCreateStringFromCharCode();
@@ -41,9 +42,11 @@ int main()
     testCreatePaddedEndString();
     
     testCreateStringRemove();
+    testCreateStringRemoveAll();
     testCreateStringReplaceStart();
     testCreateStringReplaceEnd();
     testCreateStringReplace();
+    testCreateStringReplaceAll();
     
     testCreateStringCutStart();
     testCreateStringCutEnd();
