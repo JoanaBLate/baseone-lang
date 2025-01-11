@@ -37,6 +37,39 @@ void testCreateStringRemove()
     }
 }
 
+void testCreateStringRemoveAll()
+{
+    printf("- testing createStringRemoveAll\n");
+    
+    bool fails = false;
+
+    String empty = createEmptyString();    
+    String source1 = { 39, "∆∆∆ Life ∆is ∆ rock ∆∆∆" };   
+    String source2 = {  3, "∆" };    
+    String source3 = {  6, "∆∆" };
+   
+    String result1 = createStringRemoveAll(&source1, &source2);
+    String expected1 = { 15, " Life is  rock " };   
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
+   
+    String result2 = createStringRemoveAll(&source1, &source3);
+    String expected2 = { 27, "∆ Life ∆is ∆ rock ∆" };    
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
+    
+    String result3 = createStringRemoveAll(&source1, &empty);
+    String expected3 = { 39, "∆∆∆ Life ∆is ∆ rock ∆∆∆" };    
+    if (! stringsAreEqual(&result3, &expected3)) { fails = true; }
+    
+    String result4 = createStringRemoveAll(&empty, &source1);
+    String expected4 = { 0, "" };    
+    if (! stringsAreEqual(&result4, &expected4)) { fails = true; }
+    
+    if (fails) { 
+        printf("createStringRemoveAll FAILS!\n");
+        exit(1);
+    }
+}
+
 void testCreateStringReplaceStart()
 {
     printf("- testing createStringReplaceStart\n");
@@ -146,6 +179,44 @@ void testCreateStringReplace()
     
     if (fails) { 
         printf("createStringReplace FAILS!\n");
+        exit(1);
+    }
+}
+
+void testCreateStringReplaceAll()
+{
+    printf("- testing createStringReplaceAll\n");
+    
+    bool fails = false;
+
+    String empty = createEmptyString();    
+    String source1 = { 39, "∆∆∆ Life ∆is ∆ rock ∆∆∆" };   
+    String source2 = {  3, "∆" };    
+    String source3 = {  6, "∆∆" };  
+    String source4 = {  3, "Y.Y" };
+   
+    String result1 = createStringReplaceAll(&source1, &source2, &source3);
+    String expected1 = { 63, "∆∆∆∆∆∆ Life ∆∆is ∆∆ rock ∆∆∆∆∆∆" };  
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
+   
+    String result2 = createStringReplaceAll(&source1, &source2, &source4);
+    String expected2 = { 39, "Y.YY.YY.Y Life Y.Yis Y.Y rock Y.YY.YY.Y" };  
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
+    
+    String result3 = createStringReplaceAll(&source1, &source3, &source2);
+    String expected3 = { 33, "∆∆ Life ∆is ∆ rock ∆∆" };    
+    if (! stringsAreEqual(&result3, &expected3)) { fails = true; }
+
+    String result4 = createStringReplaceAll(&empty, &source1, &source2);
+    String expected4 = { 0, "" };    
+    if (! stringsAreEqual(&result4, &expected4)) { fails = true; }
+    
+    String result5 = createStringReplaceAll(&source1, &source2, &empty);
+    String expected5 = { 15, " Life is  rock " };    
+    if (! stringsAreEqual(&result5, &expected5)) { fails = true; }
+    
+    if (fails) { 
+        printf("createStringReplaceAll FAILS!\n");
         exit(1);
     }
 }

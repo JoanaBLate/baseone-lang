@@ -33,7 +33,7 @@ String createStringReplaceEnd(String *string, int count, String *chunk)
     
     if (count >= string->size) { return createStringClone(chunk); } 
     
-    int stringLeftArmStart = 0;
+ // int stringLeftArmStart = 0;
     int stringLeftArmSize = string->size - count;
     
     int bufferSize = stringLeftArmSize + chunk->size;
@@ -63,7 +63,7 @@ String createStringReplace(String *string, String *target, String *chunk)
     
     //
     
-    int stringLeftArmStart = 0;
+ // int stringLeftArmStart = 0;
     int stringLeftArmSize = position;
     
     int stringRightArmStart = position + target->size;
@@ -95,5 +95,62 @@ String createStringRemove(String *string, String *target)
     String empty = createEmptyString();
     
     return createStringReplace(string, target, &empty);
+}
+
+String createStringReplaceAll(String *string, String *target, String *chunk)
+{
+    int count = stringCountOfTarget(string, target);
+    
+    if (count == 0) { return createStringClone(string); }
+    
+    int bufferSize = string->size + count * (chunk->size - target->size);
+    
+    if (bufferSize == 0) { return createEmptyString(); }
+
+    char *buffer = malloc(bufferSize);
+
+    int bufferIndex = -1;
+    
+    String temp = { string->size, string->data };
+    
+    while (temp.size > 0) {
+
+        bool startsNormal = true;
+        
+        if (temp.data[0] == target->data[0]) { startsNormal = ! stringStartsWith(&temp, target); } // avoiding always call the function
+   
+        if (startsNormal) {
+        
+            bufferIndex += 1; 
+            buffer[bufferIndex] = temp.data[0];            
+        
+            temp.size -= 1;            
+            temp.data += 1;
+        
+            continue;        
+        }
+        
+        // skipping the target
+        temp.size -= target->size;        
+        temp.data += target->size;
+        
+        // inserting the chunk        
+        for (int index = 0; index < chunk->size; index++) 
+        { 
+            bufferIndex += 1;
+            buffer[bufferIndex] = chunk->data[index];
+        }
+    }
+            
+    String newString = { bufferSize, buffer };
+    
+    return newString;
+}
+
+String createStringRemoveAll(String *string, String *target)
+{
+    String empty = createEmptyString();
+    
+    return createStringReplaceAll(string, target, &empty);
 }
 
