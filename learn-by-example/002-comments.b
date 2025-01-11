@@ -10,6 +10,7 @@
 // at the same time.
 // Check your text editor about that.
 
+
 package main
 
 func main() {  // this line ends with a comment

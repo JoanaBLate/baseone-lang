@@ -1,0 +1,16 @@
+
+// Semicolons are accepted only to join small lines in a single line.
+
+// BaseOne understands that each line that ends with a logical/math operator, 
+// "=",  "(",  "[",  ","  and even  "{"  (as a hashmap symbol) is to be continued.
+// Otherwise the line is considered finished.
+
+
+package main
+
+func main() { 
+
+    @println(); @println(); @println()
+    
+    @println();  // produces -> ERROR: unnecessary semicolon
+}
