@@ -20,11 +20,11 @@
 // Margins of comments are not checked, use them nicely.
 
 
- package main //  produces -> ERROR: forbidden margin here
+ package main  // ERROR: forbidden margin here
 
 func main() {
 
-  @println() //  produces -> ERROR: too short margin (missing 2 whitespaces)
+  @println()  // ERROR: too short margin (missing 2 whitespaces)
   
   
     if 1 > 2 { } else { } // ok, everything in one line
@@ -33,12 +33,12 @@ func main() {
     if 1 > 2 {
   
     }
-    else { // ok, each block has its own lines
+    else {  // ok, each block has its own lines
     
     }
     
     
-    if 1 > 2  //  produces -> ERROR: missing left curly brace
+    if 1 > 2  // ERROR: missing left curly brace
     {
   
     }
@@ -49,7 +49,7 @@ func main() {
     
     if 1 > 2 {
     
-    } else { //  produces -> ERROR: got content after ending multiline block
+    } else {  // ERROR: got content after ending multiline block
     
     }
     
@@ -57,9 +57,9 @@ func main() {
     if 1 > 2 {
     
     } 
-    else { } //  produces -> ERROR: not symmetrical right curly brace
+    else { }  // ERROR: not symmetrical right curly brace
     
   
-    @println() } //  produces -> ERROR: not symmetrical right curly brace
+    @println() }  // ERROR: not symmetrical right curly brace
 
 

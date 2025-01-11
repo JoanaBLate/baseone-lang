@@ -12,5 +12,5 @@ func main() {
 
     @println(); @println(); @println()
     
-    @println();  // produces -> ERROR: unnecessary semicolon
+    @println();  // ERROR: unnecessary semicolon
 }
