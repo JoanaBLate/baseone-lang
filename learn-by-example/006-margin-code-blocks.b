@@ -38,6 +38,12 @@ func main() {
     }
     
     
+    if 1 > 2 {
+    
+    } 
+    else { }  // ok, each block has its own lines
+    
+    
     if 1 > 2  // ERROR: missing left curly brace
     {
   
@@ -52,12 +58,6 @@ func main() {
     } else {  // ERROR: content after ending multiline block
     
     }
-    
-    
-    if 1 > 2 {
-    
-    } 
-    else { }  // ERROR: not symmetrical right curly brace
     
   
     @println() }  // ERROR: not symmetrical right curly brace
