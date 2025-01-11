@@ -49,7 +49,7 @@ func main() {
     
     if 1 > 2 {
     
-    } else {  // ERROR: got content after ending multiline block
+    } else {  // ERROR: content after ending multiline block
     
     }
     
