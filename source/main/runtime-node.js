@@ -30,8 +30,8 @@ function readBaseOneFolder(folderName, tokenImport) {
         const stats = fs.statSync(path)
         if (stats.isDirectory()) { cliError("found folder inside folder: " + path) }
         if (! stats.isFile()) { continue }
-        if (path.endsWith(".bo")) { baseOnePaths.push(path); continue }
-        if (path.toLowerCase().endsWith(".bo")) { 
+        if (path.endsWith(".b")) { baseOnePaths.push(path); continue }
+        if (path.toLowerCase().endsWith(".b")) { 
             cliError("found uppercase letter in filename extension: " + path)
         }        
     }

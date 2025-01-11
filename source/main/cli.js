@@ -5,15 +5,41 @@
 var shallClearScreen = false
 
 function runCli() {
-    const options = getCliOptions() // cloned
-    if (options.length == 0) { showOpenMessage(); return; }
 
-    const filename = options.shift()     
+    const options = getCliOptions() // cloned
+
+    if (options.length == 0) { showOpenMessage(); return; }
+    
+    const command = options.shift()
+    
+    if (command == "help") { runCommandHelp(); return; }
+    
+    if (command == "transpile") { runCommandTranspile(options); return }
+    
+    cliError("expecting command 'help', command 'transpile' or nothing; got: " + command)
+}
+
+function runCommandHelp(__options) {
+
+    showOpenMessage()
+}
+
+function runCommandTranspile(options) {
+
+    const filename = options.shift()  
+    
+    if (filename == undefined) { cliError("missing file name") }
+       
     if (filename.startsWith("--")) { cliError("missing file name or file name starts like option: " + filename) }
-    if (filename.toLowerCase().endsWith(".bo")) { cliError("unnecessary '.bo' extension: " + filename) }
-    mainFilename = filename  
+    
+    if (! filename.endsWith(".b")) { cliError("file name not ending with the '.b' extension: " + filename) }
+    
+    if (filename == ".b") { cliError("file name has blank base name: " + filename) }
+    
+    mainFilename = filename.substr(0, filename.length - 2)
     
     while (options.length != 0) {    
+    
         const option = options.shift()
         if (option == "--clearscreen") { checkOptionClearScreen(); continue }
         if (option.startsWith("--name")) { checkOptionCName(option); continue }        
@@ -53,10 +79,10 @@ function showOpenMessage() {
     console.log("")
     console.log(" BaseOne Transpiler   version", baseOneVersion, "\n")
     console.log("  Transpiles BaseOne files into a single C file\n")
-    console.log("  Usage: baseone myFile\n")
-    console.log("  Usage: baseone myFile --name=myOtherName --clearscreen\n")
-    console.log("  Note: don't write the '.bo' extension\n")
-    console.log("  Help: https://github.com/JoanaBLate/baseone-lang\n") 
+    console.log("  Usage: baseone help\n")
+    console.log("  Usage: baseone transpile myFile.b\n")
+    console.log("  Usage: baseone transpile myFile.b --name=differentName --clearscreen\n")
+    console.log("  More info: https://github.com/JoanaBLate/baseone-lang\n") 
 }
 
 function cliError(msg) {
