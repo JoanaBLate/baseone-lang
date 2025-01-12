@@ -5,8 +5,10 @@ typedef unsigned short bool;
 const unsigned short true = 1;
 const unsigned short false = 0;
 
+// using size 'long' is big enough and allows easy math with indexes;
+// also BaseOne string functions protect it to become negative
 typedef struct {
-    int size;
+    long size;
     char *data;    
 } String;
 
