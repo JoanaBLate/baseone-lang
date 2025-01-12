@@ -15,9 +15,8 @@ void printString(String *string)
         char c = string->data[index];
         
         if (c == 10) { putchar(c); continue; }
-        if (c <  32) { putchar(substitute); continue; }
-        if (c < 128) { putchar(c); continue; }
-        putchar(substitute);
+        if (c <  32) { putchar(substitute); continue; } // includes from 0 to -127
+        putchar(c);
     }
 }
 
