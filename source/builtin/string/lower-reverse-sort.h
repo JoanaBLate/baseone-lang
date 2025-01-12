@@ -4,7 +4,7 @@ String createStringToLower(String *string)
 {
     String newString = createStringClone(string);
     
-    for (int index = 0; index < newString.size; index++)
+    for (long index = 0; index < newString.size; index++)
     {
         newString.data[index] = tolower(newString.data[index]);
     }
@@ -16,7 +16,7 @@ String createStringToUpper(String *string)
 {
     String newString = createStringClone(string);
     
-    for (int index = 0; index < newString.size; index++)
+    for (long index = 0; index < newString.size; index++)
     {
         newString.data[index] = toupper(newString.data[index]);
     }
@@ -28,7 +28,7 @@ String createStringToOppositeCase(String *string)
 {
     String newString = createStringClone(string);
     
-    for (int index = 0; index < newString.size; index++)
+    for (long index = 0; index < newString.size; index++)
     {
         char c = newString.data[index];
         
@@ -49,9 +49,9 @@ String createReversedString(String *string)
 {
     String newString = createStringClone(string);
     
-    int halfLen = newString.size / 2;
+    long halfLen = newString.size / 2;
 
-    for (int index = 0; index < halfLen; index++) 
+    for (long index = 0; index < halfLen; index++) 
     {     
         char temp = newString.data[index];
         newString.data[index] = newString.data[newString.size - 1 - index];
@@ -65,9 +65,9 @@ String createSortedString(String *string) // slow
 {
     String newString = createStringClone(string);
     
-    for (int indexA = 0; indexA < newString.size - 1; indexA++) 
+    for (long indexA = 0; indexA < newString.size - 1; indexA++) 
     { 
-        for (int indexB = indexA + 1; indexB < newString.size; indexB++) 
+        for (long indexB = indexA + 1; indexB < newString.size; indexB++) 
         { 
             if (newString.data[indexA] <= newString.data[indexB]) { continue; }
             

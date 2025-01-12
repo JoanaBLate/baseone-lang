@@ -4,7 +4,7 @@ void printString(String *string)
 {
     char substitute = 26;
     
-    int index = -1;
+    long index = -1;
     
     while (true)
     {
@@ -29,7 +29,7 @@ void printStringBytes(String *string)
 
     printf("{");
     
-    for (int index = 0; index < string->size; index++)
+    for (long index = 0; index < string->size; index++)
     {
         if (expectingComma) { printf(","); }
                 
@@ -48,7 +48,7 @@ void printStringRunes(String *string)
     
     char token[5];
     
-    int index = -1;
+    long index = -1;
 
     while (true)
     {

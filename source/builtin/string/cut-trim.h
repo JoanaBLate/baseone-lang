@@ -1,12 +1,12 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-String createStringCutStart(String *string, int count)
+String createStringCutStart(String *string, long count)
 {
     if (count < 1) { return createStringClone(string); }
     
     if (count >= string->size) { return createEmptyString(); }
     
-    int bufferSize = string->size - count;
+    long bufferSize = string->size - count;
     
     char *buffer = malloc(bufferSize);
     
@@ -17,13 +17,13 @@ String createStringCutStart(String *string, int count)
     return newString;
 }
 
-String createStringCutEnd(String *string, int count)
+String createStringCutEnd(String *string, long count)
 {
     if (count < 1) { return createStringClone(string); }
     
     if (count >= string->size) { return createEmptyString(); }
     
-    int bufferSize = string->size - count;
+    long bufferSize = string->size - count;
     
     char *buffer = malloc(bufferSize);
     
@@ -34,7 +34,7 @@ String createStringCutEnd(String *string, int count)
     return newString;
 }
 
-String createStringCutMiddle(String *string, int position, int count) // one base index
+String createStringCutMiddle(String *string, long position, long count) // one base index
 {
     position -= 1; // adjusts to zero base index
     
@@ -53,21 +53,21 @@ String createStringCutMiddle(String *string, int position, int count) // one bas
     
     //
       
- // int stringLeftArmStart = 0;
-    int stringLeftArmSize = position;
+ // long stringLeftArmStart = 0;
+    long stringLeftArmSize = position;
     
-    int stringRightArmStart = position + count;
-    int stringRightArmSize = string->size - stringLeftArmSize - count;
+    long stringRightArmStart = position + count;
+    long stringRightArmSize = string->size - stringLeftArmSize - count;
     
-    int bufferSize = stringLeftArmSize + stringRightArmSize;
+    long bufferSize = stringLeftArmSize + stringRightArmSize;
     
     char *buffer = malloc(bufferSize);
     
     // buffer left arm
-    for (int index = 0; index < stringLeftArmSize; index++) { buffer[index] = string->data[index]; } 
+    for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string->data[index]; } 
     
     // buffer right arm
-    for (int index = 0; index < stringRightArmSize; index++) 
+    for (long index = 0; index < stringRightArmSize; index++) 
     {
         buffer[position + index] = string->data[stringRightArmStart + index];
     }
@@ -83,7 +83,7 @@ String createStringTrimStart(String *string, String *chunk)
     
     while (stringStartsWith(&temp, chunk)) { temp.size -= chunk->size; temp.data += chunk->size; }
     
-    int bufferSize = temp.size;
+    long bufferSize = temp.size;
     
     char *buffer = malloc(bufferSize);
     
@@ -100,7 +100,7 @@ String createStringTrimEnd(String *string, String *chunk)
     
     while (stringEndsWith(&temp, chunk)) { temp.size -= chunk->size; }
     
-    int bufferSize = temp.size;
+    long bufferSize = temp.size;
     
     char *buffer = malloc(bufferSize);
     
@@ -119,7 +119,7 @@ String createStringTrim(String *string, String *chunk)
     
     while (stringEndsWith(&temp, chunk)) { temp.size -= chunk->size; }
     
-    int bufferSize = temp.size;
+    long bufferSize = temp.size;
     
     char *buffer = malloc(bufferSize);
     

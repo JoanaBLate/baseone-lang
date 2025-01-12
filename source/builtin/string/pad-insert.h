@@ -6,20 +6,20 @@ String createAppendedString(String *string, String *chunk)
     
     if (chunk->size == 0) { return createStringClone(string); }
     
-    int size = string->size + chunk->size;
+    long bufferSize = string->size + chunk->size;
     
-    char *buffer = malloc(size);
+    char *buffer = malloc(bufferSize);
     
     memcpy(buffer, string->data, string->size);
     
     memcpy(&buffer[string->size], chunk->data, chunk->size);
     
-    String newString = { size, buffer };
+    String newString = { bufferSize, buffer };
     
     return newString;
 }
 
-String createInsertedString(String *string, String *chunk, int position) // one base index
+String createInsertedString(String *string, String *chunk, long position) // one base index
 {
     if (string->size == 0) { return createStringClone(chunk); }
     
@@ -31,38 +31,38 @@ String createInsertedString(String *string, String *chunk, int position) // one 
     
     position -= 1;
     
-    int size = string->size + chunk->size;
+    long bufferSize = string->size + chunk->size;
     
-    char *buffer = malloc(size);
+    char *buffer = malloc(bufferSize);
 
-    for (int index = 0; index < position; index++) { buffer[index] = string->data[index]; }
+    for (long index = 0; index < position; index++) { buffer[index] = string->data[index]; }
 
-    for (int index = 0; index < chunk->size; index++) { buffer[position + index] = chunk->data[index]; }
+    for (long index = 0; index < chunk->size; index++) { buffer[position + index] = chunk->data[index]; }
 
-    for (int index = position; index < string->size; index++) { buffer[index + chunk->size] = string->data[index]; }
+    for (long index = position; index < string->size; index++) { buffer[index + chunk->size] = string->data[index]; }
     
-    String newString = { size, buffer };
+    String newString = { bufferSize, buffer };
 
     return newString;
 }
 
-String createPaddedStartString(String *string, String *chunk, int count)
+String createPaddedStartString(String *string, String *chunk, long count)
 {
     if (count < 1) { return createStringClone(string); }
     
     if (chunk->size == 0) { return createStringClone(string); }
     
-    int size = (count * chunk->size) + string->size;
+    long bufferSize = (count * chunk->size) + string->size;
             
-    char *buffer = malloc(size);
+    char *buffer = malloc(bufferSize);
     
-    int index = -1;
+    long index = -1;
     
     while (count > 0) {
     
         count -= 1;
         
-        for (int n = 0; n < chunk->size; n++) {
+        for (long n = 0; n < chunk->size; n++) {
     
             index += 1;
             
@@ -72,30 +72,30 @@ String createPaddedStartString(String *string, String *chunk, int count)
     
     memcpy(&buffer[index + 1], string->data, string->size);
     
-    String newString = { size, buffer };
+    String newString = { bufferSize, buffer };
     
     return newString;
 }
 
-String createPaddedEndString(String *string, String *chunk, int count)
+String createPaddedEndString(String *string, String *chunk, long count)
 {
     if (count < 1) { return createStringClone(string); }
     
     if (chunk->size == 0) { return createStringClone(string); }
     
-    int size = (count * chunk->size) + string->size;
+    long bufferSize = (count * chunk->size) + string->size;
             
-    char *buffer = malloc(size);
+    char *buffer = malloc(bufferSize);
     
     memcpy(buffer, string->data, string->size);
     
-    int index = string->size - 1;
+    long index = string->size - 1;
     
     while (count > 0) {
     
         count -= 1;
         
-        for (int n = 0; n < chunk->size; n++) {
+        for (long n = 0; n < chunk->size; n++) {
     
             index += 1;
             
@@ -103,7 +103,7 @@ String createPaddedEndString(String *string, String *chunk, int count)
         }
     }
     
-    String newString = { size, buffer };
+    String newString = { bufferSize, buffer };
     
     return newString;
 }

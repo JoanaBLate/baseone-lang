@@ -1,6 +1,6 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-int getStringSize(String *string)
+long getStringSize(String *string)
 {        
     return string->size;
 }
@@ -20,7 +20,7 @@ bool stringsAreEqual(String *stringA, String *stringB)
 {
     if (stringA->size != stringB->size) { return false; };
     
-    for (int index = 0; index < stringA->size; index ++)
+    for (long index = 0; index < stringA->size; index ++)
     {
         if (stringA->data[index] != stringB->data[index]) { return false; }
     }
@@ -33,7 +33,7 @@ bool stringStartsWith(String *string, String *target)
     
     if (target->size > string->size) { return false; }
     
-    for (int index = 0; index < target->size; index++)
+    for (long index = 0; index < target->size; index++)
     {
         if (string->data[index] != target->data[index]) { return false; }
     }
@@ -46,28 +46,28 @@ bool stringEndsWith(String *string, String *target)
     
     if (target->size > string->size) { return false; }
     
-    int pad = string->size - target->size;
+    long pad = string->size - target->size;
     
-    for (int index = 0; index < target->size; index++)
+    for (long index = 0; index < target->size; index++)
     {
         if (string->data[pad + index] != target->data[index]) { return false; }
     }
     return true;
 }
 
-int stringIndexOf(String *string, String *target) // one base index
+long stringIndexOf(String *string, String *target) // one base index
 {    
     if (target->size == 0) { return 0; }
     
     if (target->size > string->size) { return 0; }
     
-    int off = string->size - target->size + 1;
+    long off = string->size - target->size + 1;
     
-    for (int index = 0; index < off; index++)
+    for (long index = 0; index < off; index++)
     {
         bool match = true;
         
-        for (int targetIndex = 0; targetIndex < target->size; targetIndex++)
+        for (long targetIndex = 0; targetIndex < target->size; targetIndex++)
         {
             if (string->data[index + targetIndex] != target->data[targetIndex]) { match = false; break; }
         }
@@ -77,7 +77,7 @@ int stringIndexOf(String *string, String *target) // one base index
     return 0;
 }
 
-int stringIndexOfAfter(String *string, String *target, int usedIndex) // one base index
+long stringIndexOfAfter(String *string, String *target, long usedIndex) // one base index
 {    
     if (string->size == 0) { return 0; }
 
@@ -87,15 +87,15 @@ int stringIndexOfAfter(String *string, String *target, int usedIndex) // one bas
     
     if (usedIndex < 1) { return stringIndexOf(string, target); }
     
-    int startIndex = usedIndex; // stringStartIndex is zero base index
+    long startIndex = usedIndex; // stringStartIndex is zero base index
     
-    int maxIndex = string->size - target->size;
+    long maxIndex = string->size - target->size;
     
-    for (int index = startIndex; index <= maxIndex; index++) 
+    for (long index = startIndex; index <= maxIndex; index++) 
     {
         bool match = true;
         
-        for (int targetIndex = 0; targetIndex < target->size; targetIndex++)
+        for (long targetIndex = 0; targetIndex < target->size; targetIndex++)
         {
             if (string->data[index + targetIndex] != target->data[targetIndex]) { match = false; break; }
         }
@@ -105,19 +105,19 @@ int stringIndexOfAfter(String *string, String *target, int usedIndex) // one bas
     return 0;
 }
 
-int stringLastIndexOf(String *string, String *target) // one base index
+long stringLastIndexOf(String *string, String *target) // one base index
 {    
     if (target->size == 0) { return 0; }
     
     if (target->size > string->size) { return 0; }
     
-    int startIndex = string->size - target->size;
+    long startIndex = string->size - target->size;
     
-    for (int index = startIndex; index > -1; index--) // runs backwards
+    for (long index = startIndex; index > -1; index--) // runs backwards
     {
         bool match = true;
         
-        for (int targetIndex = 0; targetIndex < target->size; targetIndex++)
+        for (long targetIndex = 0; targetIndex < target->size; targetIndex++)
         {
             if (string->data[index + targetIndex] != target->data[targetIndex]) { match = false; break; }
         }
@@ -127,7 +127,7 @@ int stringLastIndexOf(String *string, String *target) // one base index
     return 0;
 }
 
-int stringLastIndexOfBefore(String *string, String *target, int usedIndex) // one base index
+long stringLastIndexOfBefore(String *string, String *target, long usedIndex) // one base index
 {    
     if (target->size == 0) { return 0; }
 
@@ -137,13 +137,13 @@ int stringLastIndexOfBefore(String *string, String *target, int usedIndex) // on
     
     if (usedIndex >= string->size) { return stringLastIndexOf(string, target); }
        
-    int maxIndex = (usedIndex - 1) - target->size; // off is zero base index
+    long maxIndex = (usedIndex - 1) - target->size; // off is zero base index
     
-    for (int index = maxIndex; index > -1; index--) // runs backwards
+    for (long index = maxIndex; index > -1; index--) // runs backwards
     {
         bool match = true;
         
-        for (int targetIndex = 0; targetIndex < target->size; targetIndex++)
+        for (long targetIndex = 0; targetIndex < target->size; targetIndex++)
         {
             if (string->data[index + targetIndex] != target->data[targetIndex]) { match = false; break; }
         }
@@ -156,5 +156,21 @@ int stringLastIndexOfBefore(String *string, String *target, int usedIndex) // on
 bool stringContains(String *string, String *target)
 {    
     return (stringIndexOf(string, target) != 0);
+}
+
+long stringCountOfTarget(String *string, String *target)
+{
+    long count = 0;
+
+    long index = -target->size;
+    
+    while (true) {
+    
+        index = stringIndexOfAfter(string, target, index + target->size - 1);
+    
+        if (index == 0) { break; } else { count += 1; }
+    
+    }
+    return count;
 }
 

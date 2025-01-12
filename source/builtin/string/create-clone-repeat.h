@@ -22,30 +22,30 @@ String createStringFromCharCode(int n)
 
 String createStringFromLiteral(char *cString)
 {   
-    int size = strlen(cString);
+    long bufferSize = strlen(cString);
     
-    if (size == 0) { return createEmptyString(); }
+    if (bufferSize == 0) { return createEmptyString(); }
     
-    char *buffer = malloc(size);
+    char *buffer = malloc(bufferSize);
 
-    memcpy(buffer, cString, size);
+    memcpy(buffer, cString, bufferSize);
     
-    String newString = { size, buffer };
+    String newString = { bufferSize, buffer };
     
     return newString;
 }
 
 String createStringClone(String *string)
 {   
-    int size = string->size;
+    long bufferSize = string->size;
     
-    if (size == 0) { return createEmptyString(); }
+    if (bufferSize == 0) { return createEmptyString(); }
     
-    char *buffer = malloc(size);
+    char *buffer = malloc(bufferSize);
 
-    memcpy(buffer, string->data, size);
+    memcpy(buffer, string->data, bufferSize);
     
-    String newString = { size, buffer };
+    String newString = { bufferSize, buffer };
     
     return newString;
 }
@@ -55,12 +55,14 @@ String createRepeatedString(String *string, int count)
     if (string->size == 0) { return createEmptyString(); }
     
     if (count <= 0) { return createEmptyString(); }
+    
+    long bufferSize = count * string->size;
 
-    char *buffer = malloc(count * string->size);
+    char *buffer = malloc(bufferSize);
     
     for (int turn = 0; turn < count; turn++) { memcpy(&buffer[turn * string->size], string->data, string->size); }
 
-    String newString = { count * string->size, buffer };
+    String newString = { bufferSize, buffer };
 
     return newString;    
 }

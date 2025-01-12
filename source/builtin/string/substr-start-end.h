@@ -1,40 +1,40 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-String createSubstring(String *string, int start, int count) // one base index
+String createSubstring(String *string, long start, long count) // one base index
 {
     if (count < 1) { return createEmptyString(); }
     
     start -= 1; // adjusts to zero base index
     
-    int off = start + count;
+    long off = start + count;
     
     if (off > string->size) { off = string->size; }
     
     if (start < 0) { start = 0; }
     
-    int size = off - start;
+    long bufferSize = off - start;
     
-    if (size <= 0) { return createEmptyString(); }
+    if (bufferSize <= 0) { return createEmptyString(); }
     
-    char *buffer = malloc(size);
+    char *buffer = malloc(bufferSize);
 
-    for (int index = 0; index < size; index++) { buffer[index] = string->data[start + index]; }
+    for (long index = 0; index < bufferSize; index++) { buffer[index] = string->data[start + index]; }
     
-    String newString = { size, buffer };
+    String newString = { bufferSize, buffer };
     
     return newString;
 }
 
-String createStringStart(String *string, int count)
+String createStringStart(String *string, long count)
 {    
     return createSubstring(string, 1, count);
 }
 
-String createStringEnd(String *string, int count)
+String createStringEnd(String *string, long count)
 {    
     if (count < 1) { return createEmptyString(); }
     
-    int start = string->size - count + 1;
+    long start = string->size - count + 1;
     
     return createSubstring(string, start, count);
 }
