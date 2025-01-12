@@ -38,7 +38,7 @@ void cReadFile(char *filename, char *buffer, long fileSize)
 
     // Read the entire file into the buffer
     size_t bytesRead = fread(buffer, 1, fileSize, fp);
-    if (bytesRead != fileSize) 
+    if (bytesRead != (size_t) fileSize) 
     {
         printf("\nERROR: while reading text file '%s': ", filename);
         printf("failed to read the entire file\n");
