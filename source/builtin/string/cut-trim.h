@@ -8,7 +8,7 @@ String createStringCutStart(String *string, long count)
     
     long bufferSize = string->size - count;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     memcpy(buffer, string->data + count, bufferSize);    
     
@@ -25,7 +25,7 @@ String createStringCutEnd(String *string, long count)
     
     long bufferSize = string->size - count;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     memcpy(buffer, string->data, bufferSize);    
     
@@ -61,7 +61,7 @@ String createStringCutMiddle(String *string, long position, long count) // one b
     
     long bufferSize = stringLeftArmSize + stringRightArmSize;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     // buffer left arm
     for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string->data[index]; } 
@@ -85,7 +85,7 @@ String createStringTrimStart(String *string, String *chunk)
     
     long bufferSize = temp.size;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     memcpy(buffer, temp.data, temp.size);
     
@@ -102,7 +102,7 @@ String createStringTrimEnd(String *string, String *chunk)
     
     long bufferSize = temp.size;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     memcpy(buffer, temp.data, temp.size);
     
@@ -121,7 +121,7 @@ String createStringTrim(String *string, String *chunk)
     
     long bufferSize = temp.size;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     memcpy(buffer, temp.data, temp.size);
     

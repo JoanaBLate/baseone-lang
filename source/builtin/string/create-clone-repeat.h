@@ -11,7 +11,7 @@ String createStringFromCharCode(int n)
 {   
     if (n < 0  ||  n > 255) { return createEmptyString(); }
 
-    char *buffer = malloc(1);
+    char *buffer = memoryAllocate(1);
 
     buffer[0] = n;
     
@@ -26,7 +26,7 @@ String createStringFromLiteral(char *cString)
     
     if (bufferSize == 0) { return createEmptyString(); }
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
 
     memcpy(buffer, cString, bufferSize);
     
@@ -41,7 +41,7 @@ String createStringClone(String *string)
     
     if (bufferSize == 0) { return createEmptyString(); }
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
 
     memcpy(buffer, string->data, bufferSize);
     
@@ -58,7 +58,7 @@ String createRepeatedString(String *string, int count)
     
     long bufferSize = count * string->size;
 
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     for (int turn = 0; turn < count; turn++) { memcpy(&buffer[turn * string->size], string->data, string->size); }
 

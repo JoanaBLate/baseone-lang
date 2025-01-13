@@ -11,7 +11,7 @@ String createStringReplaceStart(String *string, long count, String *chunk)
     
     long bufferSize = chunk->size + stringRightArmSize;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     // buffer left arm
     for (long index = 0; index < chunk->size; index++) { buffer[index] = chunk->data[index]; } 
@@ -38,7 +38,7 @@ String createStringReplaceEnd(String *string, long count, String *chunk)
     
     long bufferSize = stringLeftArmSize + chunk->size;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     // buffer left arm
     for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string->data[index]; } 
@@ -71,7 +71,7 @@ String createStringReplace(String *string, String *target, String *chunk)
     
     long bufferSize = stringLeftArmSize + chunk->size + stringRightArmSize;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     // buffer left arm
     for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string->data[index]; } 
@@ -107,7 +107,7 @@ String createStringReplaceAll(String *string, String *target, String *chunk)
     
     if (bufferSize == 0) { return createEmptyString(); }
 
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
 
     long bufferIndex = -1;
     

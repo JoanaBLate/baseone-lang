@@ -16,7 +16,7 @@ String createSubstring(String *string, long start, long count) // one base index
     
     if (bufferSize <= 0) { return createEmptyString(); }
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
 
     for (long index = 0; index < bufferSize; index++) { buffer[index] = string->data[start + index]; }
     
