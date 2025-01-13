@@ -65,7 +65,7 @@ String readTextFile(String *filename)
     
     long fileSize = cGetFileSize(cFilename);
 
-    char *buffer = malloc(fileSize);
+    char *buffer = memoryAllocate(fileSize);
     
     cReadFile(cFilename, buffer, fileSize);
 
