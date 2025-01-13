@@ -1,7 +1,7 @@
 
-void *memoryAllocate(size_t size)
+void *memoryAllocate(unsigned long size)
 {
-    size_t *address = malloc(size);
+    unsigned long *address = malloc(size);
     
     if (address != NULL) { return address; }
 
