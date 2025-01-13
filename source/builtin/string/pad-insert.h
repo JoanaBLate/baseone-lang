@@ -8,7 +8,7 @@ String createAppendedString(String *string, String *chunk)
     
     long bufferSize = string->size + chunk->size;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     memcpy(buffer, string->data, string->size);
     
@@ -33,7 +33,7 @@ String createInsertedString(String *string, String *chunk, long position) // one
     
     long bufferSize = string->size + chunk->size;
     
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
 
     for (long index = 0; index < position; index++) { buffer[index] = string->data[index]; }
 
@@ -54,7 +54,7 @@ String createPaddedStartString(String *string, String *chunk, long count)
     
     long bufferSize = (count * chunk->size) + string->size;
             
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     long index = -1;
     
@@ -85,7 +85,7 @@ String createPaddedEndString(String *string, String *chunk, long count)
     
     long bufferSize = (count * chunk->size) + string->size;
             
-    char *buffer = malloc(bufferSize);
+    char *buffer = memoryAllocate(bufferSize);
     
     memcpy(buffer, string->data, string->size);
     
