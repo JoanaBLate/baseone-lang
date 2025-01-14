@@ -24,7 +24,7 @@
 
 func main() {
 
-  @println()  // ERROR: too short margin (missing 2 whitespaces)
+  println()  // ERROR: too short margin (missing 2 whitespaces)
   
   
     if 1 > 2 { } else { } // ok, everything in one line
@@ -60,6 +60,5 @@ func main() {
     }
     
   
-    @println() }  // ERROR: not symmetrical right curly brace
-
+    println() }  // ERROR: not symmetrical right curly brace
 
