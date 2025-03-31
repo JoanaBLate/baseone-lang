@@ -20,10 +20,10 @@
 // in the directory of your program instead of copying and pasting 
 // packages/directories all the time.
 
-// Important: The package "main" is a *virtual* package. It is NOT
-// supposed to have a directory named "main". The package "main"
-// only "contains" one file: the main file.
-
+// Important: The main file is NOT supposed to be inside a directory 
+// named "main". Place the main file DIRECTLY inside the directory of 
+// your program (although "package main" is written on the top of the
+// main file).
 
 package main
 
