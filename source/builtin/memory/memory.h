@@ -1,5 +1,5 @@
 
-void *memoryAllocate(unsigned long size)
+void *allocateMemory(unsigned long size)
 {
     unsigned long *address = malloc(size);
     
