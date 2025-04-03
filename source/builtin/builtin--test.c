@@ -1,19 +1,22 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 #include "builtin.h"
-#include "file/file--test.h"
-#include "string/create-clone-repeat--test.h"
-#include "string/info--test.h"
-#include "string/substr-start-end--test.h"
-#include "string/pad-insert--test.h"
-#include "string/remove-replace--test.h"
-#include "string/cut-trim--test.h"
-#include "string/lower-reverse-sort--test.h"
-#include "string/print--test.h"
+#include "file-heap/file--test.h"
+#include "string-neutral/empty--test.h"
+#include "string-neutral/info--test.h"
+#include "string-heap/create-clone-repeat--test.h"
+#include "string-heap/substr-start-end--test.h"
+#include "string-heap/pad-insert-append--test.h"
+#include "string-heap/remove-replace--test.h"
+#include "string-heap/cut-trim--test.h"
+#include "string-heap/lower-reverse-sort--test.h"
+#include "string-neutral/print--test.h"
 
 int main()
 {
-    testReadTextFile();
+    testReadTextFileHeap();
+
+    testCreateStringEmpty();
 
     testStringCharCodeAt();
     testStringsAreEquals();
@@ -26,41 +29,40 @@ int main()
     testStringLastIndexOfBefore();
     testStringCountOfTarget();
     
-    testCreateEmptyString();
-    testCreateStringFromCharCode();
-    testCreateStringFromLiteral();
-    testCreateStringClone();
-    testCreateRepeatedString();
+    testCreateStringFromCharCodeHeap();
+    testCreateStringFromLiteralHeap();
+    testCreateStringCloneHeap();
+    testCreateStringRepeatHeap();
     
-    testCreateStringStart(); 
-    testCreateStringEnd(); 
-    testCreateSubstring(); 
+    testCreateStringStartHeap(); 
+    testCreateStringEndHeap(); 
+    testCreateStringSubHeap(); 
         
-    testCreateAppendedString(); 
-    testCreateInsertedString(); 
-    testCreatePaddedStartString();
-    testCreatePaddedEndString();
+    testCreateStringAppendHeap(); 
+    testCreateStringInsertHeap(); 
+    testCreateStringPadStartHeap();
+    testCreateStringPadEndHeap();
     
-    testCreateStringRemove();
-    testCreateStringRemoveAll();
-    testCreateStringReplaceStart();
-    testCreateStringReplaceEnd();
-    testCreateStringReplace();
-    testCreateStringReplaceAll();
+    testCreateStringRemoveHeap();
+    testCreateStringRemoveAllHeap();
+    testCreateStringReplaceStartHeap();
+    testCreateStringReplaceEndHeap();
+    testCreateStringReplaceHeap();
+    testCreateStringReplaceAllHeap();
     
-    testCreateStringCutStart();
-    testCreateStringCutEnd();
-    testCreateStringCutMiddle();
+    testCreateStringCutStartHeap();
+    testCreateStringCutEndHeap();
+    testCreateStringCutMiddleHeap();
         
-    testCreateStringTrimStart();
-    testCreateStringTrimEnd();
-    testCreateStringTrim();
+    testCreateStringTrimStartHeap();
+    testCreateStringTrimEndHeap();
+    testCreateStringTrimHeap();
     
-    testCreateStringToLower();
-    testCreateStringToUpper();
-    testCreateStringToOppositeCase();
-    testCreateReversedString();
-    testCreateSortedString();
+    testCreateStringToLowerHeap();
+    testCreateStringToUpperHeap();
+    testCreateStringToOppositeCaseHeap();
+    testCreateStringReverseHeap();
+    testCreateStringSortHeap();
     
     testPrintStringA();
     testPrintStringB();
