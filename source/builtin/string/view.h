@@ -1,7 +1,7 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 // any String returned from a StringView function does NOT have own memory,
-// that string is just a view for the data contained by the StringView object
+// that string is just a view to the data *pointed* by the StringView object
 
 typedef struct 
 {
