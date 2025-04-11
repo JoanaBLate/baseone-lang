@@ -1,3 +1,6 @@
+// # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
+
+// pointer must be unsigned long, because must be able to access all RAM bytes
 
 void *allocateMemory(unsigned long size)
 {
