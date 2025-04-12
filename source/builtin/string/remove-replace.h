@@ -22,7 +22,7 @@ String createStringReplaceStart(String *string, long count, String *chunk)
         buffer[chunk->size + index] = string->data[stringRightArmStart + index];
     }
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringReplaceEnd(String *string, long count, String *chunk)
@@ -44,7 +44,7 @@ String createStringReplaceEnd(String *string, long count, String *chunk)
     // buffer right arm
     for (long index = 0; index < chunk->size; index++) { buffer[stringLeftArmSize + index] = chunk->data[index]; } 
         
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringReplace(String *string, String *target, String *chunk)
@@ -81,12 +81,12 @@ String createStringReplace(String *string, String *target, String *chunk)
         buffer[position + chunk->size + index] = string->data[stringRightArmStart + index];
     }
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringRemove(String *string, String *target)
 {
-    String empty = createStringEmpty();
+    String empty = makeStringEmpty();
     
     return createStringReplace(string, target, &empty);
 }
@@ -99,13 +99,13 @@ String createStringReplaceAll(String *string, String *target, String *chunk)
     
     long bufferSize = string->size + count * (chunk->size - target->size);
     
-    if (bufferSize == 0) { return createStringEmpty(); }
+    if (bufferSize == 0) { return makeStringEmpty(); }
 
     char *buffer = allocateMemory(bufferSize);
 
     long bufferIndex = -1;
     
-    String temp = createString(string->data, string->size);
+    String temp = makeString(string->data, string->size);
     
     while (temp.size > 0) {
 
@@ -136,12 +136,12 @@ String createStringReplaceAll(String *string, String *target, String *chunk)
         }
     }
             
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringRemoveAll(String *string, String *target)
 {
-    String empty = createStringEmpty();
+    String empty = makeStringEmpty();
     
     return createStringReplaceAll(string, target, &empty);
 }

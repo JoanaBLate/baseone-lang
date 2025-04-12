@@ -2,7 +2,7 @@
 
 String createStringSub(String *string, long start, long count) // one base index
 {
-    if (count < 1) { return createStringEmpty(); }
+    if (count < 1) { return makeStringEmpty(); }
     
     start -= 1; // adjusts to zero base index
     
@@ -14,13 +14,13 @@ String createStringSub(String *string, long start, long count) // one base index
     
     long bufferSize = off - start;
     
-    if (bufferSize <= 0) { return createStringEmpty(); }
+    if (bufferSize <= 0) { return makeStringEmpty(); }
     
     char *buffer = allocateMemory(bufferSize);
 
     for (long index = 0; index < bufferSize; index++) { buffer[index] = string->data[start + index]; }
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringStart(String *string, long count)
@@ -30,7 +30,7 @@ String createStringStart(String *string, long count)
 
 String createStringEnd(String *string, long count)
 {    
-    if (count < 1) { return createStringEmpty(); }
+    if (count < 1) { return makeStringEmpty(); }
     
     long start = string->size - count + 1;
     

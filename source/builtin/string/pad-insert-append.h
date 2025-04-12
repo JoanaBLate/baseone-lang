@@ -14,7 +14,7 @@ String createStringAppend(String *string, String *chunk)
     
     memcpy(&buffer[string->size], chunk->data, chunk->size);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringInsert(String *string, String *chunk, long position) // one base index
@@ -39,7 +39,7 @@ String createStringInsert(String *string, String *chunk, long position) // one b
 
     for (long index = position; index < string->size; index++) { buffer[index + chunk->size] = string->data[index]; }
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringPadStart(String *string, String *chunk, long count)
@@ -68,7 +68,7 @@ String createStringPadStart(String *string, String *chunk, long count)
     
     memcpy(&buffer[index + 1], string->data, string->size);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringPadEnd(String *string, String *chunk, long count)
@@ -97,6 +97,6 @@ String createStringPadEnd(String *string, String *chunk, long count)
         }
     }
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 

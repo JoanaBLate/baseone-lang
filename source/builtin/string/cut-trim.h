@@ -4,7 +4,7 @@ String createStringCutStart(String *string, long count)
 {
     if (count < 1) { return createStringClone(string); }
     
-    if (count >= string->size) { return createStringEmpty(); }
+    if (count >= string->size) { return makeStringEmpty(); }
     
     long bufferSize = string->size - count;
     
@@ -12,14 +12,14 @@ String createStringCutStart(String *string, long count)
     
     memcpy(buffer, string->data + count, bufferSize);    
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringCutEnd(String *string, long count)
 {
     if (count < 1) { return createStringClone(string); }
     
-    if (count >= string->size) { return createStringEmpty(); }
+    if (count >= string->size) { return makeStringEmpty(); }
     
     long bufferSize = string->size - count;
     
@@ -27,7 +27,7 @@ String createStringCutEnd(String *string, long count)
     
     memcpy(buffer, string->data, bufferSize);    
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringCutMiddle(String *string, long position, long count) // one base index
@@ -40,7 +40,7 @@ String createStringCutMiddle(String *string, long position, long count) // one b
     
     if (position == 0)
     {  
-        if (count >= string->size) { return createStringEmpty(); }
+        if (count >= string->size) { return makeStringEmpty(); }
 
         return createStringCutStart(string, count);  
     }
@@ -68,12 +68,12 @@ String createStringCutMiddle(String *string, long position, long count) // one b
         buffer[position + index] = string->data[stringRightArmStart + index];
     }
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringTrimStartIt(String *string, String *chunk)
 {
-    String temp = createString(string->data, string->size);
+    String temp = makeString(string->data, string->size);
     
     while (stringStartsWith(&temp, chunk)) { temp.size -= chunk->size; temp.data += chunk->size; }
     
@@ -83,12 +83,12 @@ String createStringTrimStartIt(String *string, String *chunk)
     
     memcpy(buffer, temp.data, temp.size);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringTrimEndIt(String *string, String *chunk)
 {
-    String temp = createString(string->data, string->size);
+    String temp = makeString(string->data, string->size);
     
     while (stringEndsWith(&temp, chunk)) { temp.size -= chunk->size; }
     
@@ -98,12 +98,12 @@ String createStringTrimEndIt(String *string, String *chunk)
     
     memcpy(buffer, temp.data, temp.size);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringTrimIt(String *string, String *chunk)
 {
-    String temp = createString(string->data, string->size);
+    String temp = makeString(string->data, string->size);
     
     while (stringStartsWith(&temp, chunk)) { temp.size -= chunk->size; temp.data += chunk->size; }
     
@@ -115,7 +115,7 @@ String createStringTrimIt(String *string, String *chunk)
     
     memcpy(buffer, temp.data, temp.size);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringTrimStart(String *string)
@@ -124,7 +124,7 @@ String createStringTrimStart(String *string)
         
     while (true) 
     {
-        if (start == string->size) { return createStringEmpty(); } 
+        if (start == string->size) { return makeStringEmpty(); } 
         
         if ((unsigned char) string->data[start] > ' ') { break; }
     
@@ -137,7 +137,7 @@ String createStringTrimStart(String *string)
     
     memcpy(buffer, string->data + start, bufferSize);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringTrimEnd(String *string)
@@ -146,7 +146,7 @@ String createStringTrimEnd(String *string)
 
     while (true)
     {
-        if (end < 0) { return createStringEmpty(); }    
+        if (end < 0) { return makeStringEmpty(); }    
 
         if ((unsigned char) string->data[end] > ' ') { break; }
     
@@ -159,7 +159,7 @@ String createStringTrimEnd(String *string)
     
     memcpy(buffer, string->data, bufferSize);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringTrim(String *string)
@@ -168,7 +168,7 @@ String createStringTrim(String *string)
         
     while (true) 
     {
-        if (start == string->size) { return createStringEmpty(); } 
+        if (start == string->size) { return makeStringEmpty(); } 
         
         if ((unsigned char) string->data[start] > ' ') { break; }
     
@@ -185,6 +185,6 @@ String createStringTrim(String *string)
     
     memcpy(buffer, string->data + start, bufferSize);
     
-    return createString(buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
