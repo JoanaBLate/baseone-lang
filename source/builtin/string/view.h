@@ -1,228 +1,192 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-// any String returned from a StringView function does NOT have own memory,
-// that string is just a view to the data *pointed* by the StringView object
-
-typedef struct 
+void stringTrimStart(String *string)
 {
-    char *data;
-    long size;
-    char *start; // keeps bad value when length reaches zero
-    long length;
-} StringView;
-
-StringView createStringView(char* data, long size)
-{
-    StringView sv = { data, size, data, size };    
-
-    return sv;
-}
-
-void stringViewReset(StringView *sv)
-{
-    sv->start  = sv->data;
-    sv->length = sv->size;
-}
-
-String stringViewCurrent(StringView *sv)
-{
-    String result = createStringEmpty();
-    
-    if (sv->length == 0) { return result; }
-    
-    result.data = sv->start;
-
-    result.size = sv->length;
-
-    return result;
-}
-
-void stringViewTrimStart(StringView *sv)
-{
-    while (sv->length != 0)
+    while (true)
     {
-        if ((unsigned char) sv->start[0] > ' ') { return; }
+        if (string->size == 0) { string->data = NULL; return; }
         
-        sv->start  += 1; sv->length -= 1;
+        if ((unsigned char) string->data[0] > ' ') { return; }
+        
+        string->data += 1; string->size -= 1;
     }
 }
 
-void stringViewTrimEnd(StringView *sv)
+void stringTrimEnd(String *string)
 {
-    while (sv->length != 0)
+    while (true)
     {
-        long index = sv->length - 1;
+        if (string->size == 0) { string->data = NULL; return; }
         
-        if ((unsigned char) sv->data[index] > ' ') { return; }
+        long index = string->size - 1;
+        
+        if ((unsigned char) string->data[index] > ' ') { return; }
     
-        sv->length -= 1;          
+        string->size -= 1;          
     }
 }
 
-void stringViewTrim(StringView *sv)
+void stringTrim(String *string)
 {
-    stringViewTrimStart(sv);
+    stringTrimStart(string);
 
-    stringViewTrimEnd(sv);
+    stringTrimEnd(string);
 }
 
-String stringViewEatStart(StringView *sv, long count)
+String stringEatStart(String *string, long size)
 {
-    String result = createStringEmpty();
+    String result = makeStringEmpty();
     
-    if (count <= 0) { return result; }
+    if (size <= 0) { return result; }
     
-    if (count > sv->length) { count = sv->length; }
-        
-    result.data = sv->start;    
-    result.size = count;
+    if (size >= string->size) { size = string->size; }
     
-    sv->start += count;
-    sv->length -= count;
+    result.data = string->data;
+    result.size = size;
+    
+    string->data += size;
+    string->size -= size;
+    
+    if (string->size == 0) { string->data = NULL; }
     
     return result;
 }
 
-String stringViewEatLine(StringView *sv)
+String stringEatLine(String *string)
 {
-    String result = createStringEmpty();
+    String result = makeStringEmpty();
     
-    if (sv->length == 0) { return result; }
-    
-    result.data = sv->start;
-    
-    result.size = 1;
-    
-    while (sv->length != 0)
+    char *rAddress = NULL;
+    char *nAddress = NULL;
+
+    while (true)
     {
-        char c = sv->start[0];
+        if (string->size == 0) { string->data = NULL; break; }
+        
+        char c = string->data[0];
+        
+        if (c == '\r') { rAddress = string->data; }
+        
+        if (c == '\n') { nAddress = string->data; }
     
-        sv->start += 1; sv->length -= 1;
+        string->data += 1; string->size -= 1;
         
         if (c == '\n') { break; }
-        
-        result.size += 1;          
-    }
-    
-    if (result.size == 0) { return createStringEmpty(); }
-    
-    if (result.data[result.size - 1] == '\r') { result.size -= 1; }
-    
-    if (result.size == 0) { return createStringEmpty(); }
-    
-    return result;
-}
-    
-String stringViewEatToken(StringView *sv) // skips any kind of blank (like EOL)
-{
-    String result = createStringEmpty();
-    
-    stringViewTrimStart(sv);
-    
-    if (sv->length == 0) { return result; } 
-    
-    // now, granted to start with non blank token
-    
-    result.data = sv->start;
-    
-    result.size = 1;
-    
-    sv->start += 1; sv->length -= 1;
-    
-    while (sv->length != 0)
-    {        
-        if ((unsigned char) sv->start[0] <= ' ') { break; }
-        
-        result.size += 1;          
-    
-        sv->start += 1; sv->length -= 1;
-    }
 
-    return result;
-}
-
-String stringViewJustEatSignalBeforeDigit(StringView *sv) // will not trim start 
-{  
-    String result = createStringEmpty();
-
-    if (sv->length < 2) { return result; }
-      
-    char c = sv->start[0];
-    
-    if (c != '-'   &&   c != '+') { return result; } 
-    
-    if (sv->start[1] < '0') { return result; }         
-    if (sv->start[1] > '9') { return result; } 
-        
-    result.data = sv->start;
-    result.size = 1;
-        
-    sv->start += 1; sv->length -= 1;         
-    
-    return result;
-}
-
-String stringViewJustEatDigits(StringView *sv) // will not trim start
-{
-    String result = createStringEmpty();
-    
-    if (sv->length == 0) { return result; }
-    
-    if (sv->start[0] < '0') { return result; }
-    if (sv->start[0] > '9') { return result; }
-    
-    // now, granted to start with digit
-    
-    result.data = sv->start;
-    
-    result.size = 1;
-    
-    sv->start += 1; sv->length -= 1;
-    
-    while (sv->length != 0)
-    {
-        if (sv->start[0] < '0') { break; }
-        if (sv->start[0] > '9') { break; }
+        if (result.data == NULL) { result.data = string->data - 1; }
         
         result.size += 1;
+    }
+    
+    if (rAddress == NULL) { return result; }
+    if (nAddress == NULL) { return result; }
+    
+    if (rAddress + 1 != nAddress) { return result; }
+    
+    result.size -= 1;
+    
+    if (result.size == 0) { result.data = NULL; }
+    
+    return result; 
+}
+
+String stringEatToken(String *string) // skips any kind of blank excepting EOL
+{
+    String result = makeStringEmpty();
+    
+    while (true)
+    {
+        if (string->size == 0) { string->data = NULL; break; }
+        
+        char c = (unsigned char) string->data[0];
+        
+        if (c == '\n') 
+        {
+            if (result.data != NULL) { break; }
             
-        sv->start += 1; sv->length -= 1;
+            result.data = string->data; result.size = 1;
+            
+            string->data += 1; string->size -= 1;
+            
+            break;
+        }
+        
+        if (c <= ' ') { string->data += 1; string->size -= 1; continue; }
+        
+        if (result.data == NULL) { result.data = string->data; }
+        
+        result.size = 1;
     }
     
     return result;
 }
+    
+// number /////////////////////////////////////////////////////////////////////
 
-String stringViewEatNumber(StringView *sv) // returns String!
-{
-    String result = createStringEmpty();
+NullLong _stringEatInteger(String *string, int signal) // expected to start with digit!!!
+{   
+    char *digits = string->data;
     
-    stringViewTrimStart(sv);
+    int length = 0;
     
-    if (sv->length == 0) { return result; } 
-    
-    result.data = sv->start;
-    
-    result.size = stringViewJustEatSignalBeforeDigit(sv).size;
-    
-    String tokenA = stringViewJustEatDigits(sv);
-    
-    if (tokenA.size == 0) { return createStringEmpty(); }
-    
-    result.size += tokenA.size;    
-    
-    if (sv->length < 2) { return result; } // no room for dot and digit
-    
-    if (sv->start[0] != '.') { return result; };
-    
-    if (sv->start[1] < '0') { return result; }
-    if (sv->start[1] > '9') { return result; }
-    
-    sv->start += 1; sv->length -= 1; // dot
+    while (true)
+    {
+        if (string->size == 0) { break; }
+        
+        if (string->data[0] < '0') { break; }
+        if (string->data[0] > '9') { break; }
+        
+        length += 1;
 
-    String tokenB = stringViewJustEatDigits(sv);
-    
-    result.size += tokenB.size;
+        string->data += 1; string->size -= 1;
+    }             
 
-    return result;
+    long result = 0;
+    long factor = 1;
+
+    for (int index = length; index > 0; index--)
+    {
+        result += (digits[index - 1] - '0') * factor;
+        
+        factor *= 10;
+    }
+
+    return createNullableLong(signal * result, false);
+}  
+
+NullLong stringEatInteger(String *string) // trim leading startin whitespaces
+{   
+    while (string->size != 0) 
+    {
+        if (string->data[0] == ' ') { string->data += 1; string->size -= 1; } else { break; }
+    }
+    
+    if (string->size == 0) { return createNullLong(); }
+    
+    char first = (unsigned char) string->data[0];
+    
+    if (string->size == 1)
+    {
+        if (first < '0') { return createNullLong(); }
+        if (first > '9') { return createNullLong(); }
+    
+        return createNullableLong(first - '0', false);
+    }
+    
+    int signal = 0;
+    
+    if (first == '-') { signal = -1; } else if (first == '+') { signal = +1; }
+    
+    if (signal != 0)
+    {
+        if (string->data[1] < '0') { return createNullLong(); }
+        if (string->data[1] > '9') { return createNullLong(); }
+                
+        string->data += 1; string->size -= 1; // eating the signal
+    }
+    
+    if (signal == 0) { signal = 1; }
+    
+    return _stringEatInteger(string, signal);
 }
 
