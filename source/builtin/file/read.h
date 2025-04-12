@@ -84,7 +84,7 @@ String readTextFile(String *filename)
     
     free(cFilename);
     
-    String string = createString(buffer, fileSize);
+    String string = makeString(buffer, fileSize);
     
     return string;
 }
