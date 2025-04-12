@@ -154,7 +154,7 @@ NullLong _stringEatInteger(String *string, int signal) // expected to start with
     return createNullableLong(signal * result, false);
 }  
 
-NullLong stringEatInteger(String *string) // trim leading startin whitespaces
+NullLong stringEatInteger(String *string) // trims leading whitespaces
 {   
     while (string->size != 0) 
     {
