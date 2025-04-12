@@ -4,11 +4,11 @@ void testReadTextFile()
 {
     printf("- testing readTextFile\n"); 
     
-    String filename = createStringFromLiteral("../builtin/builtin.h");        
+    String filename = makeStringFromLiteral("../builtin/builtin.h");        
     String file = readTextFile(&filename);
 
     String string = createStringSub(&file, 1, 18);
-    String expected = createStringFromLiteral("// # Copyright (c)");
+    String expected = makeStringFromLiteral("// # Copyright (c)");
 
     if (! stringsAreEqual(&expected, &string)) { 
         printf("readTextFile FAILS!\n"); 
