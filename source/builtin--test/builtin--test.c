@@ -2,7 +2,7 @@
 
 #include "../builtin/builtin.h"
 #include "file/file--test.h"
-#include "string/info1--test.h"
+#include "string/info--test.h"
 #include "string/create-clone-repeat--test.h"
 #include "string/substr-start-end--test.h"
 #include "string/pad-insert-append--test.h"
@@ -74,4 +74,3 @@ int main()
     
     return 0;
 }
-
