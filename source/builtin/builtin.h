@@ -19,5 +19,7 @@
 #include "string/view.h"
 #include "array-list/array-list.h"
 #include "linked-list/linked-list.h"
-#include "hashmap/hashmap.h"
+#include "hashmap/hashmap-code.h"
+#include "hashmap/hashmap-long.h"
+#include "hashmap/hashmap-string.h"
 #include "file/read.h"
