@@ -8,6 +8,7 @@ long cGetFileSize(char *filename)
     {
         printf("\nERROR: while trying to read text file '%s': ", filename);
         printf("unknown file\n");
+        fclose(fp);
         exit(1);
     }
 
@@ -33,6 +34,7 @@ void cReadFile(char *filename, char *buffer, long fileSize)
     {
         printf("\nERROR: while trying to read text file '%s': ", filename);
         printf("unknown file\n");
+        fclose(fp);
         exit(1);
     }
 
@@ -88,4 +90,3 @@ String readTextFile(String *filename)
     
     return string;
 }
-
