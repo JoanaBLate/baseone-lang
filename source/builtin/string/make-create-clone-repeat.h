@@ -2,9 +2,9 @@
 
 String makeString(char *data, long size)
 {
-    String result = { data, size };
+    String string = { data, size };
     
-    return result;
+    return string;
 }
 
 String makeStringEmpty()
@@ -28,6 +28,15 @@ String makeStringFromLiteral(char *cString)
     return makeString(cString, size);    
 }
 
+String createString(char *data, long size)
+{
+    char *buffer = allocateMemory(size);
+
+    memcpy(buffer, data, size);
+    
+    return makeString(buffer, size);
+}
+
 String createStringFromCharCode(int n)
 {   
     if (n < 0  ||  n > 255) { return makeStringEmpty(); }
@@ -39,7 +48,7 @@ String createStringFromCharCode(int n)
     return makeString(buffer, 1);
 }
 
-String _createStringFromLiteral(char *cString)
+String createStringFromLiteral(char *cString)
 {   
     long bufferSize = strlen(cString);
     

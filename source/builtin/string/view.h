@@ -52,6 +52,8 @@ String stringEatStart(String *string, long size)
     return result;
 }
 
+// line ///////////////////////////////////////////////////////////////////////
+
 String stringEatLine(String *string)
 {
     String result = makeStringEmpty();
@@ -83,44 +85,59 @@ String stringEatLine(String *string)
     
     if (rAddress + 1 != nAddress) { return result; }
     
-    result.size -= 1;
+    result.size -= 1; // removing '\r' at the end (that was windows EOL)
     
     if (result.size == 0) { result.data = NULL; }
     
     return result; 
 }
 
-String stringEatToken(String *string) // skips any kind of blank excepting EOL
+// token //////////////////////////////////////////////////////////////////////
+
+String stringEatToken(String *string) // skips whitespaces, delivers anything else
 {
     String result = makeStringEmpty();
-    
-    while (true)
+   
+    while (string->size != 0)
     {
-        if (string->size == 0) { string->data = NULL; break; }
-        
-        char c = (unsigned char) string->data[0];
-        
-        if (c == '\n') 
-        {
-            if (result.data != NULL) { break; }
-            
-            result.data = string->data; result.size = 1;
-            
-            string->data += 1; string->size -= 1;
-            
-            break;
-        }
-        
-        if (c <= ' ') { string->data += 1; string->size -= 1; continue; }
-        
-        if (result.data == NULL) { result.data = string->data; }
-        
-        result.size = 1;
+         if (string->data[0] != ' ') { break; }
+         
+         string->data += 1; string->size -= 1;
     }
+    
+    if (string->size == 0) { string->data = NULL; return result; }
+       
+    result.data = string->data; result.size = 1;
+         
+    char first = (unsigned char) string->data[0];
+    
+    string->data += 1; string->size -= 1;
+    
+    if (string->size == 0) { string->data = NULL; return result; }
+    
+    if (first == '\r'  &&  string->data[0] == '\n') // windows EOL
+    { 
+        string->data += 1; string->size -= 1; if (string->size == 0) { string->data = NULL; }
+        
+        result.size += 1; return result;    
+    }
+    
+    if (first < ' ') { return result; } // cannot be whitespace now    
+
+    while (string->size != 0)
+    {
+         if (string->data[0] <= ' ') { break; }
+         
+         result.size += 1; 
+         
+         string->data += 1; string->size -= 1; 
+    }
+    
+    if (string->size == 0) { string->data = NULL; }
     
     return result;
 }
-    
+
 // number /////////////////////////////////////////////////////////////////////
 
 NullLong _stringEatInteger(String *string, int signal) // expected to start with digit!!!

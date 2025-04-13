@@ -84,13 +84,6 @@ String createStringReplace(String *string, String *target, String *chunk)
     return makeString(buffer, bufferSize);
 }
 
-String createStringRemove(String *string, String *target)
-{
-    String empty = makeStringEmpty();
-    
-    return createStringReplace(string, target, &empty);
-}
-
 String createStringReplaceAll(String *string, String *target, String *chunk)
 {
     long count = stringCountOfTarget(string, target);
@@ -138,6 +131,14 @@ String createStringReplaceAll(String *string, String *target, String *chunk)
             
     return makeString(buffer, bufferSize);
 }
+
+String createStringRemove(String *string, String *target)
+{
+    String empty = makeStringEmpty();
+    
+    return createStringReplace(string, target, &empty);
+}
+
 
 String createStringRemoveAll(String *string, String *target)
 {
