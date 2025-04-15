@@ -1,6 +1,6 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-long makeHashCode(String *string, int capacity)
+long makeHashCode(String* string, int capacity)
 {
     if (string->size == 0) { return 0; }
     
