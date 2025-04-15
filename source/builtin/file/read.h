@@ -1,8 +1,8 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-long cGetFileSize(char *filename)
+long cGetFileSize(char* filename)
 {
-    FILE *fp = fopen(filename, "r");
+    FILE* fp = fopen(filename, "r");
 
     if (fp == NULL)  
     {
@@ -27,9 +27,9 @@ long cGetFileSize(char *filename)
 }
 
 // function cReadFile does NOT include extra byte for the NULL/terminator character
-void cReadFile(char *filename, char *buffer, long fileSize) 
+void cReadFile(char* filename, char* buffer, long fileSize) 
 {        
-    FILE *fp = fopen(filename, "r");
+    FILE* fp = fopen(filename, "r");
     if (fp == NULL) 
     {
         printf("\nERROR: while trying to read text file '%s': ", filename);
@@ -53,7 +53,7 @@ void cReadFile(char *filename, char *buffer, long fileSize)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-String readTextFile(String *filename)
+String* readTextFile(String* filename)
 {
     if (filename->size == 0) {    
         printf("\nERROR: cannot read text file: file name is blank\n");
@@ -61,13 +61,13 @@ String readTextFile(String *filename)
     }
 
     // c filename
-    char *cFilename = malloc(filename->size + 1);
+    char* cFilename = allocateMemory(filename->size + 1);
     memcpy(cFilename, filename->data, filename->size);
     cFilename[filename->size] = 0;
     
     long fileSize = cGetFileSize(cFilename);
 
-    char *buffer = allocateMemory(fileSize);
+    char* buffer = allocateMemory(fileSize);
     
     cReadFile(cFilename, buffer, fileSize);
 
@@ -86,7 +86,8 @@ String readTextFile(String *filename)
     
     free(cFilename);
     
-    String string = makeString(buffer, fileSize);
+    String* string = makeString(buffer, fileSize);
     
     return string;
 }
+
