@@ -1,17 +1,18 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
+
 typedef struct 
 {
-    char *data;    
+    char* data;    
     long size;
 } String;
 
-long getStringSize(String *string)
+long getStringSize(String* string)
 {        
     return string->size;
 }
 
-int stringCharCodeAt(String *string, int index) // one base index
+int stringCharCodeAt(String* string, int index) // one base index
 {    
     if (index < 1) { return -1; }
     
@@ -22,7 +23,7 @@ int stringCharCodeAt(String *string, int index) // one base index
     return (int) value;
 }
 
-bool stringsAreEqual(String *stringA, String *stringB)
+bool stringsAreEqual(String* stringA, String* stringB)
 {
     if (stringA->size != stringB->size) { return false; };
     
@@ -33,7 +34,7 @@ bool stringsAreEqual(String *stringA, String *stringB)
     return true;
 }
 
-bool stringStartsWith(String *string, String *target)
+bool stringStartsWith(String* string, String* target)
 {    
     if (target->size == 0) { return false; }
     
@@ -46,7 +47,7 @@ bool stringStartsWith(String *string, String *target)
     return true;
 }
 
-bool stringEndsWith(String *string, String *target)
+bool stringEndsWith(String* string, String* target)
 {    
     if (target->size == 0) { return false; }
     
@@ -61,7 +62,7 @@ bool stringEndsWith(String *string, String *target)
     return true;
 }
 
-long stringIndexOf(String *string, String *target) // one base index
+long stringIndexOf(String* string, String* target) // one base index
 {    
     if (target->size == 0) { return 0; }
     
@@ -83,7 +84,7 @@ long stringIndexOf(String *string, String *target) // one base index
     return 0;
 }
 
-long stringIndexOfAfter(String *string, String *target, long usedIndex) // one base index
+long stringIndexOfAfter(String* string, String* target, long usedIndex) // one base index
 {    
     if (string->size == 0) { return 0; }
 
@@ -111,7 +112,7 @@ long stringIndexOfAfter(String *string, String *target, long usedIndex) // one b
     return 0;
 }
 
-long stringLastIndexOf(String *string, String *target) // one base index
+long stringLastIndexOf(String* string, String* target) // one base index
 {    
     if (target->size == 0) { return 0; }
     
@@ -133,7 +134,7 @@ long stringLastIndexOf(String *string, String *target) // one base index
     return 0;
 }
 
-long stringLastIndexOfBefore(String *string, String *target, long usedIndex) // one base index
+long stringLastIndexOfBefore(String* string, String* target, long usedIndex) // one base index
 {    
     if (target->size == 0) { return 0; }
 
@@ -159,12 +160,12 @@ long stringLastIndexOfBefore(String *string, String *target, long usedIndex) // 
     return 0;
 }
 
-bool stringContains(String *string, String *target)
+bool stringContains(String* string, String* target)
 {    
     return (stringIndexOf(string, target) != 0);
 }
 
-long stringCountOfTarget(String *string, String *target)
+long stringCountOf(String* string, String* target)
 {
     long count = 0;
 

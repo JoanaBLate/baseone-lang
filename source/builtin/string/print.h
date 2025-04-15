@@ -1,6 +1,7 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-void printString(String *string)
+
+void printString(String* string)
 {
     char substitute = 26;
     
@@ -20,7 +21,7 @@ void printString(String *string)
     }
 }
 
-void printStringBytes(String *string)
+void printStringBytes(String* string)
 {    
     if (string->size == 0) { printf("{ }"); return; }
 
@@ -41,7 +42,7 @@ void printStringBytes(String *string)
     printf(" }");
 }
 
-void printStringRunes(String *string)
+void printStringRunes(String* string)
 {
     char substitute = 26;
     
