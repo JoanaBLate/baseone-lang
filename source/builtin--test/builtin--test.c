@@ -17,7 +17,7 @@
 #include "string/eat--test.h"
 #include "string/info--test.h"
 #include "string/lower-reverse-sort--test.h"
-#include "string/new-clone-repeat-char-number--test.h"
+#include "string/clone-repeat-char-number--test.h"
 #include "string/print--test.h"
 #include "string/remove--test.h"
 #include "string/replace--test.h"
