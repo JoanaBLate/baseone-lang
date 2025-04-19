@@ -10,7 +10,7 @@
 #include "memory/memory.h"
 #include "string/info.h"
 #include "string/make.h"
-#include "string/new-clone-repeat.h"
+#include "string/new-clone-repeat-number.h"
 #include "string/append-insert.h"
 #include "string/lower-reverse-sort.h"
 #include "string/pad.h"
