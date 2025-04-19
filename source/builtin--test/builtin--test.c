@@ -1,13 +1,14 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
+// IMPLICITLY TESTED:
+// makeString, makeStringEmpty, makeStringFromLiteral, newString
 
-// makeString, makeStringEmpty and makeStringFromLiteral
-// are implicitly tested among the other function testes
+// NOT TESTED:
+// makeStringClone, getStringSize
 
+// TESTED SOMEWHERE ELSE (Advent Of Code puzzles):
 // stringEatLine, stringEatToken, stringEatLongInt 
-// and Hashmap and ArrayList functions
-// are tested with Advent Of Code puzzles somewhere else
-// TODO: make the tests here too
+// Memory, Hashmap and ArrayList functions
 
 
 #include "../builtin/builtin.h"
@@ -41,6 +42,7 @@ int main()
     testNewStringFromCharCode();
     testNewStringClone();
     testNewStringRepeat();
+    testNewStringFromLong();
 
     testStringSliceStart(); 
     testStringSliceEnd(); 
@@ -48,12 +50,14 @@ int main()
         
     testNewStringAppend(); 
     testNewStringInsert(); 
+    
     testNewStringPadStart();
     testNewStringPadEnd();
     
     testNewStringRemove();
     testNewStringRemoveLast();
     testNewStringRemoveAll();
+    
     testNewStringReplaceStart();
     testNewStringReplaceEnd();
     testNewStringReplace();
