@@ -74,13 +74,14 @@ String* readTextFile(String* filename)
     // checking if is good string
     for (long index = 0; index < fileSize; index++)
     {
-        if (buffer[index] > 31) { continue; }
-        if (buffer[index] == '\n') { continue; }
-        if (buffer[index] == '\r') { continue; }
-        if (buffer[index] == '\t') { continue; }
+        unsigned char c = buffer[index];
+        if (c > 31) { continue; }
+        if (c == '\n') { continue; }
+        if (c == '\r') { continue; }
+        if (c == '\t') { continue; }
         
         printf("\nERROR: while reading text file '%s': ", cFilename);
-        printf("found invalid character (code %d) at position %li\n", buffer[index], index);
+        printf("found invalid character (code %d) at position %li\n", c, index);
         exit(1);    
     }
     
