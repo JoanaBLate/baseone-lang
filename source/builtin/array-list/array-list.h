@@ -9,13 +9,13 @@ typedef struct {
 
 ArrayList* newArrayList(long capacity)
 {
-    ArrayList* list = allocateMemory(1 * sizeof(ArrayList));
+    ArrayList* list = heapAllocate(1 * sizeof(ArrayList));
     
     list->capacity = capacity;
     
     list->count = 0;
     
-    list->items = allocateMemory(capacity * sizeof(void**));
+    list->items = heapAllocate(capacity * sizeof(void**));
 
     return list;
 }
