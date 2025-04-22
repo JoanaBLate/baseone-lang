@@ -7,15 +7,15 @@ void testNewStringToLower()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();    
-    String* source = makeStringFromLiteral("Life is ∆ ROCK");   
+    String empty = makeStringEmpty();    
+    String source = makeStringFromLiteral("Life is ∆ ROCK");   
    
-    String* result1 = newStringToLower(source);
-    String* expected1 = makeStringFromLiteral("life is ∆ rock");    
+    String result1 = newStringToLower(source);
+    String expected1 = makeStringFromLiteral("life is ∆ rock");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String* result2 = newStringToLower(empty);
-    String* expected2 = makeStringEmpty();    
+    String result2 = newStringToLower(empty);
+    String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
@@ -30,15 +30,15 @@ void testNewStringToUpper()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();    
-    String* source = makeStringFromLiteral("Life is ∆ ROCK");   
+    String empty = makeStringEmpty();    
+    String source = makeStringFromLiteral("Life is ∆ ROCK");   
    
-    String* result1 = newStringToUpper(source);
-    String* expected1 = makeStringFromLiteral("LIFE IS ∆ ROCK");    
+    String result1 = newStringToUpper(source);
+    String expected1 = makeStringFromLiteral("LIFE IS ∆ ROCK");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String* result2 = newStringToUpper(empty);
-    String* expected2 = makeStringEmpty();    
+    String result2 = newStringToUpper(empty);
+    String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
@@ -53,15 +53,15 @@ void testNewStringToOppositeCase()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();    
-    String* source = makeStringFromLiteral("Life is ∆ ROCK");   
+    String empty = makeStringEmpty();    
+    String source = makeStringFromLiteral("Life is ∆ ROCK");   
    
-    String* result1 = newStringToOppositeCase(source);
-    String* expected1 = makeStringFromLiteral("lIFE IS ∆ rock");    
+    String result1 = newStringToOppositeCase(source);
+    String expected1 = makeStringFromLiteral("lIFE IS ∆ rock");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String* result2 = newStringToOppositeCase(empty);
-    String* expected2 = makeStringEmpty();    
+    String result2 = newStringToOppositeCase(empty);
+    String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
@@ -76,15 +76,15 @@ void testNewStringReverse()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();    
-    String* source = makeStringFromLiteral("Life is ∆ rock");   
+    String empty = makeStringEmpty();    
+    String source = makeStringFromLiteral("Life is ∆ rock");   
    
-    String* result1 = newStringReverse(source);    
-    String* expected1 = makeStringFromLiteral("kcor \x86\x88\xe2 si efiL");    
+    String result1 = newStringReverse(source);    
+    String expected1 = makeStringFromLiteral("kcor \x86\x88\xe2 si efiL");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String* result2 = newStringReverse(empty);
-    String* expected2 = makeStringEmpty();    
+    String result2 = newStringReverse(empty);
+    String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
@@ -99,15 +99,15 @@ void testNewStringSort()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();    
-    String* source = makeStringFromLiteral("Life is ∆ rock");   
+    String empty = makeStringEmpty();    
+    String source = makeStringFromLiteral("Life is ∆ rock");   
    
-    String* result1 = newStringSort(source);
-    String* expected1 = makeStringFromLiteral("\x86\x88\xe2   Lcefiikors");    
+    String result1 = newStringSort(source);
+    String expected1 = makeStringFromLiteral("\x86\x88\xe2   Lcefiikors");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String* result2 = newStringSort(empty);
-    String* expected2 = makeStringEmpty();    
+    String result2 = newStringSort(empty);
+    String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 

@@ -5,7 +5,7 @@ void testStringCharCodeAt()
 {
     printf("- testing stringCharCodeAt\n"); 
     
-    String* source = makeStringFromLiteral("He@llo");
+    String source = makeStringFromLiteral("He@llo");
     bool fails = false;
     if (stringCharCodeAt(source, 3) != 64)   { fails = true; }
     if (stringCharCodeAt(source, 333) != -1) { fails = true; }
@@ -23,15 +23,15 @@ void testStringsAreEquals()
     
     bool fails = false;
 
-    String* source1 = makeStringFromLiteral("Life is ∆ rock");
-    String* source2 = makeStringFromLiteral("Life is ∆ rock");
-    String* source3 = makeStringFromLiteral("Life is ∆ ");
+    String source1 = makeStringFromLiteral("Life is ∆ rock");
+    String source2 = makeStringFromLiteral("Life is ∆ rock");
+    String source3 = makeStringFromLiteral("Life is ∆ ");
 
     if (! stringsAreEqual(source1, source2)) { fails = true; }
     if (stringsAreEqual(source1, source3))   { fails = true; }
     
-    String* empty1 = makeStringEmpty();    
-    String* empty2 = makeStringEmpty();
+    String empty1 = makeStringEmpty();    
+    String empty2 = makeStringEmpty();
     
     if (! stringsAreEqual(empty1, empty2)) { fails = true; }
     if (stringsAreEqual(empty1, source1))  { fails = true; }
@@ -48,10 +48,10 @@ void testStringContains()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();    
-    String* source1 = makeStringFromLiteral("Life is ∆ rock");
-    String* source2 = makeStringFromLiteral(" ∆ ro");
-    String* source3 = makeStringFromLiteral("ck ∆");
+    String empty = makeStringEmpty();    
+    String source1 = makeStringFromLiteral("Life is ∆ rock");
+    String source2 = makeStringFromLiteral(" ∆ ro");
+    String source3 = makeStringFromLiteral("ck ∆");
     
     if (! stringContains(source1, source1)) { fails = true; }
     if (! stringContains(source1, source2)) { fails = true; }
@@ -71,10 +71,10 @@ void testStringStartsWith()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();  
-    String* source1 = makeStringFromLiteral("Life is ∆ rock");  
-    String* source2 = makeStringFromLiteral("Life is ∆");
-    String* source3 = makeStringFromLiteral("Life rocks");
+    String empty = makeStringEmpty();  
+    String source1 = makeStringFromLiteral("Life is ∆ rock");  
+    String source2 = makeStringFromLiteral("Life is ∆");
+    String source3 = makeStringFromLiteral("Life rocks");
     
     if (stringStartsWith(source1, empty))   { fails = true; }
     if (stringStartsWith(empty, source1))   { fails = true; }
@@ -95,10 +95,10 @@ void testStringEndsWith()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();  
-    String* source1 = makeStringFromLiteral("Life is ∆ rock");  
-    String* source2 = makeStringFromLiteral("ck ∆");
-    String* source3 = makeStringFromLiteral("∆ rock");
+    String empty = makeStringEmpty();  
+    String source1 = makeStringFromLiteral("Life is ∆ rock");  
+    String source2 = makeStringFromLiteral("ck ∆");
+    String source3 = makeStringFromLiteral("∆ rock");
     
     if (stringEndsWith(source1, empty))   { fails = true; }
     if (stringEndsWith(empty, source1))   { fails = true; }
@@ -119,10 +119,10 @@ void testStringIndexOf()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();  
-    String* source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock");  
-    String* source2 = makeStringFromLiteral("∆ like");
-    String* source3 = makeStringFromLiteral("and#∆");
+    String empty = makeStringEmpty();  
+    String source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock");  
+    String source2 = makeStringFromLiteral("∆ like");
+    String source3 = makeStringFromLiteral("and#∆");
 
     if (stringIndexOf(source1, source1) !=  1) { fails = true; }
     if (stringIndexOf(source1, source2) != 22) { fails = true; }
@@ -143,10 +143,10 @@ void testStringLastIndexOf()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();  
-    String* source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock"); 
-    String* source2 = makeStringFromLiteral("∆");
-    String* source3 = makeStringFromLiteral("∆#");
+    String empty = makeStringEmpty();  
+    String source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock"); 
+    String source2 = makeStringFromLiteral("∆");
+    String source3 = makeStringFromLiteral("∆#");
 
     if (stringLastIndexOf(source1, source1) !=  1) { fails = true; }
     if (stringLastIndexOf(source1, source2) != 22) { fails = true; }
@@ -167,10 +167,10 @@ void testStringIndexOfAfter()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();  
-    String* source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock");  
-    String* source2 = makeStringFromLiteral("∆");
-    String* source3 = makeStringFromLiteral("∆#");
+    String empty = makeStringEmpty();  
+    String source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock");  
+    String source2 = makeStringFromLiteral("∆");
+    String source3 = makeStringFromLiteral("∆#");
     
     if (stringIndexOfAfter(source1, source1,  0) !=  1) { fails = true; }
     if (stringIndexOfAfter(source1, source1, -9) !=  1) { fails = true; }
@@ -194,10 +194,10 @@ void testStringLastIndexOfBefore()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();  
-    String* source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock"); 
-    String* source2 = makeStringFromLiteral("∆");
-    String* source3 = makeStringFromLiteral("∆#");
+    String empty = makeStringEmpty();  
+    String source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock"); 
+    String source2 = makeStringFromLiteral("∆");
+    String source3 = makeStringFromLiteral("∆#");
     
     if (stringLastIndexOfBefore(source1, source1, -1) !=  0) { fails = true; }
     if (stringLastIndexOfBefore(source1, source1,  3) !=  0) { fails = true; }
@@ -220,12 +220,12 @@ void testStringCountOf()
     
     bool fails = false;
 
-    String* empty = makeStringEmpty();  
-    String* source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock"); 
-    String* source2 = makeStringFromLiteral("∆");
-    String* source3 = makeStringFromLiteral("∆#");
-    String* source4 = makeStringFromLiteral("∆∆∆");
-    String* source5 = makeStringFromLiteral("∆.∆.∆");
+    String empty = makeStringEmpty();  
+    String source1 = makeStringFromLiteral("Life is ∆ rock and ∆ like rock"); 
+    String source2 = makeStringFromLiteral("∆");
+    String source3 = makeStringFromLiteral("∆#");
+    String source4 = makeStringFromLiteral("∆∆∆");
+    String source5 = makeStringFromLiteral("∆.∆.∆");
     
     if (stringCountOf(source1, source2) != 2) { fails = true; }
     if (stringCountOf(source1, source3) != 0) { fails = true; }
