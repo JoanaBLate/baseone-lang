@@ -53,21 +53,21 @@ void cReadFile(char* filename, char* buffer, long fileSize)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-String* readTextFile(String* filename)
+String readTextFile(String filename)
 {
-    if (filename->size == 0) {    
+    if (filename.size == 0) {    
         printf("\nERROR: cannot read text file: file name is blank\n");
         exit(1);     
     }
 
     // c filename
-    char* cFilename = allocateMemory(filename->size + 1);
-    memcpy(cFilename, filename->data, filename->size);
-    cFilename[filename->size] = 0;
+    char* cFilename = heapAllocate(filename.size + 1);
+    memcpy(cFilename, filename.data, filename.size);
+    cFilename[filename.size] = 0;
     
     long fileSize = cGetFileSize(cFilename);
 
-    char* buffer = allocateMemory(fileSize);
+    char* buffer = heapAllocate(fileSize);
     
     cReadFile(cFilename, buffer, fileSize);
 
@@ -82,12 +82,13 @@ String* readTextFile(String* filename)
         
         printf("\nERROR: while reading text file '%s': ", cFilename);
         printf("found invalid character (code %d) at position %li\n", c, index);
+        heapRelease(cFilename);
         exit(1);    
     }
     
-    free(cFilename);
+    heapRelease(cFilename);
     
-    String* string = makeString(buffer, fileSize);
+    String string = makeString(buffer, fileSize);
     
     return string;
 }
