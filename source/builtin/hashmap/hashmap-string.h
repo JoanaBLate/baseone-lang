@@ -1,9 +1,10 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
+
 typedef struct
 {
-    String* key;    
-    String* value;
+    String key;    
+    String value;
     void* next; // linked item that has the same hashcode
 } HashmapStringItem;
 
@@ -11,12 +12,12 @@ typedef struct
 {
     long capacity;
     long count;
-    HashmapStringItem* *items;
+    HashmapStringItem** items;
 } HashmapString;
 
-HashmapStringItem* newHashmapStringItem(String* key, String* value)
+HashmapStringItem* newHashmapStringItem(String key, String value)
 {
-    HashmapStringItem* item = allocateMemory(sizeof(HashmapStringItem));
+    HashmapStringItem* item = heapAllocate(sizeof(HashmapStringItem));
 
     item->key = newStringClone(key);
     
@@ -29,114 +30,176 @@ HashmapStringItem* newHashmapStringItem(String* key, String* value)
 
 HashmapString* newHashmapString(long capacity) 
 {
-    HashmapString* map = allocateMemory(1 * sizeof(HashmapString));
+    HashmapString* map = heapAllocate(1 * sizeof(HashmapString));
     
     map->capacity = capacity;
     
     map->count = 0;
     
-    map->items = allocateMemoryClean(capacity, sizeof(HashmapStringItem*));
+    map->items = heapAllocateClean(capacity * sizeof(HashmapStringItem*));
 
     return map;
 }
 
-bool addItemToHashmapStringOrSetValue(HashmapString* map, String* key, String* value) // returns true when makes new item
+bool addItemToHashmapStringOrSetValue(HashmapString* map, String key, String value) // returns true when makes new item
 {
     long hashcode = makeHashCode(key, map->capacity);
     
-    HashmapStringItem* currentItem = map->items[hashcode];
+    HashmapStringItem* item = map->items[hashcode];
 
-    if (currentItem == NULL) // ADDING new item directly to the items array
+    if (item == NULL) // ADDING new item directly to the items array
     {     
-        HashmapStringItem* newItem = newHashmapStringItem(key, value);
-
-        map->items[hashcode] = newItem;
+        map->items[hashcode] = newHashmapStringItem(key, value);
         
         map->count += 1;
 
         return true;
     }   
   
-    if (stringsAreEqual(key, currentItem->key)) { currentItem->value = newStringClone(value); return false; } // SETTING item value
+    if (stringsAreEqual(key, item->key)) { item->value = newStringClone(value); return false; } // SETTING item value
     
     while (true) // searching in the chain
     {    
-        HashmapStringItem* nextItem = currentItem->next;
+        HashmapStringItem* nextItem = item->next;
     
         if (nextItem == NULL) { break; }
         
         if (stringsAreEqual(key, nextItem->key)) { nextItem->value = newStringClone(value); return false; } // SETTING item value
         
-        currentItem = nextItem;
+        item = nextItem;
     }
     
     // ADDING new item in the chain
     
-    HashmapStringItem* newItem = newHashmapStringItem(key, value);
-    
-    currentItem->next = newItem;
+    item->next = newHashmapStringItem(key, value);
     
     map->count += 1;
  
     return true;
 }
 
-HashmapStringItem* getItemFromHashmapString(HashmapString* map, String* key)
+HashmapStringItem* getItemFromHashmapString(HashmapString* map, String key)
 {
     long hashcode = makeHashCode(key, map->capacity);
     
-    HashmapStringItem* currentItem = map->items[hashcode];
+    HashmapStringItem* item = map->items[hashcode];
 
-    if (currentItem == NULL) { return NULL; }
+    if (item == NULL) { return NULL; }
         
-    if (stringsAreEqual(key, currentItem->key)) { return currentItem; }
+    if (stringsAreEqual(key, item->key)) { return item; }
     
     while (true) // searching in the chain
     {    
-        HashmapStringItem* nextItem = currentItem->next;
+        HashmapStringItem* nextItem = item->next;
     
         if (nextItem == NULL) { break; }
         
         if (stringsAreEqual(key, nextItem->key)) { return nextItem; }
         
-        currentItem = nextItem;
+        item = nextItem;
     }
 
     return NULL; 
 }
 
-bool deleteItemFromHashmapString(HashmapString* map, String* key)
+bool deleteItemFromHashmapString(HashmapString* map, String key)
 {
     long hashcode = makeHashCode(key, map->capacity);
     
-    HashmapStringItem* currentItem = map->items[hashcode];
+    HashmapStringItem* item = map->items[hashcode];
 
-    if (currentItem == NULL) { return false; }
+    if (item == NULL) { return false; }
         
-    if (stringsAreEqual(key, currentItem->key)) 
+    if (stringsAreEqual(key, item->key)) 
     { 
-        map->items[hashcode] = currentItem->next;
+        map->items[hashcode] = item->next;
         
         map->count -= 1;
+        
+        releaseString(item->key);
+        releaseString(item->value);
+        
+        heapRelease(item);
         
         return true;
     }
     
     while (true) // searching in the chain
     {    
-        HashmapStringItem* nextItem = currentItem->next;
+        HashmapStringItem *nextItem = item->next;
     
-        if (nextItem == NULL) { break; }
+        if (nextItem == NULL) { return false; }
         
-        if (! stringsAreEqual(key, nextItem->key)) { currentItem = nextItem; continue; }
+        if (! stringsAreEqual(key, nextItem->key)) { item = nextItem; continue; }
         
-        currentItem->next = nextItem->next;
+        item->next = nextItem->next;
         
         map->count -= 1;
+        
+        releaseString(item->key);
+        releaseString(item->value);
+        
+        heapRelease(item);
         
         return true;
     } 
     
-    return false;
+    return false; // unreachable
+}
+
+void deleteHashmapString(HashmapString* map)
+{
+    for (long mapIndex = 0; mapIndex < map->capacity; mapIndex++)
+    {    
+        HashmapStringItem* item = map->items[mapIndex];
+        
+        if (item == NULL) { continue; }
+        
+        HashmapStringItem* nextItem = item->next;
+        
+        releaseString(item->key);
+        releaseString(item->value);
+        
+        heapRelease(item);
+        
+        while (nextItem != NULL)
+        {
+            item = nextItem;
+        
+            nextItem = item->next;
+            
+            releaseString(item->key);
+            releaseString(item->value);
+            
+            heapRelease(item);
+        }
+    }
+    
+    heapRelease(map->items);
+    
+    heapRelease(map);
+}
+
+ArrayList* getHashmapStringKeys(HashmapString* map)
+{
+    ArrayList* list = newArrayList(map->count);
+        
+    for (long mapIndex = 0; mapIndex < map->capacity; mapIndex++)
+    {    
+        HashmapStringItem* item = map->items[mapIndex];
+        
+        if (item == NULL) { continue; }
+        
+        arrayListInclude(list, &item->key);
+        
+        while (item->next != NULL)
+        {
+            item = item->next;
+            
+            arrayListInclude(list, &item->key);
+        }
+    }
+
+    return list;
 }
 

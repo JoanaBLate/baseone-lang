@@ -1,8 +1,9 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
+
 typedef struct
 {
-    String* key;    
+    String key;    
     long value;
     void* next; // linked item that has the same hashcode
 } HashmapLongItem;
@@ -14,9 +15,9 @@ typedef struct
     HashmapLongItem** items;
 } HashmapLong;
 
-HashmapLongItem* newHashmapLongItem(String* key, long value)
+HashmapLongItem* newHashmapLongItem(String key, long value)
 {
-    HashmapLongItem* item = allocateMemory(sizeof(HashmapLongItem));
+    HashmapLongItem* item = heapAllocate(sizeof(HashmapLongItem));
 
     item->key = newStringClone(key);
     
@@ -29,114 +30,172 @@ HashmapLongItem* newHashmapLongItem(String* key, long value)
 
 HashmapLong* newHashmapLong(long capacity) 
 {
-    HashmapLong* map = allocateMemory(1 * sizeof(HashmapLong));
+    HashmapLong* map = heapAllocate(1 * sizeof(HashmapLong));
     
     map->capacity = capacity;
     
     map->count = 0;
     
-    map->items = allocateMemoryClean(capacity, sizeof(HashmapLongItem*));
+    map->items = heapAllocateClean(capacity * sizeof(HashmapLongItem*));
 
     return map;
 }
 
-bool addItemToHashmapLongOrSetValue(HashmapLong* map, String* key, long value) // returns true when makes new item
+bool addItemToHashmapLongOrSetValue(HashmapLong* map, String key, long value) // returns true when makes new item
 {
     long hashcode = makeHashCode(key, map->capacity);
     
-    HashmapLongItem* currentItem = map->items[hashcode];
+    HashmapLongItem* item = map->items[hashcode];
 
-    if (currentItem == NULL) // ADDING new item directly to the items array
+    if (item == NULL) // ADDING new item directly to the items array
     {     
-        HashmapLongItem* newItem = newHashmapLongItem(key, value);
-
-        map->items[hashcode] = newItem;
+        map->items[hashcode] = newHashmapLongItem(key, value);
         
         map->count += 1;
 
         return true;
     }   
   
-    if (stringsAreEqual(key, currentItem->key)) { currentItem->value = value; return false; } // SETTING item value
+    if (stringsAreEqual(key, item->key)) { item->value = value; return false; } // SETTING item value
     
     while (true) // searching in the chain
     {    
-        HashmapLongItem* nextItem = currentItem->next;
+        HashmapLongItem* nextItem = item->next;
     
         if (nextItem == NULL) { break; }
         
         if (stringsAreEqual(key, nextItem->key)) { nextItem->value = value; return false; } // SETTING item value
         
-        currentItem = nextItem;
+        item = nextItem;
     }
     
     // ADDING new item in the chain
     
-    HashmapLongItem* newItem = newHashmapLongItem(key, value);
-    
-    currentItem->next = newItem;
+    item->next = newHashmapLongItem(key, value);
     
     map->count += 1;
  
     return true;
 }
 
-HashmapLongItem* getItemFromHashmapLong(HashmapLong* map, String* key)
+HashmapLongItem* getItemFromHashmapLong(HashmapLong* map, String key)
 {
     long hashcode = makeHashCode(key, map->capacity);
     
-    HashmapLongItem* currentItem = map->items[hashcode];
+    HashmapLongItem* item = map->items[hashcode];
 
-    if (currentItem == NULL) { return NULL; }
+    if (item == NULL) { return NULL; }
         
-    if (stringsAreEqual(key, currentItem->key)) { return currentItem; }
+    if (stringsAreEqual(key, item->key)) { return item; }
     
     while (true) // searching in the chain
     {    
-        HashmapLongItem* nextItem = currentItem->next;
+        HashmapLongItem* nextItem = item->next;
     
         if (nextItem == NULL) { break; }
         
         if (stringsAreEqual(key, nextItem->key)) { return nextItem; }
         
-        currentItem = nextItem;
+        item = nextItem;
     }
 
     return NULL; 
 }
 
-bool deleteItemFromHashmapLong(HashmapLong* map, String* key)
+bool deleteItemFromHashmapLong(HashmapLong* map, String key)
 {
     long hashcode = makeHashCode(key, map->capacity);
     
-    HashmapLongItem* currentItem = map->items[hashcode];
+    HashmapLongItem* item = map->items[hashcode];
 
-    if (currentItem == NULL) { return false; }
+    if (item == NULL) { return false; }
         
-    if (stringsAreEqual(key, currentItem->key)) 
+    if (stringsAreEqual(key, item->key)) 
     { 
-        map->items[hashcode] = currentItem->next;
+        map->items[hashcode] = item->next;
         
         map->count -= 1;
+        
+        releaseString(item->key);
+        
+        heapRelease(item);
         
         return true;
     }
     
     while (true) // searching in the chain
     {    
-        HashmapLongItem *nextItem = currentItem->next;
+        HashmapLongItem *nextItem = item->next;
     
-        if (nextItem == NULL) { break; }
+        if (nextItem == NULL) { return false; }
         
-        if (! stringsAreEqual(key, nextItem->key)) { currentItem = nextItem; continue; }
+        if (! stringsAreEqual(key, nextItem->key)) { item = nextItem; continue; }
         
-        currentItem->next = nextItem->next;
+        item->next = nextItem->next;
         
         map->count -= 1;
+        
+        releaseString(item->key);
+        
+        heapRelease(item);
         
         return true;
     } 
     
-    return false;
+    return false; // unreachable
 }
 
+void deleteHashmapLong(HashmapLong* map)
+{
+    for (long mapIndex = 0; mapIndex < map->capacity; mapIndex++)
+    {    
+        HashmapLongItem* item = map->items[mapIndex];
+        
+        if (item == NULL) { continue; }
+        
+        HashmapLongItem* nextItem = item->next;
+        
+        releaseString(item->key);
+        
+        heapRelease(item);
+        
+        while (nextItem != NULL)
+        {
+            item = nextItem;
+        
+            nextItem = item->next;
+            
+            releaseString(item->key);
+            
+            heapRelease(item);
+        }
+    }
+    
+    heapRelease(map->items);
+    
+    heapRelease(map);
+}
+
+ArrayList* getHashmapLongKeys(HashmapLong* map)
+{
+    ArrayList* list = newArrayList(map->count);
+        
+    for (long mapIndex = 0; mapIndex < map->capacity; mapIndex++)
+    {    
+        HashmapLongItem* item = map->items[mapIndex];
+        
+        if (item == NULL) { continue; }
+        
+        arrayListInclude(list, &item->key);
+        
+        while (item->next != NULL)
+        {
+            item = item->next;
+            
+            arrayListInclude(list, &item->key);
+        }
+    }
+
+    return list;
+}
+    
