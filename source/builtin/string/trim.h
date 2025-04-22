@@ -34,23 +34,23 @@ void stringTrim(String* string)
     stringTrimEnd(string);
 }
 
-void stringTrimStartTarget(String* string, String* target)
+void stringTrimStartTarget(String* string, String target)
 {
-    while (stringStartsWith(string, target))
+    while (stringStartsWith(*string, target))
     {
-        string->data += target->size; string->size -= target->size;
+        string->data += target.size; string->size -= target.size;
     }
 }
 
-void stringTrimEndTarget(String* string, String* target)
+void stringTrimEndTarget(String* string, String target)
 {
-    while (stringEndsWith(string, target))
+    while (stringEndsWith(*string, target))
     {
-        string->size -= target->size;
+        string->size -= target.size;
     }
 }
 
-void stringTrimTarget(String* string, String* target)
+void stringTrimTarget(String* string, String target)
 {
     stringTrimStartTarget(string, target);
 

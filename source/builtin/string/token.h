@@ -1,33 +1,33 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-String* stringEatStart(String* string, long count)
+String stringEatStart(String* string, long count)
 {
     if (count < 1) { return makeStringEmpty(); }
     
     if (count >= string->size) 
     { 
-        String* token = makeStringClone(string);
+        String token = makeStringClone(*string);
     
         string->data = NULL; string->size = 0;
         
         return token;
     }
     
-    String* token = makeString(string->data, count);
+    String token = makeString(string->data, count);
     
     string->data += count, string->size -= count;
     
     return token;
 }
 
-String* stringEatEnd(String* string, long count)
+String stringEatEnd(String* string, long count)
 {
     if (count < 1) { return makeStringEmpty(); }
     
     if (count >= string->size) 
     { 
-        String* token = makeStringClone(string);
+        String token = makeStringClone(*string);
     
         string->data = NULL; string->size = 0;
         
@@ -36,7 +36,7 @@ String* stringEatEnd(String* string, long count)
     
     char* tokenStart = string->data + string->size - count;
     
-    String* token = makeString(tokenStart, count);
+    String token = makeString(tokenStart, count);
 
     string->size -= count;  
     
@@ -45,9 +45,9 @@ String* stringEatEnd(String* string, long count)
 
 // line ///////////////////////////////////////////////////////////////////////
 
-String* stringEatLine(String* string)
+String stringEatLine(String* string)
 {
-    String* result = makeStringEmpty();
+    String result = makeStringEmpty();
     
     char* rAddress = NULL;
     char* nAddress = NULL;
@@ -66,9 +66,9 @@ String* stringEatLine(String* string)
         
         if (c == '\n') { break; }
 
-        if (result->data == NULL) { result->data = string->data - 1; }
+        if (result.data == NULL) { result.data = string->data - 1; }
         
-        result->size += 1;
+        result.size += 1;
     }
     
     if (rAddress == NULL) { return result; }
@@ -76,18 +76,18 @@ String* stringEatLine(String* string)
     
     if (rAddress + 1 != nAddress) { return result; }
     
-    result->size -= 1; // removing '\r' at the end (that was windows EOL)
+    result.size -= 1; // removing '\r' at the end (that was windows EOL)
     
-    if (result->size == 0) { result->data = NULL; }
+    if (result.size == 0) { result.data = NULL; }
     
     return result; 
 }
 
 // token //////////////////////////////////////////////////////////////////////
 
-String* stringEatToken(String* string) // skips whitespaces, delivers anything else
+String stringEatToken(String* string) // skips whitespaces, delivers anything else
 {
-    String *result = makeStringEmpty();
+    String result = makeStringEmpty();
    
     while (string->size != 0)
     {
@@ -98,7 +98,7 @@ String* stringEatToken(String* string) // skips whitespaces, delivers anything e
     
     if (string->size == 0) { string->data = NULL; return result; }
        
-    result->data = string->data; result->size = 1;
+    result.data = string->data; result.size = 1;
          
     char first = (unsigned char) string->data[0];
     
@@ -110,7 +110,7 @@ String* stringEatToken(String* string) // skips whitespaces, delivers anything e
     { 
         string->data += 1; string->size -= 1; if (string->size == 0) { string->data = NULL; }
         
-        result->size += 1; return result;    
+        result.size += 1; return result;    
     }
     
     if (first < ' ') { return result; } // cannot be whitespace now    
@@ -119,7 +119,7 @@ String* stringEatToken(String* string) // skips whitespaces, delivers anything e
     {
          if (string->data[0] <= ' ') { break; }
          
-         result->size += 1; 
+         result.size += 1; 
          
          string->data += 1; string->size -= 1; 
     }
