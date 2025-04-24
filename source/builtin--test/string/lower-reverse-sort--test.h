@@ -1,117 +1,117 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void testNewStringToLower()
+void testCreateStringToLower()
 {
-    printf("- testing newStringToLower\n");
+    printf("- testing createStringToLower\n");
     
     bool fails = false;
 
     String empty = makeStringEmpty();    
     String source = makeStringFromLiteral("Life is ∆ ROCK");   
    
-    String result1 = newStringToLower(source);
+    String result1 = createStringToLower(source);
     String expected1 = makeStringFromLiteral("life is ∆ rock");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String result2 = newStringToLower(empty);
+    String result2 = createStringToLower(empty);
     String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
-        printf("newStringToLower FAILS!\n");
+        printf("createStringToLower FAILS!\n");
         exit(1);
     }
 }
 
-void testNewStringToUpper()
+void testCreateStringToUpper()
 {
-    printf("- testing newStringToUpper\n");
+    printf("- testing createStringToUpper\n");
     
     bool fails = false;
 
     String empty = makeStringEmpty();    
     String source = makeStringFromLiteral("Life is ∆ ROCK");   
    
-    String result1 = newStringToUpper(source);
+    String result1 = createStringToUpper(source);
     String expected1 = makeStringFromLiteral("LIFE IS ∆ ROCK");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String result2 = newStringToUpper(empty);
+    String result2 = createStringToUpper(empty);
     String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
-        printf("newStringToUpper FAILS!\n");
+        printf("createStringToUpper FAILS!\n");
         exit(1);
     }
 }
 
-void testNewStringToOppositeCase()
+void testCreateStringToOppositeCase()
 {
-    printf("- testing newStringToOppositeCase\n");
+    printf("- testing createStringToOppositeCase\n");
     
     bool fails = false;
 
     String empty = makeStringEmpty();    
     String source = makeStringFromLiteral("Life is ∆ ROCK");   
    
-    String result1 = newStringToOppositeCase(source);
+    String result1 = createStringToOppositeCase(source);
     String expected1 = makeStringFromLiteral("lIFE IS ∆ rock");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String result2 = newStringToOppositeCase(empty);
+    String result2 = createStringToOppositeCase(empty);
     String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
-        printf("newStringToOppositeCase FAILS!\n");
+        printf("createStringToOppositeCase FAILS!\n");
         exit(1);
     }
 }
 
-void testNewStringReverse()
+void testCreateStringReverse()
 {
-    printf("- testing newStringReverse\n");
+    printf("- testing createStringReverse\n");
     
     bool fails = false;
 
     String empty = makeStringEmpty();    
     String source = makeStringFromLiteral("Life is ∆ rock");   
    
-    String result1 = newStringReverse(source);    
+    String result1 = createStringReverse(source);    
     String expected1 = makeStringFromLiteral("kcor \x86\x88\xe2 si efiL");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String result2 = newStringReverse(empty);
+    String result2 = createStringReverse(empty);
     String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
-        printf("newStringReverse FAILS!\n");
+        printf("createStringReverse FAILS!\n");
         exit(1);
     }
 }
 
-void testNewStringSort()
+void testCreateStringSort()
 {
-    printf("- testing newStringSort\n");
+    printf("- testing createStringSort\n");
     
     bool fails = false;
 
     String empty = makeStringEmpty();    
     String source = makeStringFromLiteral("Life is ∆ rock");   
    
-    String result1 = newStringSort(source);
+    String result1 = createStringSort(source);
     String expected1 = makeStringFromLiteral("\x86\x88\xe2   Lcefiikors");    
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
     
-    String result2 = newStringSort(empty);
+    String result2 = createStringSort(empty);
     String expected2 = makeStringEmpty();    
     if (! stringsAreEqual(result2, expected2)) { fails = true; }
     
     if (fails) { 
-        printf("newStringSort FAILS!\n");
+        printf("createStringSort FAILS!\n");
         exit(1);
     }
 }
