@@ -55,6 +55,6 @@ typedef struct
     char* data;    // starts the same as address
     long capacity;
     long size;
-} BufferString;
+} HeapString;
 
 
