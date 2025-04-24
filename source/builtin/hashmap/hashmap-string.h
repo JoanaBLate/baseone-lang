@@ -15,20 +15,20 @@ typedef struct
     HashmapStringItem** items;
 } HashmapString;
 
-HashmapStringItem* newHashmapStringItem(String key, String value)
+HashmapStringItem* createHashmapStringItem(String key, String value)
 {
     HashmapStringItem* item = heapAllocate(sizeof(HashmapStringItem));
 
-    item->key = newStringClone(key);
+    item->key = createStringClone(key);
     
-    item->value = newStringClone(value);
+    item->value = createStringClone(value);
     
     item->next = NULL;
     
     return item;
 }
 
-HashmapString* newHashmapString(long capacity) 
+HashmapString* createHashmapString(long capacity) 
 {
     HashmapString* map = heapAllocate(1 * sizeof(HashmapString));
     
@@ -49,14 +49,14 @@ bool addItemToHashmapStringOrSetValue(HashmapString* map, String key, String val
 
     if (item == NULL) // ADDING new item directly to the items array
     {     
-        map->items[hashcode] = newHashmapStringItem(key, value);
+        map->items[hashcode] = createHashmapStringItem(key, value);
         
         map->count += 1;
 
         return true;
     }   
   
-    if (stringsAreEqual(key, item->key)) { item->value = newStringClone(value); return false; } // SETTING item value
+    if (stringsAreEqual(key, item->key)) { item->value = createStringClone(value); return false; } // SETTING item value
     
     while (true) // searching in the chain
     {    
@@ -64,14 +64,14 @@ bool addItemToHashmapStringOrSetValue(HashmapString* map, String key, String val
     
         if (nextItem == NULL) { break; }
         
-        if (stringsAreEqual(key, nextItem->key)) { nextItem->value = newStringClone(value); return false; } // SETTING item value
+        if (stringsAreEqual(key, nextItem->key)) { nextItem->value = createStringClone(value); return false; } // SETTING item value
         
         item = nextItem;
     }
     
     // ADDING new item in the chain
     
-    item->next = newHashmapStringItem(key, value);
+    item->next = createHashmapStringItem(key, value);
     
     map->count += 1;
  
@@ -116,8 +116,8 @@ bool deleteItemFromHashmapString(HashmapString* map, String key)
         
         map->count -= 1;
         
-        releaseString(item->key);
-        releaseString(item->value);
+        releaseStringData(item->key);
+        releaseStringData(item->value);
         
         heapRelease(item);
         
@@ -136,8 +136,8 @@ bool deleteItemFromHashmapString(HashmapString* map, String key)
         
         map->count -= 1;
         
-        releaseString(item->key);
-        releaseString(item->value);
+        releaseStringData(item->key);
+        releaseStringData(item->value);
         
         heapRelease(item);
         
@@ -157,8 +157,8 @@ void deleteHashmapString(HashmapString* map)
         
         HashmapStringItem* nextItem = item->next;
         
-        releaseString(item->key);
-        releaseString(item->value);
+        releaseStringData(item->key);
+        releaseStringData(item->value);
         
         heapRelease(item);
         
@@ -168,8 +168,8 @@ void deleteHashmapString(HashmapString* map)
         
             nextItem = item->next;
             
-            releaseString(item->key);
-            releaseString(item->value);
+            releaseStringData(item->key);
+            releaseStringData(item->value);
             
             heapRelease(item);
         }

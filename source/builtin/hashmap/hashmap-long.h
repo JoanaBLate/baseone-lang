@@ -15,11 +15,11 @@ typedef struct
     HashmapLongItem** items;
 } HashmapLong;
 
-HashmapLongItem* newHashmapLongItem(String key, long value)
+HashmapLongItem* createHashmapLongItem(String key, long value)
 {
     HashmapLongItem* item = heapAllocate(sizeof(HashmapLongItem));
 
-    item->key = newStringClone(key);
+    item->key = createStringClone(key);
     
     item->value = value;
     
@@ -28,7 +28,7 @@ HashmapLongItem* newHashmapLongItem(String key, long value)
     return item;
 }
 
-HashmapLong* newHashmapLong(long capacity) 
+HashmapLong* createHashmapLong(long capacity) 
 {
     HashmapLong* map = heapAllocate(1 * sizeof(HashmapLong));
     
@@ -49,7 +49,7 @@ bool addItemToHashmapLongOrSetValue(HashmapLong* map, String key, long value) //
 
     if (item == NULL) // ADDING new item directly to the items array
     {     
-        map->items[hashcode] = newHashmapLongItem(key, value);
+        map->items[hashcode] = createHashmapLongItem(key, value);
         
         map->count += 1;
 
@@ -71,7 +71,7 @@ bool addItemToHashmapLongOrSetValue(HashmapLong* map, String key, long value) //
     
     // ADDING new item in the chain
     
-    item->next = newHashmapLongItem(key, value);
+    item->next = createHashmapLongItem(key, value);
     
     map->count += 1;
  
@@ -116,7 +116,7 @@ bool deleteItemFromHashmapLong(HashmapLong* map, String key)
         
         map->count -= 1;
         
-        releaseString(item->key);
+        releaseStringData(item->key);
         
         heapRelease(item);
         
@@ -135,7 +135,7 @@ bool deleteItemFromHashmapLong(HashmapLong* map, String key)
         
         map->count -= 1;
         
-        releaseString(item->key);
+        releaseStringData(item->key);
         
         heapRelease(item);
         
@@ -155,7 +155,7 @@ void deleteHashmapLong(HashmapLong* map)
         
         HashmapLongItem* nextItem = item->next;
         
-        releaseString(item->key);
+        releaseStringData(item->key);
         
         heapRelease(item);
         
@@ -165,7 +165,7 @@ void deleteHashmapLong(HashmapLong* map)
         
             nextItem = item->next;
             
-            releaseString(item->key);
+            releaseStringData(item->key);
             
             heapRelease(item);
         }
