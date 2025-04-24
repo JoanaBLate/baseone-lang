@@ -33,4 +33,28 @@ NullLong createNullableLong(long value, bool isNull)
     return number;
 }
 
+typedef struct 
+{
+    char* address; // will not change
+    char* data;    // starts the same as address
+    long size;
+} String;
+
+typedef struct 
+{
+    char* address; // will not change
+    char* data;    // starts the same as address
+    long capacity;
+    long size;
+} StackString;
+
+
+typedef struct 
+{
+    char* address; // will not change
+    char* data;    // starts the same as address
+    long capacity;
+    long size;
+} BufferString;
+
 
