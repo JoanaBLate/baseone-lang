@@ -1,7 +1,7 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 // IMPLICITLY TESTED:
-// makeString, makeStringEmpty, makeStringFromLiteral, newString
+// makeString, makeStringEmpty, makeStringFromLiteral, createString
 
 // NOT TESTED:
 // makeStringClone, getStringSize
@@ -39,30 +39,30 @@ int main()
     testStringLastIndexOfBefore();
     testStringCountOf();
  
-    testNewStringFromCharCode();
-    testNewStringClone();
-    testNewStringRepeat();
-    testNewStringFromLong();
+    testCreateStringFromCharCode();
+    testCreateStringClone();
+    testCreateStringRepeat();
+    testCreateStringFromLong();
 
     testStringSliceStart(); 
     testStringSliceEnd(); 
     testStringSlice(); 
         
-    testNewStringAppend(); 
-    testNewStringInsert(); 
+    testCreateStringAppend(); 
+    testCreateStringInsert(); 
     
-    testNewStringPadStart();
-    testNewStringPadEnd();
+    testCreateStringPadStart();
+    testCreateStringPadEnd();
     
-    testNewStringRemove();
-    testNewStringRemoveLast();
-    testNewStringRemoveAll();
+    testCreateStringRemove();
+    testCreateStringRemoveLast();
+    testCreateStringRemoveAll();
     
-    testNewStringReplaceStart();
-    testNewStringReplaceEnd();
-    testNewStringReplace();
-    testNewStringReplaceLast();
-    testNewStringReplaceAll();
+    testCreateStringReplaceStart();
+    testCreateStringReplaceEnd();
+    testCreateStringReplace();
+    testCreateStringReplaceLast();
+    testCreateStringReplaceAll();
 
     testStringEatStart();
     testStringEatEnd();
@@ -75,11 +75,11 @@ int main()
     testStringTrimEndTarget();
     testStringTrimTarget();
     
-    testNewStringToLower();
-    testNewStringToUpper();
-    testNewStringToOppositeCase();
-    testNewStringReverse();
-    testNewStringSort();
+    testCreateStringToLower();
+    testCreateStringToUpper();
+    testCreateStringToOppositeCase();
+    testCreateStringReverse();
+    testCreateStringSort();
        
     testPrintStringA();
     testPrintStringB();
