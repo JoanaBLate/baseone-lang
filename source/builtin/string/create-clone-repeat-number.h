@@ -80,15 +80,15 @@ String createStringFromStackString(StackString stk) // allocates memory
     return makeString(buffer, buffer, bufferSize);
 }
 
-String createStringFromBufferString(BufferString buf) // allocates memory
+String createStringFromHeapString(HeapString heapString) // allocates memory
 {   
-    long bufferSize = buf.size;
+    long bufferSize = heapString.size;
     
     if (bufferSize == 0) { return makeStringEmpty(); }
     
     char* buffer = heapAllocate(bufferSize);
 
-    memcpy(buffer, buf.data, bufferSize);
+    memcpy(buffer, heapString.data, bufferSize);
     
     return makeString(buffer, buffer, bufferSize);
 }

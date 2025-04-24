@@ -2,7 +2,7 @@
 
 
 // address == NULL means that the string must not be released,
-// because it is just a slice or based on literal
+// because it is just a slice or it is based on literal
 
 String makeString(char* address, char* data, long size)
 {
@@ -37,15 +37,5 @@ void releaseStringData(String string)
         printf("\nERROR: the string data cannot be released: this string is not the owner of the data\n"); exit(1); 
     }
     heapRelease(string.address);
-}
-
-String makePseudoStringFromStackString(StackString stk) // pseudo because may be mutated indirectly
-{
-    return makeString(NULL, stk.data, stk.size);
-}
-
-String makePseudoStringFromBufferString(StackString buf) // pseudo because may be mutated indirectly
-{
-    return makeString(NULL, buf.data, buf.size);
 }
 
