@@ -28,6 +28,6 @@
 #include "hashmap/hashmap-string.h"
 #include "stack-string/make-reset-clear-tostring.h"
 #include "stack-string/append.h"
-#include "buffer-string/info.h"
-#include "buffer-string/make-new-release.h"
+#include "heap-string/info.h"
+#include "heap-string/make-new-release.h"
 #include "file/read.h"
