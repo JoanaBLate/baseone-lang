@@ -88,7 +88,7 @@ String readTextFile(String filename)
     
     heapRelease(cFilename);
     
-    String string = makeString(buffer, fileSize);
+    String string = makeString(buffer, buffer, fileSize);
     
     return string;
 }
