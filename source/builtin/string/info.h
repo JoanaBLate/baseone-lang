@@ -1,13 +1,6 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-typedef struct 
-{
-    char* address; // will not change
-    char* data;    // starts the same as address
-    long size;
-} String;
-
 long getStringSize(String string)
 {        
     return string.size;

@@ -1,9 +1,9 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-String newStringToLower(String string) // allocates memory
+String createStringToLower(String string) // allocates memory
 {
-    String newString = newStringClone(string);
+    String newString = createStringClone(string);
     
     for (long index = 0; index < newString.size; index++)
     {
@@ -13,9 +13,9 @@ String newStringToLower(String string) // allocates memory
     return newString;
 }
 
-String newStringToUpper(String string) // allocates memory
+String createStringToUpper(String string) // allocates memory
 {
-    String newString = newStringClone(string);
+    String newString = createStringClone(string);
     
     for (long index = 0; index < newString.size; index++)
     {
@@ -25,9 +25,9 @@ String newStringToUpper(String string) // allocates memory
     return newString;
 }
 
-String newStringToOppositeCase(String string) // allocates memory
+String createStringToOppositeCase(String string) // allocates memory
 {
-    String newString = newStringClone(string);
+    String newString = createStringClone(string);
     
     for (long index = 0; index < newString.size; index++)
     {
@@ -46,9 +46,9 @@ String newStringToOppositeCase(String string) // allocates memory
     return newString;
 }
 
-String newStringReverse(String string) // allocates memory
+String createStringReverse(String string) // allocates memory
 {
-    String newString = newStringClone(string);
+    String newString = createStringClone(string);
     
     long halfLen = newString.size / 2;
 
@@ -62,9 +62,9 @@ String newStringReverse(String string) // allocates memory
     return newString;
 }
 
-String newStringSort(String string) // TODO: slow  // allocates memory
+String createStringSort(String string) // TODO: slow  // allocates memory
 {
-    String newString = newStringClone(string);
+    String newString = createStringClone(string);
     
     for (long indexA = 0; indexA < newString.size - 1; indexA++) 
     { 

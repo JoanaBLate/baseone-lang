@@ -1,11 +1,11 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-String newStringAppend(String string, String chunk) // allocates memory
+String createStringAppend(String string, String chunk) // allocates memory
 {    
-    if (string.size == 0) { return newStringClone(chunk); }
+    if (string.size == 0) { return createStringClone(chunk); }
     
-    if (chunk.size == 0) { return newStringClone(string); }
+    if (chunk.size == 0) { return createStringClone(string); }
     
     long bufferSize = string.size + chunk.size;
     
@@ -15,18 +15,18 @@ String newStringAppend(String string, String chunk) // allocates memory
     
     memcpy(&buffer[string.size], chunk.data, chunk.size);
     
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 
-String newStringInsert(String string, String chunk, long position) // allocates memory // one base index
+String createStringInsert(String string, String chunk, long position) // allocates memory // one base index
 {
-    if (string.size == 0) { return newStringClone(chunk); }
+    if (string.size == 0) { return createStringClone(chunk); }
     
-    if (chunk.size == 0) { return newStringClone(string); }
+    if (chunk.size == 0) { return createStringClone(string); }
     
-    if (position <= 1) { return newStringAppend(chunk, string); }
+    if (position <= 1) { return createStringAppend(chunk, string); }
 
-    if (position > string.size) { return newStringAppend(string, chunk); }
+    if (position > string.size) { return createStringAppend(string, chunk); }
     
     position -= 1;
     
@@ -40,6 +40,6 @@ String newStringInsert(String string, String chunk, long position) // allocates 
 
     for (long index = position; index < string.size; index++) { buffer[index + chunk.size] = string.data[index]; }
     
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 

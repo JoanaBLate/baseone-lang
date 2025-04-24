@@ -1,11 +1,11 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-String newStringPadStart(String string, String chunk, long count)
+String createStringPadStart(String string, String chunk, long count)
 {
-    if (count < 1) { return newStringClone(string); }
+    if (count < 1) { return createStringClone(string); }
     
-    if (chunk.size == 0) { return newStringClone(string); }
+    if (chunk.size == 0) { return createStringClone(string); }
     
     long bufferSize = (count * chunk.size) + string.size;
             
@@ -27,14 +27,14 @@ String newStringPadStart(String string, String chunk, long count)
     
     memcpy(&buffer[index + 1], string.data, string.size);
     
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 
-String newStringPadEnd(String string, String chunk, long count)
+String createStringPadEnd(String string, String chunk, long count)
 {
-    if (count < 1) { return newStringClone(string); }
+    if (count < 1) { return createStringClone(string); }
     
-    if (chunk.size == 0) { return newStringClone(string); }
+    if (chunk.size == 0) { return createStringClone(string); }
     
     long bufferSize = (count * chunk.size) + string.size;
             
@@ -56,6 +56,6 @@ String newStringPadEnd(String string, String chunk, long count)
         }
     }
     
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 

@@ -17,7 +17,7 @@ String stringSlice(String string, long start, long count) // one base index
     
     if (size <= 0) { return makeStringEmpty(); }
     
-    return makeString(string.data + start, size);
+    return makeString(NULL, string.data + start, size);
 }
 
 String stringSliceStart(String string, long count)

@@ -3,11 +3,11 @@
 
 // replace by position ////////////////////////////////////////////////////////
 
-String newStringReplaceStart(String string, long count, String chunk) // allocates memory
+String createStringReplaceStart(String string, long count, String chunk) // allocates memory
 {    
-    if (count < 1) { return newStringClone(string); } 
+    if (count < 1) { return createStringClone(string); } 
     
-    if (count >= string.size) { return newStringClone(chunk); }
+    if (count >= string.size) { return createStringClone(chunk); }
     
     long stringRightArmStart = count;
     long stringRightArmSize = string.size - count;
@@ -25,14 +25,14 @@ String newStringReplaceStart(String string, long count, String chunk) // allocat
         buffer[chunk.size + index] = string.data[stringRightArmStart + index];
     }
     
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 
-String newStringReplaceEnd(String string, long count, String chunk) // allocates memory
+String createStringReplaceEnd(String string, long count, String chunk) // allocates memory
 {    
-    if (count < 1) { return newStringClone(string); } 
+    if (count < 1) { return createStringClone(string); } 
     
-    if (count >= string.size) { return newStringClone(chunk); } 
+    if (count >= string.size) { return createStringClone(chunk); } 
     
  // long stringLeftArmStart = 0;
     long stringLeftArmSize = string.size - count;
@@ -47,12 +47,12 @@ String newStringReplaceEnd(String string, long count, String chunk) // allocates
     // buffer right arm
     for (long index = 0; index < chunk.size; index++) { buffer[stringLeftArmSize + index] = chunk.data[index]; } 
         
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 
 // replace by target //////////////////////////////////////////////////////////
 
-String newStringReplace2(String string, String target, String chunk, long position) // allocates memory
+String createStringReplace2(String string, String target, String chunk, long position) // allocates memory
 {
  // long stringLeftArmStart = 0;
     long stringLeftArmSize = position;
@@ -76,42 +76,42 @@ String newStringReplace2(String string, String target, String chunk, long positi
         buffer[position + chunk.size + index] = string.data[stringRightArmStart + index];
     }
     
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 
-String newStringReplace(String string, String target, String chunk) // allocates memory (indirectly)
+String createStringReplace(String string, String target, String chunk) // allocates memory (indirectly)
 {
     long position = stringIndexOf(string, target) - 1; // '-1' adjusts to zero index
     
-    if (position == -1) { return newStringClone(string); } // target not found
+    if (position == -1) { return createStringClone(string); } // target not found
     
-    if (position == 0) { return newStringReplaceStart(string, target.size, chunk); }
+    if (position == 0) { return createStringReplaceStart(string, target.size, chunk); }
     
-    if (position + target.size == string.size) { return newStringReplaceEnd(string, target.size, chunk); }
+    if (position + target.size == string.size) { return createStringReplaceEnd(string, target.size, chunk); }
     
-    return newStringReplace2(string, target, chunk, position);
+    return createStringReplace2(string, target, chunk, position);
 }
 
-String newStringReplaceLast(String string, String target, String chunk) // allocates memory (indirectly)
+String createStringReplaceLast(String string, String target, String chunk) // allocates memory (indirectly)
 {
     long position = stringLastIndexOf(string, target) - 1; // '-1' adjusts to zero index
     
-    if (position == -1) { return newStringClone(string); } // target not found
+    if (position == -1) { return createStringClone(string); } // target not found
     
-    if (position == 0) { return newStringReplaceStart(string, target.size, chunk); }
+    if (position == 0) { return createStringReplaceStart(string, target.size, chunk); }
     
-    if (position + target.size == string.size) { return newStringReplaceEnd(string, target.size, chunk); }
+    if (position + target.size == string.size) { return createStringReplaceEnd(string, target.size, chunk); }
     
-    return newStringReplace2(string, target, chunk, position);
+    return createStringReplace2(string, target, chunk, position);
 }
 
 // replace all by target //////////////////////////////////////////////////////
 
-String newStringReplaceAll(String string, String target, String chunk) // allocates memory
+String createStringReplaceAll(String string, String target, String chunk) // allocates memory
 {
     long count = stringCountOf(string, target);
     
-    if (count == 0) { return newStringClone(string); }
+    if (count == 0) { return createStringClone(string); }
     
     long bufferSize = string.size + count * (chunk.size - target.size);
     
@@ -121,7 +121,7 @@ String newStringReplaceAll(String string, String target, String chunk) // alloca
 
     long bufferIndex = -1;
     
-    String temp = makeString(string.data, string.size);
+    String temp = makeString(NULL, string.data, string.size);
     
     while (temp.size > 0) {
 
@@ -155,6 +155,6 @@ String newStringReplaceAll(String string, String target, String chunk) // alloca
         }
     }
             
-    return makeString(buffer, bufferSize);
+    return makeString(buffer, buffer, bufferSize);
 }
 
