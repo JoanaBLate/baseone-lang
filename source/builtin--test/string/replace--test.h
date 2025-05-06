@@ -35,6 +35,13 @@ void testCreateStringReplaceStart()
         printf("createStringReplaceStart FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(result5);
+    releaseString(expected5);
 }
 
 void testCreateStringReplaceEnd()
@@ -71,6 +78,13 @@ void testCreateStringReplaceEnd()
         printf("createStringReplaceEnd FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(result5);
+    releaseString(expected5);
 }
 
 void testCreateStringReplace()
@@ -112,6 +126,14 @@ void testCreateStringReplace()
         printf("createStringReplace FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(result5);
+    releaseString(result6);
+    releaseString(expected6);
 }
 
 void testCreateStringReplaceLast()
@@ -153,6 +175,14 @@ void testCreateStringReplaceLast()
         printf("createStringReplaceLast FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(result5);
+    releaseString(result6);
+    releaseString(expected6);
 }
 
 void testCreateStringReplaceAll()
@@ -191,5 +221,11 @@ void testCreateStringReplaceAll()
         printf("createStringReplaceAll FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(result5);
 }
 

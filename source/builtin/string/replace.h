@@ -3,7 +3,7 @@
 
 // replace by position ////////////////////////////////////////////////////////
 
-String createStringReplaceStart(String string, long count, String chunk) // allocates memory
+String createStringReplaceStart(String string, long count, String chunk) // allocates heap memory
 {    
     if (count < 1) { return createStringClone(string); } 
     
@@ -17,18 +17,18 @@ String createStringReplaceStart(String string, long count, String chunk) // allo
     char* buffer = heapAllocate(bufferSize);
     
     // buffer left arm
-    for (long index = 0; index < chunk.size; index++) { buffer[index] = chunk.data[index]; } 
+    for (long index = 0; index < chunk.size; index++) { buffer[index] = chunk.address[index]; } 
         
     // buffer right arm
     for (long index = 0; index < stringRightArmSize; index++) 
     {
-        buffer[chunk.size + index] = string.data[stringRightArmStart + index];
+        buffer[chunk.size + index] = string.address[stringRightArmStart + index];
     }
     
-    return makeString(buffer, buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
-String createStringReplaceEnd(String string, long count, String chunk) // allocates memory
+String createStringReplaceEnd(String string, long count, String chunk) // allocates heap memory
 {    
     if (count < 1) { return createStringClone(string); } 
     
@@ -42,17 +42,17 @@ String createStringReplaceEnd(String string, long count, String chunk) // alloca
     char* buffer = heapAllocate(bufferSize);
     
     // buffer left arm
-    for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string.data[index]; } 
+    for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string.address[index]; } 
     
     // buffer right arm
-    for (long index = 0; index < chunk.size; index++) { buffer[stringLeftArmSize + index] = chunk.data[index]; } 
+    for (long index = 0; index < chunk.size; index++) { buffer[stringLeftArmSize + index] = chunk.address[index]; } 
         
-    return makeString(buffer, buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 // replace by target //////////////////////////////////////////////////////////
 
-String createStringReplace2(String string, String target, String chunk, long position) // allocates memory
+String createStringReplace2(String string, String target, String chunk, long position) // allocates heap memory
 {
  // long stringLeftArmStart = 0;
     long stringLeftArmSize = position;
@@ -65,21 +65,21 @@ String createStringReplace2(String string, String target, String chunk, long pos
     char* buffer = heapAllocate(bufferSize);
     
     // buffer left arm
-    for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string.data[index]; } 
+    for (long index = 0; index < stringLeftArmSize; index++) { buffer[index] = string.address[index]; } 
     
     // buffer middle 
-    for (long index = 0; index < chunk.size; index++) { buffer[position + index] = chunk.data[index]; } 
+    for (long index = 0; index < chunk.size; index++) { buffer[position + index] = chunk.address[index]; } 
         
     // buffer right arm
     for (long index = 0; index < stringRightArmSize; index++) 
     {
-        buffer[position + chunk.size + index] = string.data[stringRightArmStart + index];
+        buffer[position + chunk.size + index] = string.address[stringRightArmStart + index];
     }
     
-    return makeString(buffer, buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
-String createStringReplace(String string, String target, String chunk) // allocates memory (indirectly)
+String createStringReplace(String string, String target, String chunk) // allocates heap memory
 {
     long position = stringIndexOf(string, target) - 1; // '-1' adjusts to zero index
     
@@ -92,7 +92,7 @@ String createStringReplace(String string, String target, String chunk) // alloca
     return createStringReplace2(string, target, chunk, position);
 }
 
-String createStringReplaceLast(String string, String target, String chunk) // allocates memory (indirectly)
+String createStringReplaceLast(String string, String target, String chunk) // allocates heap memory
 {
     long position = stringLastIndexOf(string, target) - 1; // '-1' adjusts to zero index
     
@@ -107,7 +107,7 @@ String createStringReplaceLast(String string, String target, String chunk) // al
 
 // replace all by target //////////////////////////////////////////////////////
 
-String createStringReplaceAll(String string, String target, String chunk) // allocates memory
+String createStringReplaceAll(String string, String target, String chunk) // allocates heap memory
 {
     long count = stringCountOf(string, target);
     
@@ -121,13 +121,13 @@ String createStringReplaceAll(String string, String target, String chunk) // all
 
     long bufferIndex = -1;
     
-    String temp = makeString(NULL, string.data, string.size);
+    String temp = makeString(string.address, string.size);
     
     while (temp.size > 0) {
 
         bool startsNormal = true;
         
-        if (temp.data[0] == target.data[0]) 
+        if (temp.address[0] == target.address[0]) 
         {
             startsNormal = ! stringStartsWith(temp, target); // avoiding always call the function
         }
@@ -135,26 +135,26 @@ String createStringReplaceAll(String string, String target, String chunk) // all
         if (startsNormal) {
         
             bufferIndex += 1; 
-            buffer[bufferIndex] = temp.data[0];            
+            buffer[bufferIndex] = temp.address[0];            
         
             temp.size -= 1;            
-            temp.data += 1;
+            temp.address += 1;
         
             continue;        
         }
         
         // skipping the target
         temp.size -= target.size;        
-        temp.data += target.size;
+        temp.address += target.size;
         
         // inserting the chunk        
         for (long index = 0; index < chunk.size; index++) 
         { 
             bufferIndex += 1;
-            buffer[bufferIndex] = chunk.data[index];
+            buffer[bufferIndex] = chunk.address[index];
         }
     }
             
-    return makeString(buffer, buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 

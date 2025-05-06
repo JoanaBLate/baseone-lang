@@ -62,7 +62,7 @@ String readTextFile(String filename)
 
     // c filename
     char* cFilename = heapAllocate(filename.size + 1);
-    memcpy(cFilename, filename.data, filename.size);
+    memcpy(cFilename, filename.address, filename.size);
     cFilename[filename.size] = 0;
     
     long fileSize = cGetFileSize(cFilename);
@@ -88,7 +88,7 @@ String readTextFile(String filename)
     
     heapRelease(cFilename);
     
-    String string = makeString(buffer, buffer, fileSize);
+    String string = makeString(buffer, fileSize);
     
     return string;
 }

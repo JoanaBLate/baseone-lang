@@ -1,7 +1,7 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-String stringSlice(String string, long start, long count) // one base index 
+String createSubstring(String string, long start, long count) // allocates heap memory // one base index 
 {
     if (count < 1) { return makeStringEmpty(); }
     
@@ -17,20 +17,20 @@ String stringSlice(String string, long start, long count) // one base index
     
     if (size <= 0) { return makeStringEmpty(); }
     
-    return makeString(NULL, string.data + start, size);
+    return createStringFromSource(string.address + start, size);
 }
 
-String stringSliceStart(String string, long count)
+String createSubstringStart(String string, long count) // allocates heap memory
 {    
-    return stringSlice(string, 1, count);
+    return createSubstring(string, 1, count);
 }
 
-String stringSliceEnd(String string, long count)
+String createSubstringEnd(String string, long count) // allocates heap memory
 {    
     if (count < 1) { return makeStringEmpty(); }
     
     long start = string.size - count + 1;
     
-    return stringSlice(string, start, count);
+    return createSubstring(string, start, count);
 }
 

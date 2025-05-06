@@ -13,7 +13,7 @@ void printString(String string)
         
         if (index >= string.size) { return; }
     
-        char c = string.data[index];
+        char c = string.address[index];
         
         if (c == 10) { putchar(c); continue; }
         if (c <  32) { putchar(substitute); continue; } // includes from 0 to -127
@@ -33,7 +33,7 @@ void printStringBytes(String string)
     {
         if (expectingComma) { printf(","); }
                 
-        unsigned char c = (unsigned char) string.data[index];
+        unsigned char c = (unsigned char) string.address[index];
 
         printf(" %d", c);
         
@@ -56,7 +56,7 @@ void printStringRunes(String string)
         
         if (index >= string.size) { return; }
     
-        unsigned char c = (unsigned char) string.data[index];
+        unsigned char c = (unsigned char) string.address[index];
         
         if (c == 10) { putchar(c); continue; }
         if (c <  32) { putchar(substitute); continue; }
@@ -69,7 +69,7 @@ void printStringRunes(String string)
         index += 1;
         if (index == string.size) { putchar(substitute); index -= 1; continue; } // corrupted data
         
-        token[1] = string.data[index];
+        token[1] = string.address[index];
 
         // 2-byte sequence
         if ((c & 0xE0) == 0xC0) { token[2] = 0; printf("%s", token); continue; }
@@ -77,7 +77,7 @@ void printStringRunes(String string)
         index += 1;
         if (index == string.size) { putchar(substitute); index -= 2; continue; } // corrupted data
 
-        token[2] = string.data[index];
+        token[2] = string.address[index];
         
         // 3-byte sequence
         if ((c & 0xF0) == 0xE0) { token[3] = 0; printf("%s", token); continue; }
@@ -85,7 +85,7 @@ void printStringRunes(String string)
         index += 1;
         if (index == string.size) { putchar(substitute); index -= 3; continue; } // corrupted data
         
-        token[3] = string.data[index];
+        token[3] = string.address[index];
         
         // 4-byte sequence
         if ((c & 0xF8) == 0xF0) { token[4] = 0; printf("%s", token); continue; }

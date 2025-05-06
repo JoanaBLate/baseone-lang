@@ -12,7 +12,7 @@ int stringCharCodeAt(String string, int index) // one base index
     
     if (index > string.size) { return -1; }
     
-    int value = (unsigned char) string.data[index - 1];
+    int value = (unsigned char) string.address[index - 1];
     
     return (int) value;
 }
@@ -23,7 +23,7 @@ bool stringsAreEqual(String stringA, String stringB)
     
     for (long index = 0; index < stringA.size; index ++)
     {
-        if (stringA.data[index] != stringB.data[index]) { return false; }
+        if (stringA.address[index] != stringB.address[index]) { return false; }
     }
     return true;
 }
@@ -36,7 +36,7 @@ bool stringStartsWith(String string, String target)
     
     for (long index = 0; index < target.size; index++)
     {
-        if (string.data[index] != target.data[index]) { return false; }
+        if (string.address[index] != target.address[index]) { return false; }
     }
     return true;
 }
@@ -51,7 +51,7 @@ bool stringEndsWith(String string, String target)
     
     for (long index = 0; index < target.size; index++)
     {
-        if (string.data[pad + index] != target.data[index]) { return false; }
+        if (string.address[pad + index] != target.address[index]) { return false; }
     }
     return true;
 }
@@ -70,7 +70,7 @@ long stringIndexOf(String string, String target) // one base index
         
         for (long targetIndex = 0; targetIndex < target.size; targetIndex++)
         {
-            if (string.data[index + targetIndex] != target.data[targetIndex]) { match = false; break; }
+            if (string.address[index + targetIndex] != target.address[targetIndex]) { match = false; break; }
         }
         
         if (match) { return index + 1; }
@@ -98,7 +98,7 @@ long stringIndexOfAfter(String string, String target, long usedIndex) // one bas
         
         for (long targetIndex = 0; targetIndex < target.size; targetIndex++)
         {
-            if (string.data[index + targetIndex] != target.data[targetIndex]) { match = false; break; }
+            if (string.address[index + targetIndex] != target.address[targetIndex]) { match = false; break; }
         }
         
         if (match) { return index + 1; }
@@ -120,7 +120,7 @@ long stringLastIndexOf(String string, String target) // one base index
         
         for (long targetIndex = 0; targetIndex < target.size; targetIndex++)
         {
-            if (string.data[index + targetIndex] != target.data[targetIndex]) { match = false; break; }
+            if (string.address[index + targetIndex] != target.address[targetIndex]) { match = false; break; }
         }
         
         if (match) { return index + 1; }
@@ -146,7 +146,7 @@ long stringLastIndexOfBefore(String string, String target, long usedIndex) // on
         
         for (long targetIndex = 0; targetIndex < target.size; targetIndex++)
         {
-            if (string.data[index + targetIndex] != target.data[targetIndex]) { match = false; break; }
+            if (string.address[index + targetIndex] != target.address[targetIndex]) { match = false; break; }
         }
         
         if (match) { return index + 1; }

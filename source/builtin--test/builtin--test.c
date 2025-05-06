@@ -1,32 +1,40 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
+
 // IMPLICITLY TESTED:
 // makeString, makeStringEmpty, makeStringFromLiteral, createString
 
 // NOT TESTED:
-// makeStringClone, getStringSize
+// makeStringCopy, getStringSize
 
 // TESTED SOMEWHERE ELSE (Advent Of Code puzzles):
-// stringEatLine, stringEatToken, stringEatLongInt 
+// bufferStringEatLine, bufferStringEatToken, bufferStringEatLongInt 
 // Memory, Hashmap and ArrayList functions
-
 
 #include "../builtin/builtin.h"
 #include "file/file--test.h"
-#include "string/append-insert-pad--test.h"
-#include "string/eat--test.h"
 #include "string/info--test.h"
+#include "string/append-insert-pad--test.h"
 #include "string/lower-reverse-sort--test.h"
-#include "string/clone-repeat-char-number--test.h"
+#include "string/clone-repeat-byte-number--test.h"
 #include "string/print--test.h"
 #include "string/remove--test.h"
 #include "string/replace--test.h"
-#include "string/slice--test.h"
+#include "string/substring--test.h"
 #include "string/trim--test.h"
+
+#include "string-buffer/trim--test.h"
+#include "string-buffer/trim-target--test.h"
+
+//#include "stringBuffer/eat--test.h"
 
 int main()
 {
+    // file
+    
     testReadTextFile();
+    
+    // String
 
     testStringCharCodeAt();
     testStringsAreEquals();
@@ -38,19 +46,14 @@ int main()
     testStringIndexOfAfter();
     testStringLastIndexOfBefore();
     testStringCountOf();
- 
-    testCreateStringFromCharCode();
+
+    testCreateStringFromByte();
     testCreateStringClone();
     testCreateStringRepeat();
     testCreateStringFromLong();
-
-    testStringSliceStart(); 
-    testStringSliceEnd(); 
-    testStringSlice(); 
         
     testCreateStringAppend(); 
-    testCreateStringInsert(); 
-    
+    testCreateStringInsert();     
     testCreateStringPadStart();
     testCreateStringPadEnd();
     
@@ -63,28 +66,38 @@ int main()
     testCreateStringReplace();
     testCreateStringReplaceLast();
     testCreateStringReplaceAll();
-
-    testStringEatStart();
-    testStringEatEnd();
-        
-    testStringTrimStart();
-    testStringTrimEnd();
-    testStringTrim();
-
-    testStringTrimStartTarget();
-    testStringTrimEndTarget();
-    testStringTrimTarget();
     
     testCreateStringToLower();
     testCreateStringToUpper();
     testCreateStringToOppositeCase();
     testCreateStringReverse();
     testCreateStringSort();
-       
+
+    testCreateSubstringStart(); 
+    testCreateSubstringEnd(); 
+    testCreateSubstring(); 
+    
+    testStringTrimStart();
+    testStringTrimEnd();
+    testStringTrim();       
+    
+    // StringBuffer    
+
+    testStringBufferTrimStart();
+    testStringBufferTrimEnd();
+    testStringBufferTrim();
+        
+//    testStringTrimStartTarget();
+//    testStringTrimEndTarget();
+//    testStringTrimTarget();    
+
+//    testStringEatStart();
+//    testStringEatEnd();
+ 
     testPrintStringA();
     testPrintStringB();
     testPrintStringC();
- 
+    
     return 0;
 }
 

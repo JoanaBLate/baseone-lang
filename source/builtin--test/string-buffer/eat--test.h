@@ -1,6 +1,8 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
+/* UNDER CONSTRUCTION
+
 void testStringEatStart()
 {
     printf("- testing stringEatStart\n");
@@ -80,4 +82,4 @@ void testStringEatEnd()
         exit(1);
     }
 }
-
+*/

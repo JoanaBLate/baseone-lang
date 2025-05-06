@@ -31,6 +31,12 @@ void testCreateStringAppend()
         printf("createStringAppend FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(expected4);
 }
 
 void testCreateStringInsert()
@@ -75,6 +81,15 @@ void testCreateStringInsert()
         printf("createStringInsert FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(result5);
+    releaseString(result6);
+    releaseString(result7);
+    releaseString(expected7);
 }
 
 void testCreateStringPadStart()
@@ -111,6 +126,11 @@ void testCreateStringPadStart()
         printf("createStringPadStart FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
 }   
 
 void testCreateStringPadEnd()
@@ -147,5 +167,12 @@ void testCreateStringPadEnd()
         printf("createStringPadEnd FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(result5);
+    releaseString(expected5);
 }   
 

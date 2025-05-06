@@ -1,52 +1,52 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-String createStringToLower(String string) // allocates memory
+String createStringToLower(String string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
     for (long index = 0; index < newString.size; index++)
     {
-        newString.data[index] = tolower(newString.data[index]);
+        newString.address[index] = tolower(newString.address[index]);
     }
     
     return newString;
 }
 
-String createStringToUpper(String string) // allocates memory
+String createStringToUpper(String string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
     for (long index = 0; index < newString.size; index++)
     {
-        newString.data[index] = toupper(newString.data[index]);
+        newString.address[index] = toupper(newString.address[index]);
     }
     
     return newString;
 }
 
-String createStringToOppositeCase(String string) // allocates memory
+String createStringToOppositeCase(String string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
     for (long index = 0; index < newString.size; index++)
     {
-        char c = newString.data[index];
+        char c = newString.address[index];
         
         if (isupper(c)) 
         { 
-            newString.data[index] = tolower(c);
+            newString.address[index] = tolower(c);
         }
         else if (islower(c)) 
         { 
-            newString.data[index] = toupper(c);
+            newString.address[index] = toupper(c);
         }
     }
     
     return newString;
 }
 
-String createStringReverse(String string) // allocates memory
+String createStringReverse(String string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
@@ -54,15 +54,15 @@ String createStringReverse(String string) // allocates memory
 
     for (long index = 0; index < halfLen; index++) 
     {     
-        char temp = newString.data[index];
-        newString.data[index] = newString.data[newString.size - 1 - index];
-        newString.data[newString.size - 1 - index] = temp;
+        char temp = newString.address[index];
+        newString.address[index] = newString.address[newString.size - 1 - index];
+        newString.address[newString.size - 1 - index] = temp;
     }
     
     return newString;
 }
 
-String createStringSort(String string) // TODO: slow  // allocates memory
+String createStringSort(String string) // TODO: slow  // allocates heap memory
 {
     String newString = createStringClone(string);
     
@@ -70,11 +70,11 @@ String createStringSort(String string) // TODO: slow  // allocates memory
     { 
         for (long indexB = indexA + 1; indexB < newString.size; indexB++) 
         { 
-            if (newString.data[indexA] <= newString.data[indexB]) { continue; }
+            if (newString.address[indexA] <= newString.address[indexB]) { continue; }
             
-            char temp = newString.data[indexA];
-            newString.data[indexA] = newString.data[indexB];
-            newString.data[indexB] = temp;
+            char temp = newString.address[indexA];
+            newString.address[indexA] = newString.address[indexB];
+            newString.address[indexB] = temp;
         }
     }
     

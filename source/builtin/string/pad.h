@@ -21,13 +21,13 @@ String createStringPadStart(String string, String chunk, long count)
     
             index += 1;
             
-            buffer[index] = chunk.data[n];
+            buffer[index] = chunk.address[n];
         }
     }
     
-    memcpy(&buffer[index + 1], string.data, string.size);
+    memcpy(&buffer[index + 1], string.address, string.size);
     
-    return makeString(buffer, buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 
 String createStringPadEnd(String string, String chunk, long count)
@@ -40,7 +40,7 @@ String createStringPadEnd(String string, String chunk, long count)
             
     char* buffer = heapAllocate(bufferSize);
     
-    memcpy(buffer, string.data, string.size);
+    memcpy(buffer, string.address, string.size);
     
     long index = string.size - 1;
     
@@ -52,10 +52,10 @@ String createStringPadEnd(String string, String chunk, long count)
     
             index += 1;
             
-            buffer[index] = chunk.data[n];
+            buffer[index] = chunk.address[n];
         }
     }
     
-    return makeString(buffer, buffer, bufferSize);
+    return makeString(buffer, bufferSize);
 }
 

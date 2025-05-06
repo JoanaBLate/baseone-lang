@@ -1,59 +1,66 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void stringTrimStart(String* string)
+String stringTrimStart(String string) // allocates heap memory
 {
-    while (true)
-    {
-        if (string->size == 0) { string->data = NULL; return; }
-        
-        if ((unsigned char) string->data[0] > ' ') { return; }
-        
-        string->data += 1; string->size -= 1;
-    }
-}
+    long margin = 0;
+    long size = string.size;
 
-void stringTrimEnd(String* string)
-{
     while (true)
     {
-        if (string->size == 0) { string->data = NULL; return; }
+        if (size == 0) { return makeStringEmpty(); }
         
-        long index = string->size - 1;
+        if ((unsigned char) string.address[margin] > ' ') { break; }
         
-        if ((unsigned char) string->data[index] > ' ') { return; }
+        margin += 1; size -= 1;
+    }
     
-        string->size -= 1;          
-    }
+    return createStringFromSource(string.address + margin, size);
 }
 
-void stringTrim(String* string)
+String stringTrimEnd(String string) // allocates heap memory
 {
-    stringTrimStart(string);
-
-    stringTrimEnd(string);
-}
-
-void stringTrimStartTarget(String* string, String target)
-{
-    while (stringStartsWith(*string, target))
+    long size = string.size;
+    
+    while (true)
     {
-        string->data += target.size; string->size -= target.size;
+        if (size == 0) { return makeStringEmpty(); }
+        
+        long index = size - 1;
+        
+        if ((unsigned char) string.address[index] > ' ') { break; }
+    
+        size -= 1;          
     }
+    
+    return createStringFromSource(string.address, size);
 }
 
-void stringTrimEndTarget(String* string, String target)
+String stringTrim(String string) // allocates heap memory
 {
-    while (stringEndsWith(*string, target))
+    long margin = 0;
+    long size = string.size;
+    
+    while (true) // trims end
     {
-        string->size -= target.size;
+        if (size == 0) { return makeStringEmpty(); }
+        
+        long index = size - 1;
+        
+        if ((unsigned char) string.address[index] > ' ') { break; }
+    
+        size -= 1;          
     }
-}
 
-void stringTrimTarget(String* string, String target)
-{
-    stringTrimStartTarget(string, target);
-
-    stringTrimEndTarget(string, target);
+    while (true) // trims start
+    {
+        if (size == 0) { return makeStringEmpty(); } // probably not necessary
+        
+        if ((unsigned char) string.address[margin] > ' ') { break; }
+        
+        margin += 1; size -= 1;
+    }
+    
+    return createStringFromSource(string.address + margin, size);
 }
 

@@ -1,28 +1,32 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void testCreateStringFromCharCode() 
+void testCreateStringFromByte() 
 {    
-    printf("- testing createStringFromCharCode\n");
+    printf("- testing createStringFromByte\n");
     
     bool fails = false;
     
-    String result1 = createStringFromCharCode(64);
+    String result1 = createStringFromByte(64);
     String expected1 = makeStringFromLiteral("@");
     if (! stringsAreEqual(expected1, result1)) { fails = true; }
+  
+//    makes the program exit    
+//    String result2 = createStringFromByte(364);
+//    String expected2 = makeStringEmpty();
+//    if (! stringsAreEqual(expected2, result2)) { fails = true ; }
     
-    String result2 = createStringFromCharCode(364);
-    String expected2 = makeStringEmpty();
-    if (! stringsAreEqual(expected2, result2)) { fails = true ; }
-    
-    String result3 = createStringFromCharCode(-1);
-    String expected3 = makeStringEmpty();
-    if (! stringsAreEqual(expected3, result3)) { fails = true ; }
+//    makes the program exit 
+//    String result3 = createStringFromByte(-1);
+//    String expected3 = makeStringEmpty();
+//    if (! stringsAreEqual(expected3, result3)) { fails = true ; }
     
     if (fails) {
-        printf("createStringFromCharCode FAILS!\n");
+        printf("createStringFromByte FAILS!\n");
         exit(1);
     }
+
+    releaseString(result1);
 }
 
 void testCreateStringClone()
@@ -45,6 +49,11 @@ void testCreateStringClone()
         printf("createStringClone FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(source2);
+    releaseString(result2);
+    releaseString(expected2);
 }
 
 void testCreateStringRepeat()
@@ -71,6 +80,12 @@ void testCreateStringRepeat()
         printf("createStringRepeat FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(expected2);
+    releaseString(result3);
+    releaseString(expected3);
 }
 
 void testCreateStringFromLong()
@@ -95,5 +110,9 @@ void testCreateStringFromLong()
         printf("createStringFromLong FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
 }
 

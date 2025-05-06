@@ -19,6 +19,22 @@ typedef struct
     bool isNull;
 } NullLong;
 
+typedef struct 
+{
+    char* address; 
+    long size;
+} String;
+
+typedef struct 
+{
+    char* address; 
+    long capacity;
+    long margin;
+    long size;
+} StringBuffer;
+
+// creating ///////////////////////////////////////////////////////////////////
+
 NullLong createNullLong()
 {
     NullLong number = { 0, true };
@@ -32,29 +48,5 @@ NullLong createNullableLong(long value, bool isNull)
     
     return number;
 }
-
-typedef struct 
-{
-    char* address; // will not change
-    char* data;    // starts the same as address
-    long size;
-} String;
-
-typedef struct 
-{
-    char* address; // will not change
-    char* data;    // starts the same as address
-    long capacity;
-    long size;
-} StackString;
-
-
-typedef struct 
-{
-    char* address; // will not change
-    char* data;    // starts the same as address
-    long capacity;
-    long size;
-} HeapString;
 
 

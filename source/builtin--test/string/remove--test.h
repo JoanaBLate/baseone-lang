@@ -36,6 +36,14 @@ void testCreateStringRemove()
         printf("createStringRemove FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(expected4);
+    releaseString(result5);
+    releaseString(expected5);
 }
 
 void testCreateStringRemoveLast()
@@ -73,6 +81,14 @@ void testCreateStringRemoveLast()
         printf("createStringRemoveLast FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(expected4);
+    releaseString(result5);
+    releaseString(expected5);
 }
 
 void testCreateStringRemoveAll()
@@ -106,5 +122,11 @@ void testCreateStringRemoveAll()
         printf("createStringRemoveAll FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(result3);
+    releaseString(result4);
+    releaseString(expected4);
 }
 

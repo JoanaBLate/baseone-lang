@@ -22,6 +22,10 @@ void testCreateStringToLower()
         printf("createStringToLower FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(expected2);
 }
 
 void testCreateStringToUpper()
@@ -45,6 +49,10 @@ void testCreateStringToUpper()
         printf("createStringToUpper FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(expected2);
 }
 
 void testCreateStringToOppositeCase()
@@ -68,6 +76,10 @@ void testCreateStringToOppositeCase()
         printf("createStringToOppositeCase FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(expected2);
 }
 
 void testCreateStringReverse()
@@ -91,6 +103,10 @@ void testCreateStringReverse()
         printf("createStringReverse FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(expected2);
 }
 
 void testCreateStringSort()
@@ -114,5 +130,9 @@ void testCreateStringSort()
         printf("createStringSort FAILS!\n");
         exit(1);
     }
+    
+    releaseString(result1);
+    releaseString(result2);
+    releaseString(expected2);
 }
 
