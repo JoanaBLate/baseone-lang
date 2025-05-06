@@ -8,7 +8,7 @@
 // makeStringCopy, getStringSize
 
 // TESTED SOMEWHERE ELSE (Advent Of Code puzzles):
-// bufferStringEatLine, bufferStringEatToken, bufferStringEatLongInt 
+// stringBufferEatLine, stringBufferEatToken, stringBufferEatLongInt 
 // Memory, Hashmap and ArrayList functions
 
 #include "../builtin/builtin.h"
@@ -26,7 +26,6 @@
 #include "string-buffer/trim--test.h"
 #include "string-buffer/trim-target--test.h"
 
-//#include "stringBuffer/eat--test.h"
 
 int main()
 {
@@ -34,7 +33,7 @@ int main()
     
     testReadTextFile();
     
-    // String
+    // String (1)
 
     testStringCharCodeAt();
     testStringsAreEquals();
@@ -87,13 +86,12 @@ int main()
     testStringBufferTrimEnd();
     testStringBufferTrim();
         
-//    testStringTrimStartTarget();
-//    testStringTrimEndTarget();
-//    testStringTrimTarget();    
+    testStringBufferTrimStartTarget();
+    testStringBufferTrimEndTarget();
+    testStringBufferTrimTarget();    
 
-//    testStringEatStart();
-//    testStringEatEnd();
- 
+    // String (2)
+
     testPrintStringA();
     testPrintStringB();
     testPrintStringC();

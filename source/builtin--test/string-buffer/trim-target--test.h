@@ -1,135 +1,250 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-/* UNDER CONSTRUCTION
-
-bool testStringBufferTrim3()
+bool testStringBufferTrimStartTarget1()
 {
-    StringBuffer bs = createStringBufferFromLiteral("");   
+    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
-    stringBufferTrim(&bs);
+    String target = makeStringFromLiteral("∆!");    
+
+    stringBufferTrimStartTarget(&bs, target);
     
-    String result = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(bs);
     
-    String expected = makeStringEmpty();
+    String expected = makeStringFromLiteral(" Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(virtual, expected);
     
     releaseStringBuffer(bs);
     
     return ok;
 }
 
-void testStringBufferTrim()
+bool testStringBufferTrimStartTarget2()
 {
-    printf("- testing stringBufferTrim\n");
+    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+
+    String target = makeStringFromLiteral("xy");    
+
+    stringBufferTrimStartTarget(&bs, target);
     
-    char* msg = "stringBufferTrim FAILS!\n";
+    String virtual = makeStringFromStringBuffer(bs);
     
-    if (! testStringBufferTrim1()) { printf("%s", msg); exit(1); }
-    if (! testStringBufferTrim2()) { printf("%s", msg); exit(1); }
-    if (! testStringBufferTrim3()) { printf("%s", msg); exit(1); }
+    String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+bool testStringBufferTrimStartTarget3()
+{
+    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
+    String target = makeStringFromLiteral("");    
 
+    stringBufferTrimStartTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
+}
 
+bool testStringBufferTrimStartTarget4()
+{
+    StringBuffer bs = createStringBufferFromLiteral(""); 
 
+    String target = makeStringFromLiteral("");    
+
+    stringBufferTrimStartTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
+}
 
 void testStringBufferTrimStartTarget()
 {
     printf("- testing stringBufferTrimStartTarget\n");
     
-    bool fails = false;
-
-    String source1 = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    String target1 = makeStringFromLiteral("∆!");   
-    stringBufferTrimStartTarget(&source1, target1);
-    String expected1 = makeStringFromLiteral(" Life is ∆ rock ∆!∆!");
-    if (! stringsAreEqual(source1, expected1)) { fails = true; }
-
-    String source2 = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    String target2 = makeStringFromLiteral("xy");   
-    stringBufferTrimStartTarget(&source2, target2);
-    String expected2 = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    if (! stringsAreEqual(source2, expected2)) { fails = true; }
+    char* msg = "stringBufferTrimStartTarget FAILS!\n";
     
-    String source3 = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    String target3 = makeStringFromLiteral("");   
-    stringBufferTrimStartTarget(&source3, target3);
-    String expected3 = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    if (! stringsAreEqual(source3, expected3)) { fails = true; }
-    
-    String source4 = createStringBufferFromLiteral("");
-    String target4 = makeStringFromLiteral("xy");   
-    stringBufferTrimStartTarget(&source4, target4);
-    String expected4 = makeStringFromLiteral("");
-    if (! stringsAreEqual(source4, expected4)) { fails = true; }
+    if (! testStringBufferTrimStartTarget1()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimStartTarget2()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimStartTarget3()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimStartTarget4()) { printf("%s", msg); exit(1); }
+}
 
-    if (fails) { 
-        printf("stringBufferTrimStartTarget FAILS!\n");
-        exit(1);
-    }
+///////////////////////////////////////////////////////////////////////////////
+
+bool testStringBufferTrimEndTarget1()
+{
+    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+
+    String target = makeStringFromLiteral("∆!");    
+
+    stringBufferTrimEndTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
+}
+
+bool testStringBufferTrimEndTarget2()
+{
+    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+
+    String target = makeStringFromLiteral("xy");    
+
+    stringBufferTrimEndTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
+}
+
+bool testStringBufferTrimEndTarget3()
+{
+    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+
+    String target = makeStringFromLiteral("");    
+
+    stringBufferTrimEndTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
+}
+
+bool testStringBufferTrimEndTarget4()
+{
+    StringBuffer bs = createStringBufferFromLiteral(""); 
+
+    String target = makeStringFromLiteral("xy");    
+
+    stringBufferTrimEndTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
 }
 
 void testStringBufferTrimEndTarget()
 {
     printf("- testing stringBufferTrimEndTarget\n");
     
-    bool fails = false;
-
-    String source1 = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    String target1 = makeStringFromLiteral("∆!");   
-    stringBufferTrimEndTarget(&source1, target1);
-    String expected1 = makeStringFromLiteral("∆!∆! Life is ∆ rock ");
-    if (! stringsAreEqual(source1, expected1)) { fails = true; }
-
-    String source2 = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    String target2 = makeStringFromLiteral("xy");   
-    stringBufferTrimEndTarget(&source2, target2);
-    String expected2 = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    if (! stringsAreEqual(source2, expected2)) { fails = true; }
+    char* msg = "stringBufferTrimEndTarget FAILS!\n";
     
-    String source3 = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    String target3 = makeStringFromLiteral("");   
-    stringBufferTrimEndTarget(&source3, target3);
-    String expected3 = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    if (! stringsAreEqual(source3, expected3)) { fails = true; }
-    
-    String source4 = createStringBufferFromLiteral("");
-    String target4 = makeStringFromLiteral("xy");   
-    stringBufferTrimEndTarget(&source4, target4);
-    String expected4 = makeStringFromLiteral("");
-    if (! stringsAreEqual(source4, expected4)) { fails = true; }
+    if (! testStringBufferTrimEndTarget1()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimEndTarget2()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimEndTarget3()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimEndTarget4()) { printf("%s", msg); exit(1); }
+}
 
-    if (fails) { 
-        printf("stringBufferTrimEndTarget FAILS!\n");
-        exit(1);
-    }
+///////////////////////////////////////////////////////////////////////////////
+
+bool testStringBufferTrimTarget1()
+{
+    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+
+    String target = makeStringFromLiteral("∆!");    
+
+    stringBufferTrimTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral(" Life is ∆ rock ");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
+}
+
+bool testStringBufferTrimTarget2()
+{
+    StringBuffer bs = createStringBufferFromLiteral(""); 
+
+    String target = makeStringFromLiteral("");    
+
+    stringBufferTrimTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
+}
+
+bool testStringBufferTrimTarget3()
+{
+    StringBuffer bs = createStringBufferFromLiteral(""); 
+
+    String target = makeStringFromLiteral("");    
+
+    stringBufferTrimTarget(&bs, target);
+    
+    String virtual = makeStringFromStringBuffer(bs);
+    
+    String expected = makeStringFromLiteral("");
+    
+    bool ok = stringsAreEqual(virtual, expected);
+    
+    releaseStringBuffer(bs);
+    
+    return ok;
 }
 
 void testStringBufferTrimTarget()
 {
     printf("- testing stringBufferTrimTarget\n");
     
-    bool fails = false;
-
-    String source1 = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
-    String target1 = makeStringFromLiteral("∆!");   
-    stringBufferTrimTarget(&source1, target1);
-    String expected1 = makeStringFromLiteral(" Life is ∆ rock ");
-    if (! stringsAreEqual(source1, expected1)) { fails = true; }
-
-    String source2 = createStringBufferFromLiteral("");
-    String target2 = makeStringFromLiteral("");   
-    stringBufferTrimTarget(&source2, target2);
-    String expected2 = makeStringFromLiteral("");
-    if (! stringsAreEqual(source2, expected2)) { fails = true; }
+    char* msg = "stringBufferTrimTarget FAILS!\n";
     
-    if (fails) { 
-        printf("stringBufferTrimTarget FAILS!\n");
-        exit(1);
-    }
+    if (! testStringBufferTrimTarget1()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimTarget2()) { printf("%s", msg); exit(1); }
 }
-*/
+
