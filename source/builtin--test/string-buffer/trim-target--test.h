@@ -246,5 +246,6 @@ void testStringBufferTrimTarget()
     
     if (! testStringBufferTrimTarget1()) { printf("%s", msg); exit(1); }
     if (! testStringBufferTrimTarget2()) { printf("%s", msg); exit(1); }
+    if (! testStringBufferTrimTarget3()) { printf("%s", msg); exit(1); }
 }
 

@@ -25,6 +25,7 @@
 
 #include "string-buffer/trim--test.h"
 #include "string-buffer/trim-target--test.h"
+#include "string-buffer/trim-any--test.h"
 
 
 int main()
@@ -88,7 +89,11 @@ int main()
         
     testStringBufferTrimStartTarget();
     testStringBufferTrimEndTarget();
-    testStringBufferTrimTarget();    
+    testStringBufferTrimTarget(); 
+       
+    testStringBufferTrimStartAny();
+    testStringBufferTrimEndAny();
+    testStringBufferTrimAny();    
 
     // String (2)
 

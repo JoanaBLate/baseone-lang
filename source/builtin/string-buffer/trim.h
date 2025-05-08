@@ -67,4 +67,54 @@ void stringBufferTrimTarget(StringBuffer* sb, String target)
     stringBufferTrimEndTarget(sb, target);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
+void stringBufferTrimStartAny(StringBuffer* sb, String sample)
+{
+    while (sb->size > 0)
+    {
+        char* sbHead = sb->address + sb->margin;
+        
+        bool changed = false;
+        
+        for (int n = 0; n < sample.size; n++)
+        {
+            char c = sample.address[n];
+            
+            if (*sbHead != c) { continue; }
+        
+            sb->margin += 1; sb->size -= 1; changed = true; break;
+        }
+        
+        if (! changed) { return; }
+    }
+}
+
+void stringBufferTrimEndAny(StringBuffer* sb, String sample)
+{
+    while (sb->size > 0)
+    {
+        char* sbTail = sb->address + sb->margin + sb->size - 1;
+        
+        bool changed = false;
+        
+        for (int n = 0; n < sample.size; n++)
+        {
+            char c = sample.address[n];
+            
+            if (*sbTail != c) { continue; }
+        
+            sb->size -= 1; changed = true; break;
+        }
+        
+        if (! changed) { return; }
+    }
+}
+
+void stringBufferTrimAny(StringBuffer* sb, String sample)
+{
+    stringBufferTrimStartAny(sb, sample);
+    
+    stringBufferTrimEndAny(sb, sample);
+}
 
