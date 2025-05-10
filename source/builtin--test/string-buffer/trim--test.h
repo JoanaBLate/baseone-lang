@@ -3,51 +3,51 @@
 
 bool testStringBufferTrimStart1()
 {
-    StringBuffer bs = createStringBufferFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆! \n ");   
+    StringBuffer sb = createStringBufferFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆! \n ");   
 
-    stringBufferTrimStart(&bs);
+    stringBufferTrimStart(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆! \n ");
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStart2()
 {
-    StringBuffer bs = createStringBufferFromLiteral(" \n   \n ");   
+    StringBuffer sb = createStringBufferFromLiteral(" \n   \n ");   
 
-    stringBufferTrimStart(&bs);
+    stringBufferTrimStart(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringEmpty();
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStart3()
 {
-    StringBuffer bs = createStringBufferFromLiteral("");   
+    StringBuffer sb = createStringBufferFromLiteral("");   
 
-    stringBufferTrimStart(&bs);
+    stringBufferTrimStart(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringEmpty();
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
@@ -67,51 +67,51 @@ void testStringBufferTrimStart()
 
 bool testStringBufferTrimEnd1()
 {
-    StringBuffer bs = createStringBufferFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆! \n ");   
+    StringBuffer sb = createStringBufferFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆! \n ");   
 
-    stringBufferTrimEnd(&bs);
+    stringBufferTrimEnd(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEnd2()
 {
-    StringBuffer bs = createStringBufferFromLiteral(" \n   \n ");   
+    StringBuffer sb = createStringBufferFromLiteral(" \n   \n ");   
 
-    stringBufferTrimEnd(&bs);
+    stringBufferTrimEnd(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringEmpty();
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEnd3()
 {
-    StringBuffer bs = createStringBufferFromLiteral("");   
+    StringBuffer sb = createStringBufferFromLiteral("");   
 
-    stringBufferTrimEnd(&bs);
+    stringBufferTrimEnd(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringEmpty();
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
@@ -131,51 +131,51 @@ void testStringBufferTrimEnd()
 
 bool testStringBufferTrim1()
 {
-    StringBuffer bs = createStringBufferFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆! \n ");   
+    StringBuffer sb = createStringBufferFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆! \n ");   
 
-    stringBufferTrim(&bs);
+    stringBufferTrim(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrim2()
 {
-    StringBuffer bs = createStringBufferFromLiteral(" \n   \n ");   
+    StringBuffer sb = createStringBufferFromLiteral(" \n   \n ");   
 
-    stringBufferTrim(&bs);
+    stringBufferTrim(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringEmpty();
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrim3()
 {
-    StringBuffer bs = createStringBufferFromLiteral("");   
+    StringBuffer sb = createStringBufferFromLiteral("");   
 
-    stringBufferTrim(&bs);
+    stringBufferTrim(&sb);
     
-    String result = makeStringFromStringBuffer(bs);
+    String result = makeStringFromStringBuffer(sb);
     
     String expected = makeStringEmpty();
     
     bool ok = stringsAreEqual(result, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }

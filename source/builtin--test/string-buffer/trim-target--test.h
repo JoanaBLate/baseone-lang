@@ -3,76 +3,76 @@
 
 bool testStringBufferTrimStartTarget1()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String target = makeStringFromLiteral("∆!");    
 
-    stringBufferTrimStartTarget(&bs, target);
+    stringBufferTrimStartTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral(" Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStartTarget2()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String target = makeStringFromLiteral("xy");    
 
-    stringBufferTrimStartTarget(&bs, target);
+    stringBufferTrimStartTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStartTarget3()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String target = makeStringFromLiteral("");    
 
-    stringBufferTrimStartTarget(&bs, target);
+    stringBufferTrimStartTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStartTarget4()
 {
-    StringBuffer bs = createStringBufferFromLiteral(""); 
+    StringBuffer sb = createStringBufferFromLiteral(""); 
 
     String target = makeStringFromLiteral("");    
 
-    stringBufferTrimStartTarget(&bs, target);
+    stringBufferTrimStartTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
@@ -93,76 +93,76 @@ void testStringBufferTrimStartTarget()
 
 bool testStringBufferTrimEndTarget1()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String target = makeStringFromLiteral("∆!");    
 
-    stringBufferTrimEndTarget(&bs, target);
+    stringBufferTrimEndTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEndTarget2()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String target = makeStringFromLiteral("xy");    
 
-    stringBufferTrimEndTarget(&bs, target);
+    stringBufferTrimEndTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEndTarget3()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String target = makeStringFromLiteral("");    
 
-    stringBufferTrimEndTarget(&bs, target);
+    stringBufferTrimEndTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEndTarget4()
 {
-    StringBuffer bs = createStringBufferFromLiteral(""); 
+    StringBuffer sb = createStringBufferFromLiteral(""); 
 
     String target = makeStringFromLiteral("xy");    
 
-    stringBufferTrimEndTarget(&bs, target);
+    stringBufferTrimEndTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
@@ -183,57 +183,57 @@ void testStringBufferTrimEndTarget()
 
 bool testStringBufferTrimTarget1()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String target = makeStringFromLiteral("∆!");    
 
-    stringBufferTrimTarget(&bs, target);
+    stringBufferTrimTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral(" Life is ∆ rock ");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimTarget2()
 {
-    StringBuffer bs = createStringBufferFromLiteral(""); 
+    StringBuffer sb = createStringBufferFromLiteral(""); 
 
     String target = makeStringFromLiteral("");    
 
-    stringBufferTrimTarget(&bs, target);
+    stringBufferTrimTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimTarget3()
 {
-    StringBuffer bs = createStringBufferFromLiteral(""); 
+    StringBuffer sb = createStringBufferFromLiteral(""); 
 
     String target = makeStringFromLiteral("");    
 
-    stringBufferTrimTarget(&bs, target);
+    stringBufferTrimTarget(&sb, target);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }

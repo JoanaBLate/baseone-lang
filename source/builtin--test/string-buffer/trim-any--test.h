@@ -3,76 +3,76 @@
 
 bool testStringBufferTrimStartAny1()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String sample = makeStringFromLiteral(" ∆!");    
 
-    stringBufferTrimStartAny(&bs, sample);
+    stringBufferTrimStartAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStartAny2()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String sample = makeStringFromLiteral("xy");    
 
-    stringBufferTrimStartAny(&bs, sample);
+    stringBufferTrimStartAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStartAny3()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String sample = makeStringFromLiteral("");    
 
-    stringBufferTrimStartAny(&bs, sample);
+    stringBufferTrimStartAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimStartAny4()
 {
-    StringBuffer bs = createStringBufferFromLiteral(""); 
+    StringBuffer sb = createStringBufferFromLiteral(""); 
 
     String sample = makeStringFromLiteral("");    
 
-    stringBufferTrimStartAny(&bs, sample);
+    stringBufferTrimStartAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
@@ -93,76 +93,76 @@ void testStringBufferTrimStartAny()
 
 bool testStringBufferTrimEndAny1()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String sample = makeStringFromLiteral(" ∆!");    
 
-    stringBufferTrimEndAny(&bs, sample);
+    stringBufferTrimEndAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEndAny2()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String sample = makeStringFromLiteral("xy");    
 
-    stringBufferTrimEndAny(&bs, sample);
+    stringBufferTrimEndAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEndAny3()
 {
-    StringBuffer bs = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
+    StringBuffer sb = createStringBufferFromLiteral("∆!∆! Life is ∆ rock ∆!∆!"); 
 
     String sample = makeStringFromLiteral("");    
 
-    stringBufferTrimEndAny(&bs, sample);
+    stringBufferTrimEndAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
 
 bool testStringBufferTrimEndAny4()
 {
-    StringBuffer bs = createStringBufferFromLiteral(""); 
+    StringBuffer sb = createStringBufferFromLiteral(""); 
 
     String sample = makeStringFromLiteral("xy");    
 
-    stringBufferTrimEndAny(&bs, sample);
+    stringBufferTrimEndAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     return ok;
 }
@@ -187,22 +187,22 @@ void testStringBufferTrimAny()
     
     char* msg = "stringBufferTrimAny FAILS!\n";
 
-    StringBuffer bs = createStringBufferFromLiteral("123∆!∆! Life is ∆ rock ∆!∆!123"); 
+    StringBuffer sb = createStringBufferFromLiteral("123∆!∆! Life is ∆ rock ∆!∆!123"); 
     
-    bs.margin = 3;
-    bs.size -= 6;
+    sb.margin = 3;
+    sb.size -= 6;
 
     String sample = makeStringFromLiteral(" ∆!");    
 
-    stringBufferTrimAny(&bs, sample);
+    stringBufferTrimAny(&sb, sample);
     
-    String virtual = makeStringFromStringBuffer(bs);
+    String virtual = makeStringFromStringBuffer(sb);
     
     String expected = makeStringFromLiteral("Life is ∆ rock");
     
     bool ok = stringsAreEqual(virtual, expected);
     
-    releaseStringBuffer(bs);
+    releaseStringBuffer(sb);
     
     if (! ok) { printf("%s", msg); exit(1); }
 }
