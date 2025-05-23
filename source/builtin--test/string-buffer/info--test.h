@@ -12,8 +12,10 @@ void testStringBufferCharCodeAt()
     
     bool fails = false;
     if (stringBufferCharCodeAt(sb, 3) != 64)   { fails = true; }
-    if (stringBufferCharCodeAt(sb, 9) != -1)   { fails = true; }
-    if (stringBufferCharCodeAt(sb, -33) != -1) { fails = true; }
+    
+//  RAISES ERROR 
+//  printf("%c\n", stringBufferCharCodeAt(sb, -1));
+//  printf("%c\n", stringBufferCharCodeAt(sb, 333));
     
     if (fails) { 
         printf("stringBufferCharCodeAt FAILS!\n"); 

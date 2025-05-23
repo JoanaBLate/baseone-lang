@@ -26,6 +26,7 @@
 #include "string-buffer/info.h"
 #include "string-buffer/make-stack.h"
 #include "string-buffer/create-from-release.h"
+#include "string-buffer/lower-reverse-sort.h"
 #include "string-buffer/trim.h"
 
 //#include "string/slice.h"

@@ -6,15 +6,14 @@ long getStringSize(String string)
     return string.size;
 }
 
-int stringCharCodeAt(String string, int index) // one base index
+unsigned char stringCharCodeAt(String string, long index) // one base index
 {    
-    if (index < 1) { return -1; }
+    if (index < 1  ||  index > string.size) 
+    { 
+        printf("\nERROR in function '@stringCharCodeAt': index (%li) out of bounds\n", index); exit(1);
+    }
     
-    if (index > string.size) { return -1; }
-    
-    int value = (unsigned char) string.address[index - 1];
-    
-    return (int) value;
+    return (unsigned char) string.address[index - 1];
 }
 
 bool stringsAreEqual(String stringA, String stringB)

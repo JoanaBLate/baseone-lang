@@ -8,8 +8,10 @@ void testStringCharCodeAt()
     String source = makeStringFromLiteral("He@llo");
     bool fails = false;
     if (stringCharCodeAt(source, 3) != 64)   { fails = true; }
-    if (stringCharCodeAt(source, 333) != -1) { fails = true; }
-    if (stringCharCodeAt(source, -33) != -1) { fails = true; }
+    
+//  RAISES ERROR 
+//  printf("%c\n", stringCharCodeAt(source, -1));
+//  printf("%c\n", stringCharCodeAt(source, 333));
     
     if (fails) { 
         printf("stringCharCodeAt FAILS!\n"); 

@@ -6,12 +6,20 @@ void releaseStringBuffer(StringBuffer sb)
     heapRelease(sb.address);
 }
 
+StringBuffer createStringBufferEmpty() // allocates heap memory
+{
+    char* buffer = heapAllocate(1);
+    
+    StringBuffer sb = { buffer, 1, 0, 0 };
+    
+    sb.address[0] = 0;
+    
+    return sb;
+}
+
 StringBuffer createStringBuffer(long capacity) // allocates heap memory
 {
-    if (capacity < 1)
-    { 
-        printf("\nERROR: cannot create StringBuffer: capacity must be greater than zero\n"); exit(1); 
-    }
+    if (capacity < 1) { return createStringBufferEmpty(); }
     
     char* buffer = heapAllocate(capacity);
     
@@ -26,7 +34,7 @@ StringBuffer createStringBufferFromLiteral(char* cString) // allocates heap memo
     
     long capacity = size;
     
-    if (capacity < 1) { capacity = 1; }
+    if (capacity < 1) { return createStringBufferEmpty(); }
     
     char* buffer = heapAllocate(capacity);
     
@@ -41,7 +49,7 @@ StringBuffer createStringBufferFromString(String string) // allocates heap memor
 {   
     long capacity = string.size;
     
-    if (capacity < 1) { capacity = 1; }
+    if (capacity < 1) { return createStringBufferEmpty(); }
     
     char* buffer = heapAllocate(capacity);
     

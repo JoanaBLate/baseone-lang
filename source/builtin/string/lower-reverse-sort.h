@@ -50,12 +50,14 @@ String createStringReverse(String string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
-    long halfLen = newString.size / 2;
+    long halfLength = newString.size / 2;
 
-    for (long index = 0; index < halfLen; index++) 
+    for (long index = 0; index < halfLength; index++) 
     {     
         char temp = newString.address[index];
+        
         newString.address[index] = newString.address[newString.size - 1 - index];
+        
         newString.address[newString.size - 1 - index] = temp;
     }
     
@@ -73,7 +75,9 @@ String createStringSort(String string) // TODO: slow  // allocates heap memory
             if (newString.address[indexA] <= newString.address[indexB]) { continue; }
             
             char temp = newString.address[indexA];
+            
             newString.address[indexA] = newString.address[indexB];
+            
             newString.address[indexB] = temp;
         }
     }

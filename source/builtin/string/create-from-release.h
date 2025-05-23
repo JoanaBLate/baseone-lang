@@ -12,7 +12,7 @@ String createStringFromByte(int n) // allocates heap memory
 {   
     if (n < 0  ||  n > 255)  
     { 
-        printf("\nERROR: cannot create String from byte: bad number: %i\n", n); exit(1); 
+        printf("\nERROR in function '@createStringFromByte': bad argument (%i)\n", n); exit(1); 
     }
 
     char* buffer = heapAllocate(1);

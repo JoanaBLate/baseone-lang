@@ -9,6 +9,7 @@
 #include "trim--test.h"
 #include "trim-target--test.h"
 #include "trim-any--test.h"
+#include "lower-reverse-sort--test.h"
 
 void testStringBuffer()
 {    
@@ -22,6 +23,12 @@ void testStringBuffer()
     testStringBufferIndexOfAfter();
     testStringBufferLastIndexOfBefore();
     testStringBufferCountOf();
+    
+    testStringBufferToLower();
+    testStringBufferToUpper();
+    testStringBufferToOppositeCase();
+    testStringBufferReverse();
+    testStringBufferSort();
 
     testStringBufferTrimStart();
     testStringBufferTrimEnd();

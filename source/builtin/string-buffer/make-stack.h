@@ -14,3 +14,12 @@ StringBuffer makeStringBuffer(char* address, long capacity) // just the struct
     return sb;
 }
 
+// only for the stack
+StringBuffer makeStringBufferFromLiteral(char* cString) // just the struct
+{
+    long length = strlen(cString);
+    
+    StringBuffer sb = { cString, length, 0, length };
+    
+    return sb;
+}
