@@ -5,7 +5,7 @@ void testStringBufferCharCodeAt()
 {
     printf("- testing stringBufferCharCodeAt\n"); 
     
-    StringBuffer sb = makeStringBufferFromLiteral("123He@llo123");
+    StringBuffer sb = createStringBufferFromLiteral("123He@llo123");
     
     sb.margin = 3;
     sb.size -= 6;
@@ -21,6 +21,8 @@ void testStringBufferCharCodeAt()
         printf("stringBufferCharCodeAt FAILS!\n"); 
         exit(1);
     }
+    
+    releaseStringBuffer(sb);
 }
 
 void testStringBuffersAreEquals()
@@ -29,9 +31,9 @@ void testStringBuffersAreEquals()
     
     bool fails = false;
 
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock123");
-    StringBuffer sb2 = makeStringBufferFromLiteral("Life is ∆ rock");
-    StringBuffer sb3 = makeStringBufferFromLiteral("Life is ∆ ");
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock123");
+    StringBuffer sb2 = createStringBufferFromLiteral("Life is ∆ rock");
+    StringBuffer sb3 = createStringBufferFromLiteral("Life is ∆ ");
     
     sb1.margin = 3;
     sb1.size -= 6;
@@ -39,8 +41,8 @@ void testStringBuffersAreEquals()
     if (! stringBuffersAreEqual(sb1, sb2)) { fails = true; }
     if (stringBuffersAreEqual(sb1, sb3))   { fails = true; }
     
-    StringBuffer empty1 = makeStringBufferFromLiteral("");    
-    StringBuffer empty2 = makeStringBufferFromLiteral("");
+    StringBuffer empty1 = createStringBufferFromLiteral("");    
+    StringBuffer empty2 = createStringBufferFromLiteral("");
     
     if (! stringBuffersAreEqual(empty1, empty2)) { fails = true; }
     if (stringBuffersAreEqual(empty1, sb1))  { fails = true; }
@@ -49,6 +51,12 @@ void testStringBuffersAreEquals()
         printf("stringBuffersAreEqual FAILS!\n");
         exit(1);
     }
+    
+    releaseStringBuffer(sb1);
+    releaseStringBuffer(sb2);
+    releaseStringBuffer(sb3);
+    releaseStringBuffer(empty1);
+    releaseStringBuffer(empty2);
 }
 
 void testStringBufferContains()
@@ -57,8 +65,8 @@ void testStringBufferContains()
     
     bool fails = false;
 
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock123");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock123");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -78,6 +86,9 @@ void testStringBufferContains()
         printf("stringBufferContains FAILS!\n"); 
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
 }
 
 void testStringBufferStartsWith()
@@ -86,8 +97,8 @@ void testStringBufferStartsWith()
     
     bool fails = false;
     
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock123");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock123");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -108,6 +119,9 @@ void testStringBufferStartsWith()
         printf("stringBufferStartsWith FAILS!\n");
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
 }
 
 void testStringBufferEndsWith()
@@ -116,8 +130,8 @@ void testStringBufferEndsWith()
     
     bool fails = false;
     
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock123");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock123");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -138,6 +152,9 @@ void testStringBufferEndsWith()
         printf("stringBufferEndsWith FAILS!\n");
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
 }
 
 void testStringBufferIndexOf()
@@ -146,8 +163,8 @@ void testStringBufferIndexOf()
     
     bool fails = false;
     
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -168,6 +185,9 @@ void testStringBufferIndexOf()
         printf("stringBufferIndexOf FAILS!\n");
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
 }
 
 void testStringBufferLastIndexOf()
@@ -176,8 +196,8 @@ void testStringBufferLastIndexOf()
     
     bool fails = false;
     
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -198,6 +218,9 @@ void testStringBufferLastIndexOf()
         printf("stringBufferLastIndexOf FAILS!\n");
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
 }
 
 void testStringBufferIndexOfAfter()
@@ -206,8 +229,8 @@ void testStringBufferIndexOfAfter()
     
     bool fails = false;
     
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -231,6 +254,9 @@ void testStringBufferIndexOfAfter()
         printf("stringBufferIndexOfAfter FAILS!\n");
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
 }
 
 void testStringBufferLastIndexOfBefore()
@@ -239,8 +265,8 @@ void testStringBufferLastIndexOfBefore()
     
     bool fails = false;
     
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -263,6 +289,9 @@ void testStringBufferLastIndexOfBefore()
         printf("stringBufferLastIndexOfBefore FAILS!\n"); 
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
 }
 
 void testStringBufferCountOf()
@@ -271,10 +300,10 @@ void testStringBufferCountOf()
     
     bool fails = false;
 
-    StringBuffer sb0 = makeStringBufferFromLiteral("");    
-    StringBuffer sb1 = makeStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
-    StringBuffer sb2 = makeStringBufferFromLiteral("∆∆∆");
-    StringBuffer sb3 = makeStringBufferFromLiteral("∆.∆.∆");
+    StringBuffer sb0 = createStringBufferFromLiteral("");    
+    StringBuffer sb1 = createStringBufferFromLiteral("123Life is ∆ rock and ∆ like rock123");
+    StringBuffer sb2 = createStringBufferFromLiteral("∆∆∆");
+    StringBuffer sb3 = createStringBufferFromLiteral("∆.∆.∆");
 
     sb1.margin = 3;
     sb1.size -= 6;
@@ -296,5 +325,10 @@ void testStringBufferCountOf()
         printf("stringBufferCountOf FAILS!\n"); 
         exit(1);
     }
+    
+    releaseStringBuffer(sb0);
+    releaseStringBuffer(sb1);
+    releaseStringBuffer(sb2);
+    releaseStringBuffer(sb3);
 }
 

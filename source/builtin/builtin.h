@@ -24,10 +24,11 @@
 #include "string/trim.h"
 
 #include "string-buffer/info.h"
-#include "string-buffer/make-stack.h"
 #include "string-buffer/create-from-release.h"
 #include "string-buffer/lower-reverse-sort.h"
 #include "string-buffer/trim.h"
+#include "string-buffer/eat-start-end.h"
+#include "string-buffer/token-line.h"
 
 //#include "string/slice.h"
 //#include "string/token.h"

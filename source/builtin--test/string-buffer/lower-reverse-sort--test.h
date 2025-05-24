@@ -177,7 +177,7 @@ void testStringBufferSort()
     
     String result1 = createStringFromStringBuffer(sbSource);
     
-    String expected1 = createStringFromLiteral("\x86\x88\xe2   Lcefiikors"); 
+    String expected1 = makeStringFromLiteral("\x86\x88\xe2   Lcefiikors"); 
     
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
       
@@ -197,5 +197,7 @@ void testStringBufferSort()
     releaseString(result1);
     releaseString(result2);
     releaseString(expected2);
+    releaseStringBuffer(sbEmpty);
+    releaseStringBuffer(sbSource);
 }
 

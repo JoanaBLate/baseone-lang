@@ -9,6 +9,7 @@
 #include "trim--test.h"
 #include "trim-target--test.h"
 #include "trim-any--test.h"
+#include "eat-start-end--test.h"
 #include "lower-reverse-sort--test.h"
 
 void testStringBuffer()
@@ -41,5 +42,8 @@ void testStringBuffer()
     testStringBufferTrimStartAny();
     testStringBufferTrimEndAny();
     testStringBufferTrimAny(); 
+    
+    testStringBufferEatStart();
+    testStringBufferEatEnd();
 }
 

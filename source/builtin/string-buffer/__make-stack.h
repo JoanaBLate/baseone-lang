@@ -1,3 +1,12 @@
+
+/*
+    abandoned because having a limited StringBuffer would be confusing,
+    only useful in corner cases, and those corner cases could be solved
+    in other ways
+*/
+
+
+
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
