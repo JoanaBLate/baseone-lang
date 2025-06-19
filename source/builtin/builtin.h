@@ -23,12 +23,12 @@
 #include "string/remove.h"
 #include "string/trim.h"
 
-#include "string-buffer/info.h"
-#include "string-buffer/create-from-release.h"
-#include "string-buffer/lower-reverse-sort.h"
-#include "string-buffer/trim.h"
-#include "string-buffer/eat-start-end.h"
-#include "string-buffer/token-line.h"
+#include "heap-buffer/info.h"
+#include "heap-buffer/create-from-release.h"
+#include "heap-buffer/lower-reverse-sort.h"
+#include "heap-buffer/trim.h"
+#include "heap-buffer/eat-start-end.h"
+#include "heap-buffer/token-line.h"
 
 //#include "string/slice.h"
 //#include "string/token.h"

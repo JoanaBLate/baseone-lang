@@ -40,10 +40,10 @@ String makeStringCopy(String string) // just the struct
 }
 
 // for type compatibility of builtin function arguments ONLY
-String makeStringFromStringBuffer(StringBuffer sb) // just the struct 
+String makeStringFromHeapBuffer(HeapBuffer hb) // just the struct 
 {   
-    if (sb.size == 0) { return makeStringEmpty(); }
+    if (hb.size == 0) { return makeStringEmpty(); }
     
-    return makeString(sb.address + sb.margin, sb.size);
+    return makeString(hb.address + hb.margin, hb.size);
 }
 

@@ -47,9 +47,9 @@ String createStringClone(String string) // allocates heap memory
     return createStringFromSource(string.address, string.size);
 }
 
-String createStringFromStringBuffer(StringBuffer sb) // allocates heap memory
+String createStringFromHeapBuffer(HeapBuffer hb) // allocates heap memory
 {   
-    return createStringFromSource(sb.address + sb.margin, sb.size);
+    return createStringFromSource(hb.address + hb.margin, hb.size);
 }
 
 String createStringFromLong(long number) // allocates heap memory

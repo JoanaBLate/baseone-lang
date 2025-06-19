@@ -6,12 +6,12 @@
 //   BaseOne builtin functions assure that size/capacity/length will never get negative value
 //   while this is about the inner C code, it follows the BaseOne principle: there is no 'unsigned'
 
-typedef unsigned short byte;
+typedef unsigned char byte; // the builtin library keeps using unsigned char
 
-typedef unsigned short bool;
+typedef unsigned char bool;
 
-const unsigned short true = 1;
-const unsigned short false = 0;
+const unsigned char true = 1;
+const unsigned char false = 0;
 
 typedef struct
 {
@@ -31,7 +31,15 @@ typedef struct
     long capacity;
     long margin;
     long size;
-} StringBuffer;
+} StackBuffer;
+
+typedef struct 
+{
+    char* address; 
+    long capacity;
+    long margin;
+    long size;
+} HeapBuffer;
 
 // creating ///////////////////////////////////////////////////////////////////
 

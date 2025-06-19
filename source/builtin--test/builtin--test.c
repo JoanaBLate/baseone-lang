@@ -8,12 +8,12 @@
 
 #include "file/test.h"
 #include "string/test.h"
-#include "string-buffer/test.h"
+#include "heap-buffer/test.h"
 
 int main()
 {
     testReadTextFile();
-    testStringBuffer();
+    testHeapBuffer();
     testString();
 
     return 0;
