@@ -31,15 +31,7 @@ typedef struct
     long capacity;
     long margin;
     long size;
-} StackBuffer;
-
-typedef struct 
-{
-    char* address; 
-    long capacity;
-    long margin;
-    long size;
-} HeapBuffer;
+} Buffer;
 
 // creating ///////////////////////////////////////////////////////////////////
 

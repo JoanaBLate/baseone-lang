@@ -11,7 +11,7 @@
 #include "memory/memory.h"
 
 #include "string/info.h"
-#include "string/make-from-stack.h"
+#include "string/make-from.h"
 #include "string/create-from-release.h"
 #include "string/repeat.h"
 #include "string/append-insert.h"
@@ -23,12 +23,12 @@
 #include "string/remove.h"
 #include "string/trim.h"
 
-#include "heap-buffer/info.h"
-#include "heap-buffer/create-from-release.h"
-#include "heap-buffer/lower-reverse-sort.h"
-#include "heap-buffer/trim.h"
-#include "heap-buffer/eat-start-end.h"
-#include "heap-buffer/token-line.h"
+#include "buffer/info.h"
+#include "buffer/create-from-release.h"
+#include "buffer/lower-reverse-sort.h"
+#include "buffer/trim.h"
+#include "buffer/eat-start-end.h"
+//#include "buffer/token-line.h"
 
 //#include "string/slice.h"
 //#include "string/token.h"
@@ -41,8 +41,8 @@
 //#include "hashmap/hashmap-string.h"
 //#include "stack-string/make-reset-clear-tostring.h"
 //#include "stack-string/append.h"
-//#include "heap-string/info.h"
-//#include "heap-string/make-new-release.h"
+//#include "string/info.h"
+//#include "string/make-new-release.h"
 
 #include "file/read.h"
 

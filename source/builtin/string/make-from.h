@@ -1,11 +1,6 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-// creating String on the stack:
-// must be hard coded by the compiler
-// inside the body of the user's C function,
-// then makeString will be called
-
 String makeString(char* address, long size) // just the struct
 {
     String string = { address, size };
@@ -40,10 +35,10 @@ String makeStringCopy(String string) // just the struct
 }
 
 // for type compatibility of builtin function arguments ONLY
-String makeStringFromHeapBuffer(HeapBuffer hb) // just the struct 
+String makeStringFromBuffer(Buffer buffer) // just the struct 
 {   
-    if (hb.size == 0) { return makeStringEmpty(); }
+    if (buffer.size == 0) { return makeStringEmpty(); }
     
-    return makeString(hb.address + hb.margin, hb.size);
+    return makeString(buffer.address + buffer.margin, buffer.size);
 }
 
