@@ -5,7 +5,7 @@
 
 String createStringReplaceStart(String string, long count, String chunk) // allocates heap memory
 {    
-    if (count < 1) { return createStringClone(string); } 
+    if (count < 1) { return createStringInsert(string, chunk, 0); } 
     
     if (count >= string.size) { return createStringClone(chunk); }
     
@@ -30,7 +30,7 @@ String createStringReplaceStart(String string, long count, String chunk) // allo
 
 String createStringReplaceEnd(String string, long count, String chunk) // allocates heap memory
 {    
-    if (count < 1) { return createStringClone(string); } 
+    if (count < 1) { return createStringAppend(string, chunk); } 
     
     if (count >= string.size) { return createStringClone(chunk); } 
     
@@ -52,7 +52,7 @@ String createStringReplaceEnd(String string, long count, String chunk) // alloca
 
 // replace by target //////////////////////////////////////////////////////////
 
-String createStringReplace2(String string, String target, String chunk, long position) // allocates heap memory
+String _createStringReplace(String string, String target, String chunk, long position) // allocates heap memory
 {
  // long stringLeftArmStart = 0;
     long stringLeftArmSize = position;
@@ -89,7 +89,7 @@ String createStringReplace(String string, String target, String chunk) // alloca
     
     if (position + target.size == string.size) { return createStringReplaceEnd(string, target.size, chunk); }
     
-    return createStringReplace2(string, target, chunk, position);
+    return _createStringReplace(string, target, chunk, position);
 }
 
 String createStringReplaceLast(String string, String target, String chunk) // allocates heap memory
@@ -102,7 +102,7 @@ String createStringReplaceLast(String string, String target, String chunk) // al
     
     if (position + target.size == string.size) { return createStringReplaceEnd(string, target.size, chunk); }
     
-    return createStringReplace2(string, target, chunk, position);
+    return _createStringReplace(string, target, chunk, position);
 }
 
 // replace all by target //////////////////////////////////////////////////////

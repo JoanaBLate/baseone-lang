@@ -1,6 +1,6 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
-
+/*
 void printString(String string)
 {
     char substitute = 26;
@@ -20,6 +20,7 @@ void printString(String string)
         putchar(c);
     }
 }
+*/
 
 void printStringBytes(String string)
 {    

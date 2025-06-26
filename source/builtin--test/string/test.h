@@ -8,9 +8,10 @@
 // makeStringCopy, getStringSize
 
 #include "info--test.h"
-#include "append-insert-pad--test.h"
+#include "append-insert--test.h"
 #include "lower-reverse-sort--test.h"
 #include "clone-repeat-byte-number--test.h"
+#include "pad--test.h"
 #include "print--test.h"
 #include "remove--test.h"
 #include "replace--test.h"

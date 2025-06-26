@@ -16,6 +16,8 @@ int main()
     testBuffer();
     testString();
 
+    printf("\nAll tests passed!\n");
+
     return 0;
 }
 

@@ -6,11 +6,13 @@
 
 
 #include "info--test.h"
+#include "lower-reverse-sort--test.h"
 #include "trim--test.h"
 #include "trim-target--test.h"
 #include "trim-any--test.h"
 #include "eat-start-end--test.h"
-#include "lower-reverse-sort--test.h"
+#include "replace--test.h"
+#include "print--test.h"
 
 void testBuffer()
 {    
@@ -45,5 +47,15 @@ void testBuffer()
     
     testBufferEatStart();
     testBufferEatEnd();
+    
+    testBufferReplaceStart();
+    testBufferReplaceEnd();
+    testBufferReplace();
+    testBufferReplaceLast();
+    testBufferReplaceAll();
+    
+    testPrintBufferA();
+    testPrintBufferB();
+    testPrintBufferC();
 }
 

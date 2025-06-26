@@ -12,7 +12,7 @@ void testCreateStringReplaceStart()
     String source2 = makeStringFromLiteral("∆ ");  
    
     String result1 = createStringReplaceStart(source1, 0, source2);
-    String expected1 = makeStringFromLiteral("Life is ∆ rock");
+    String expected1 = makeStringFromLiteral("∆ Life is ∆ rock");
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
    
     String result2 = createStringReplaceStart(source1, 16, source2);
@@ -55,7 +55,7 @@ void testCreateStringReplaceEnd()
     String source2 = makeStringFromLiteral(" ∆");  
    
     String result1 = createStringReplaceEnd(source1, 0, source2);
-    String expected1 = makeStringFromLiteral("Life is ∆ rock");
+    String expected1 = makeStringFromLiteral("Life is ∆ rock ∆");
     if (! stringsAreEqual(result1, expected1)) { fails = true; }
    
     String result2 = createStringReplaceEnd(source1, 16, source2);

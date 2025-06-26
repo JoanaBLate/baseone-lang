@@ -3,7 +3,7 @@
 
 void releaseString(String string)
 {
-    if (string.address == NULL) { return; }
+    if (string.address == NULL  &&  string.size == 0) { return; } // empty string (not heap allocated)
     
     heapRelease(string.address);
 }

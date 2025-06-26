@@ -26,23 +26,21 @@
 #include "buffer/info.h"
 #include "buffer/create-from-release.h"
 #include "buffer/lower-reverse-sort.h"
+#include "buffer/print.h"
 #include "buffer/trim.h"
 #include "buffer/eat-start-end.h"
-//#include "buffer/token-line.h"
+#include "buffer/replace.h"
+#include "buffer/remove.h"
 
-//#include "string/slice.h"
-//#include "string/token.h"
-//#include "string/token-number.h"
-//#include "string/trim.h"
+//#include "array/array.h"
+
 //#include "array-list/array-list.h"
+
 //#include "linked-list/linked-list.h"
+
 //#include "hashmap/hashmap-helper.h"
 //#include "hashmap/hashmap-long.h"
 //#include "hashmap/hashmap-string.h"
-//#include "stack-string/make-reset-clear-tostring.h"
-//#include "stack-string/append.h"
-//#include "string/info.h"
-//#include "string/make-new-release.h"
 
 #include "file/read.h"
 
