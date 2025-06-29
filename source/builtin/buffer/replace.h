@@ -1,18 +1,13 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-// replace by position ////////////////////////////////////////////////////////
+// replace start //////////////////////////////////////////////////////////////
 
 void bufferReplaceStart(Buffer* buffer, long count, String chunk)
 {    
-    if (count < 1) 
-    { 
-        count = 0; 
-    } 
-    else if (count > buffer->size) 
-    { 
-        count = buffer->size; 
-    }
+    if (count < 1) { count = 0; }
+     
+    else if (count > buffer->size) { count = buffer->size; }
       
     // eating the start
     buffer->size -= count;
@@ -28,59 +23,8 @@ void bufferReplaceStart(Buffer* buffer, long count, String chunk)
 
         return;    
     }
- 
-    long newCapacity = chunk.size + buffer->size;
     
-    if (newCapacity > buffer->capacity) 
-    {
-        buffer->address = heapReallocate(buffer->address, newCapacity); // allocates memory
-        
-        buffer->capacity = newCapacity;
-    }
-    
-    // now capacity is enough but margin is not enough: must move bytes (backwards)
-    
-    long jump = chunk.size - buffer->margin;
-    
-    long first = buffer->margin;
-    
-    long last = buffer->margin + buffer->size - 1;
-        
-    for (long index = last; index >= first; index--) // backwards
-    {
-        buffer->address[index + jump] = buffer->address[index];
-    }
-    
-    buffer->margin = 0;
-    buffer->size += chunk.size;        
-    
-    memcpy(buffer->address, chunk.address, chunk.size);
-}
-
-void bufferReplaceEnd(Buffer* buffer, long count, String chunk)
-{    
-    if (count < 1) 
-    { 
-        count = 0; 
-    } 
-    else if (count > buffer->size) 
-    { 
-        count = buffer->size; 
-    }
-      
-    // eating the end
-    buffer->size -= count;
-    
-    long hiddenEnd = buffer->capacity - buffer->margin - buffer->size;
-    
-    if (chunk.size <= hiddenEnd)
-    {        
-        memcpy(buffer->address + buffer->margin + buffer->size, chunk.address, chunk.size);
-        
-        buffer->size += chunk.size;
-        
-        return;    
-    }
+    // increasing buffer capacity (maybe)
  
     long newCapacity = buffer->size + chunk.size;
     
@@ -90,70 +34,129 @@ void bufferReplaceEnd(Buffer* buffer, long count, String chunk)
         
         buffer->capacity = newCapacity;
     }
-    
-    // now capacity is enough but hidden end space is not enough: must move bytes
-    
-    hiddenEnd = buffer->capacity - buffer->margin - buffer->size;
-    
-    long jump = chunk.size - hiddenEnd;
-    
-    long first = buffer->margin;
-    
-    long last = buffer->margin + buffer->size - 1;
-    
-    for (long index = first; index <= last; index++) 
-    {
-        buffer->address[index - jump] = buffer->address[index];
-    }
-    
-    buffer->margin -= jump;
-    
-    memcpy(buffer->address + buffer->margin + buffer->size, chunk.address, chunk.size);
 
-    buffer->size += chunk.size;        
+    // now capacity is enough but margin is not enough: must move bytes to right
+    
+    long delta = chunk.size - buffer->margin;
+    
+    buffer->size += delta;
+    
+    bufferMoveRange(buffer, 1, buffer->size - delta, 1 + delta); // arguments adjusted to one base index
+
+    buffer->size += buffer->margin;
+    
+    buffer->margin = 0;
+    
+    // pasting the chunk
+    
+    memcpy(buffer->address, chunk.address, chunk.size);
 }
 
-// replace by target once /////////////////////////////////////////////////////
+// replace end ////////////////////////////////////////////////////////////////
 
-void _bufferReplace(Buffer* buffer, String target, String chunk, long relativePosition) // may allocate heap memory
+void bufferReplaceEnd(Buffer* buffer, long count, String chunk)
+{    
+    if (count < 1) { count = 0; } 
+    
+    else if (count > buffer->size) { count = buffer->size; }
+      
+    // eating the end
+    buffer->size -= count;
+    
+    long hiddenTail = buffer->capacity - buffer->margin - buffer->size;
+    
+    if (chunk.size <= hiddenTail)
+    {        
+        memcpy(buffer->address + buffer->margin + buffer->size, chunk.address, chunk.size);
+        
+        buffer->size += chunk.size;
+        
+        return;    
+    }
+    
+    // increasing buffer capacity (maybe)
+ 
+    long newCapacity = buffer->size + chunk.size;
+    
+    if (newCapacity > buffer->capacity) 
+    {
+        buffer->address = heapReallocate(buffer->address, newCapacity); // allocates memory
+        
+        buffer->capacity = newCapacity;
+    }
+  
+    // now capacity is enough
+    
+    hiddenTail = buffer->capacity - buffer->margin - buffer->size;
+    
+    long delta = chunk.size - hiddenTail;
+    
+    if (delta == 0) // no need to displace data
+    {
+        memcpy(buffer->address + buffer->margin + buffer->size, chunk.address, chunk.size);
+        
+        buffer->size += chunk.size;
+    
+        return;    
+    }     
+    
+    // must use the margin: moving bytes to left
+    
+    long position = buffer->margin + buffer->size - delta;
+        
+    buffer->margin -= delta;
+    
+    buffer->size += delta;
+  
+    bufferMoveRange(buffer, 1 + delta, buffer->size, 1); // arguments adjusted to one base index
+
+    memcpy(buffer->address + position, chunk.address, chunk.size);
+    
+    buffer->size += chunk.size - delta;
+}
+
+// replace target once ////////////////////////////////////////////////////////
+
+bool _bufferReplace(Buffer* buffer, String target, String chunk, long relativePosition) // may allocate heap memory
 {
-    if (relativePosition == -1) { return; } // target not found
+    if (relativePosition == -1) { return false; } // target not found
     
     long absolutePosition = buffer->margin + relativePosition;
     
-    if (target.size == chunk.size) // just enough room
+    // just enough room
+    if (target.size == chunk.size) 
     {
         memcpy(buffer->address + absolutePosition, chunk.address, chunk.size);
         
-        return;    
+        return true;    
     }
     
-    if (target.size > chunk.size) // more than enough room
+    // more than enough room
+    if (target.size > chunk.size) 
     {
         memcpy(buffer->address + absolutePosition, chunk.address, chunk.size);
         
-        long jump = target.size - chunk.size;
+        long delta = target.size - chunk.size;
         long start = absolutePosition + chunk.size;
-        long end = buffer->margin + buffer->size - 1 - jump;
+        long off = buffer->margin + buffer->size - delta;
         
-        for (long index = start; index <= end; index++)
+        for (long index = start; index < off; index++)
         {
-            buffer->address[index] = buffer->address[index + jump];
+            buffer->address[index] = buffer->address[index + delta];
         }
         
-        buffer->size -= jump;
+        buffer->size -= delta;
 
-        return;    
+        return true;    
     }
     
-    // expanding the buffer (maybe)
-    
-    long extraSpace = chunk.size - target.size;
+    // expanding the buffer (maybe)    
+    long neededSpace = chunk.size - target.size;
     
     long hiddenSpace = buffer->capacity - buffer->size;
     
-    long neededExpansion = extraSpace - hiddenSpace;
-    
+    long neededExpansion = neededSpace - hiddenSpace;
+ 
     if (neededExpansion > 0)
     {
         long newCapacity = buffer->capacity + neededExpansion;
@@ -162,64 +165,74 @@ void _bufferReplace(Buffer* buffer, String target, String chunk, long relativePo
             
         buffer->capacity = newCapacity;
     }
+     
+    // moving to the right (maybe)    
+    long hiddenTail = buffer->capacity - buffer->margin - buffer->size;  
     
-    // moving data to left
+    long deltaRight = neededSpace;
     
-    long leftDisplacement = extraSpace;
-    
-    if (leftDisplacement > buffer->margin) { leftDisplacement = buffer->margin; }
-    
-    extraSpace -= leftDisplacement;
-    
-    for (long index = buffer->margin; index < absolutePosition; index++)
+    if (deltaRight > hiddenTail) { deltaRight = hiddenTail; }
+
+    if (deltaRight > 0)
     {
-        buffer->address[index - leftDisplacement] = buffer->address[index];    
+        buffer->size += deltaRight;
+        
+        long a = relativePosition + target.size;
+        
+        long b = a + deltaRight;
+      
+        bufferMoveRange(buffer, a + 1, buffer->size, b + 1); // arguments adjusted to one base index
+        
+        neededSpace -= deltaRight;
     }
     
-    buffer->margin -= leftDisplacement; 
-    buffer->size   += leftDisplacement;
+    // moving to the left (maybe)
+    long deltaLeft = neededSpace;
     
-    // moving data to right
+ // if (deltaLeft > buffer->margin) { deltaLeft = buffer->margin; } // unnecessary
     
-    long rightDisplacement = extraSpace; // ok because buffer is already extended
-    
-    buffer->size += rightDisplacement;
-    
-    for (long index = buffer->margin + buffer->size - 1; index >= absolutePosition + target.size; index--) // runs backwards
+    if (deltaLeft > 0)
     {
-        buffer->address[index] = buffer->address[index - rightDisplacement];    
+        buffer->margin -= deltaLeft;
+        
+        buffer->size += deltaLeft;
+      
+        bufferMoveRange(buffer, 1 + deltaLeft, buffer->size, 1); // arguments adjusted to one base index
+    
+        absolutePosition -= deltaLeft;
     }
     
-    // pasting chunk
+    // copyng the chunk
+    memcpy(buffer->address + absolutePosition, chunk.address, chunk.size);
     
-    memcpy(buffer->address + absolutePosition - leftDisplacement, chunk.address, chunk.size);    
+    return true;
 }
    
-void bufferReplace(Buffer* buffer, String target, String chunk) // may allocate heap memory
+bool bufferReplace(Buffer* buffer, String target, String chunk) // may allocate heap memory
 {
     long position = bufferIndexOf(*buffer, target) - 1; // '-1' adjusts to zero index
     
-    _bufferReplace(buffer, target, chunk, position);
+    return _bufferReplace(buffer, target, chunk, position);
 }
 
-void bufferReplaceLast(Buffer* buffer, String target, String chunk) // may allocate heap memory
+bool bufferReplaceLast(Buffer* buffer, String target, String chunk) // may allocate heap memory
 {
     long position = bufferLastIndexOf(*buffer, target) - 1; // '-1' adjusts to zero index
     
-    _bufferReplace(buffer, target, chunk, position);
+    return _bufferReplace(buffer, target, chunk, position);
 }
 
-// replace by target all //////////////////////////////////////////////////////
+// replace target all /////////////////////////////////////////////////////////
 
 void _bufferExpandBeforeReplaceAll(Buffer* buffer, String target, String chunk, long count) // may allocate heap memory
 {
     if (target.size >= chunk.size) { return; }
     
-    long extraSpace = count * (chunk.size - target.size);
+    long neededSpace = count * (chunk.size - target.size);
     
     long hiddenSpace = buffer->capacity - buffer->size;
     
-    long neededExpansion = extraSpace - hiddenSpace;
+    long neededExpansion = neededSpace - hiddenSpace;
     
     if (neededExpansion <= 0) { return; }
 
@@ -230,21 +243,16 @@ void _bufferExpandBeforeReplaceAll(Buffer* buffer, String target, String chunk, 
     buffer->capacity = newCapacity;
 }
 
-void bufferReplaceAll(Buffer* buffer, String target, String chunk) // may allocate heap memory
+bool bufferReplaceAll(Buffer* buffer, String target, String chunk) // may allocate heap memory
 {
     long count = bufferCountOf(*buffer, target);
     
-    if (count == 0) { return; }
+    if (count == 0) { return false; }
     
      _bufferExpandBeforeReplaceAll(buffer, target, chunk, count);
      
-     while (true)
-     {
-        long position = bufferIndexOf(*buffer, target) - 1; // '-1' adjusts to zero index
-        
-        if (position == -1) { break; }
-    
-        _bufferReplace(buffer, target, chunk, position);
-     }
+     while (bufferReplace(buffer, target, chunk)) { }
+     
+     return true;
 }
 

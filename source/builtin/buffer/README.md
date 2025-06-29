@@ -9,6 +9,8 @@ Excepting the function 'bufferByteAt', Buffer functions silently avoid 'index of
 (TODO: check all functions about that) 
 
 Unicode characters like '∆' may be corrupted by these functions:
+- 'bufferMoveRange'
+- 'bufferCopyRange'
 - 'bufferTrim'
 - 'bufferTrimStart'
 - 'bufferTrimEnd'

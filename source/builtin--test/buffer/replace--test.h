@@ -16,37 +16,41 @@ void testBufferReplaceStart()
 {
     printf("- testing bufferReplaceStart\n"); 
     
-    Buffer source = createBufferFromLiteral(".....Hello!");
-    source.margin = 5;
-    source.size = 6;
-    Buffer* buffer = &source;
+    Buffer buffer = createBufferFromLiteral(".....Hello!");
+    buffer.margin = 5;
+    buffer.size = 6;
+    
+    String chunk = makeStringFromLiteral("123"); 
+    String expected = makeStringFromLiteral("123Hello!");    
+    _testBufferReplaceStart(&buffer, -15, chunk, expected);    
 
-    String chunk1 = makeStringFromLiteral("123"); 
-    String expected1 = makeStringFromLiteral("123Hello!");    
-    _testBufferReplaceStart(buffer, -15, chunk1, expected1);    
+    chunk = makeStringFromLiteral("AB"); 
+    expected = makeStringFromLiteral("ABHello!");    
+    _testBufferReplaceStart(&buffer, 3, chunk, expected);     
+ 
+    chunk = makeStringFromLiteral("abcdefghij"); 
+    expected = makeStringFromLiteral("abcdefghijHello!");    
+    _testBufferReplaceStart(&buffer, 2, chunk, expected); 
+
+    buffer.margin += 2; // cutting 'ab', leaving margin
+    buffer.size -= 2;
+     
+    buffer.size -= 2;   // cutting 'o!', leaving hidden end
+
+    chunk = makeStringFromLiteral(""); 
+    expected = makeStringFromLiteral("Hell");    
+    _testBufferReplaceStart(&buffer, 8, chunk, expected);  
     
-    String chunk2 = makeStringFromLiteral("AB"); 
-    String expected2 = makeStringFromLiteral("ABHello!");    
-    _testBufferReplaceStart(buffer, 3, chunk2, expected2);    
-    
-    String chunk3 = makeStringFromLiteral("abcdefghij"); 
-    String expected3 = makeStringFromLiteral("abcdefghijHello!");    
-    _testBufferReplaceStart(buffer, 2, chunk3, expected3);  
-    
-    String chunk4 = makeStringFromLiteral(""); 
-    String expected4 = makeStringFromLiteral("Hello!");    
-    _testBufferReplaceStart(buffer, 10, chunk4, expected4);  
-    
-    releaseBuffer(*buffer);
+    releaseBuffer(buffer);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void _testBufferReplaceEnd(Buffer* buffer, long count, String chunk, String expected) 
 {
-    bufferReplaceEnd(buffer, count, chunk);    
+    bufferReplaceEnd(buffer, count, chunk); 
     
-    String result = makeStringFromBuffer(*buffer);
+    String result = makeStringFromBuffer(*buffer);    
     
     if (stringsAreEqual(result, expected)) { return; }
     
@@ -57,28 +61,40 @@ void testBufferReplaceEnd()
 {
     printf("- testing bufferReplaceEnd\n"); 
     
-    Buffer source = createBufferFromLiteral("XYZHello!.....");
-    source.margin = 3;
-    source.size = 6;
-    Buffer* buffer = &source;
+    Buffer buffer = createBufferFromLiteral("XYZHello!.....");
+    buffer.margin = 3;
+    buffer.size = 6;
 
-    String chunk1 = makeStringFromLiteral("123"); 
-    String expected1 = makeStringFromLiteral("Hello!123");    
-    _testBufferReplaceEnd(buffer, -15, chunk1, expected1); 
+    String chunk = makeStringFromLiteral("123"); 
+    String expected = makeStringFromLiteral("Hello!123");    
+    _testBufferReplaceEnd(&buffer, -15, chunk, expected); 
     
-    String chunk2 = makeStringFromLiteral("AB"); 
-    String expected2 = makeStringFromLiteral("Hello!AB");    
-    _testBufferReplaceEnd(buffer, 3, chunk2, expected2);    
-  
-    String chunk3 = makeStringFromLiteral("abcdefghij"); 
-    String expected3 = makeStringFromLiteral("Hello!abcdefghij");    
-    _testBufferReplaceEnd(buffer, 2, chunk3, expected3);  
+    chunk = makeStringFromLiteral("AB"); 
+    expected = makeStringFromLiteral("Hello!AB");    
+    _testBufferReplaceEnd(&buffer, 3, chunk, expected);    
+    releaseBuffer(buffer);
     
-    String chunk4 = makeStringFromLiteral(""); 
-    String expected4 = makeStringFromLiteral("Hello!");    
-    _testBufferReplaceEnd(buffer, 10, chunk4, expected4);
+    buffer = createBufferFromLiteral("Hello!");
+    chunk = makeStringFromLiteral("abc"); 
+    expected = makeStringFromLiteral("Helloabc");    
+    _testBufferReplaceEnd(&buffer, 1, chunk, expected);
+    releaseBuffer(buffer);
     
-    releaseBuffer(*buffer);
+    buffer = createBufferFromLiteral(".12345!");
+    buffer.margin = 1;
+    buffer.size -= 1;
+    chunk = makeStringFromLiteral("abc"); 
+    expected = makeStringFromLiteral("12345abc");    
+    _testBufferReplaceEnd(&buffer, 1, chunk, expected);
+    releaseBuffer(buffer);
+    
+    buffer = createBufferFromLiteral("...HelloXX...");
+    buffer.margin = 3;
+    buffer.size = 7;
+    chunk = makeStringFromLiteral("abcdefghijklmn"); 
+    expected = makeStringFromLiteral("Helloabcdefghijklmn");
+    _testBufferReplaceEnd(&buffer, 2, chunk, expected);  
+    releaseBuffer(buffer);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,34 +117,33 @@ void testBufferReplace()
     Buffer source = createBufferFromLiteral("Hello!");
     Buffer* buffer = &source;
 
-    String target1 = makeStringFromLiteral("ll");
-    String chunk1 = makeStringFromLiteral("@#"); 
-    String expected1 = makeStringFromLiteral("He@#o!");    
-    _testBufferReplace(buffer, target1, chunk1, expected1);
+    String target = makeStringFromLiteral("ll");
+    String chunk = makeStringFromLiteral("@#"); 
+    String expected = makeStringFromLiteral("He@#o!");    
+    _testBufferReplace(buffer, target, chunk, expected);
 
-    String target2 = makeStringFromLiteral("@#");
-    String chunk2 = makeStringFromLiteral(""); 
-    String expected2 = makeStringFromLiteral("Heo!");    
-    _testBufferReplace(buffer, target2, chunk2, expected2);
+    target = makeStringFromLiteral("@#");
+    chunk = makeStringFromLiteral(""); 
+    expected = makeStringFromLiteral("Heo!");      
+    _testBufferReplace(buffer, target, chunk, expected);
 
-    String target3 = makeStringFromLiteral("e");
-    String chunk3 = makeStringFromLiteral("ell---$$$---"); 
-    String expected3 = makeStringFromLiteral("Hell---$$$---o!");    
-    _testBufferReplace(buffer, target3, chunk3, expected3);
+    target = makeStringFromLiteral("e");
+    chunk = makeStringFromLiteral("ell---$$$---"); 
+    expected = makeStringFromLiteral("Hell---$$$---o!");    
+    _testBufferReplace(buffer, target, chunk, expected);
     
     buffer->margin = 4;
     buffer->size -= 4;
     
-    String target4 = makeStringFromLiteral("---$$$---o!");
-    String chunk4 = makeStringFromLiteral(">[^]<"); 
-    String expected4 = makeStringFromLiteral(">[^]<");    
-    _testBufferReplace(buffer, target4, chunk4, expected4);
+    target = makeStringFromLiteral("---$$$---o!");
+    chunk = makeStringFromLiteral(">[^]<"); 
+    expected = makeStringFromLiteral(">[^]<");   
+    _testBufferReplace(buffer, target, chunk, expected);
         
-    String target5 = makeStringFromLiteral("^");
-    String chunk5 = makeStringFromLiteral("Life is ∆ rock! Life is ∆ rock!"); 
-    String expected5 = makeStringFromLiteral(">[Life is ∆ rock! Life is ∆ rock!]<");    
-    _testBufferReplace(buffer, target5, chunk5, expected5);
-
+    target = makeStringFromLiteral("^");
+    chunk = makeStringFromLiteral("Life is ∆ rock! Life is ∆ rock!"); 
+    expected = makeStringFromLiteral(">[Life is ∆ rock! Life is ∆ rock!]<");   
+    _testBufferReplace(buffer, target, chunk, expected);
     releaseBuffer(*buffer);
 }
 

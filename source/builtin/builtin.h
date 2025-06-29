@@ -24,9 +24,11 @@
 #include "string/trim.h"
 
 #include "buffer/info.h"
-#include "buffer/create-from-release.h"
-#include "buffer/lower-reverse-sort.h"
 #include "buffer/print.h"
+#include "buffer/create-from-release.h"
+#include "buffer/move-range.h"
+#include "buffer/copy-range.h"
+#include "buffer/lower-reverse-sort.h"
 #include "buffer/trim.h"
 #include "buffer/eat-start-end.h"
 #include "buffer/replace.h"
