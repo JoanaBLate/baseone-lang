@@ -1,7 +1,7 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-String createStringToLower(String string) // allocates heap memory
+String createStringToLower(String* string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
@@ -13,7 +13,7 @@ String createStringToLower(String string) // allocates heap memory
     return newString;
 }
 
-String createStringToUpper(String string) // allocates heap memory
+String createStringToUpper(String* string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
@@ -25,7 +25,7 @@ String createStringToUpper(String string) // allocates heap memory
     return newString;
 }
 
-String createStringToOppositeCase(String string) // allocates heap memory
+String createStringToOppositeCase(String* string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
@@ -46,7 +46,7 @@ String createStringToOppositeCase(String string) // allocates heap memory
     return newString;
 }
 
-String createStringReverse(String string) // allocates heap memory
+String createStringReverse(String* string) // allocates heap memory
 {
     String newString = createStringClone(string);
     
@@ -64,7 +64,7 @@ String createStringReverse(String string) // allocates heap memory
     return newString;
 }
 
-String createStringSort(String string) // TODO: slow  // allocates heap memory
+String createStringSort(String* string) // TODO: slow  // allocates heap memory
 {
     String newString = createStringClone(string);
     

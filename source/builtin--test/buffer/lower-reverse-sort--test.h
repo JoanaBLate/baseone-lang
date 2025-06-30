@@ -13,32 +13,32 @@ void testBufferToLower()
 
     bufferSource.margin = 3; bufferSource.size -= 6;
           
-    bufferToLower(bufferSource);
+    bufferToLower(&bufferSource);
     
-    String result1 = createStringFromBuffer(bufferSource);
+    String result1 = createStringFromBuffer(&bufferSource);
         
     String expected1 = createStringFromLiteral("life is ∆ rock");
     
-    if (! stringsAreEqual(result1, expected1)) { fails = true; }
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
     
-    bufferToLower(bufferEmpty);
+    bufferToLower(&bufferEmpty);
     
-    String result2 = createStringFromBuffer(bufferEmpty);
+    String result2 = createStringFromBuffer(&bufferEmpty);
         
     String expected2 = makeStringEmpty("");
     
-    if (! stringsAreEqual(result2, expected2)) { fails = true; }
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
     
     if (fails) { 
         printf("bufferToLower FAILS!\n");
         exit(1);
     }
     
-    releaseString(result1);
-    releaseString(expected1);
-    releaseString(result2);
-    releaseBuffer(bufferEmpty);
-    releaseBuffer(bufferSource);
+    releaseString(&result1);
+    releaseString(&expected1);
+    releaseString(&result2);
+    releaseBuffer(&bufferEmpty);
+    releaseBuffer(&bufferSource);
 }
 
 void testBufferToUpper()
@@ -53,32 +53,32 @@ void testBufferToUpper()
 
     bufferSource.margin = 3; bufferSource.size -= 6;
           
-    bufferToUpper(bufferSource);
+    bufferToUpper(&bufferSource);
     
-    String result1 = createStringFromBuffer(bufferSource);
+    String result1 = createStringFromBuffer(&bufferSource);
         
     String expected1 = createStringFromLiteral("LIFE IS ∆ ROCK");
     
-    if (! stringsAreEqual(result1, expected1)) { fails = true; }
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
     
-    bufferToUpper(bufferEmpty);
+    bufferToUpper(&bufferEmpty);
     
-    String result2 = createStringFromBuffer(bufferEmpty);
+    String result2 = createStringFromBuffer(&bufferEmpty);
         
     String expected2 = makeStringEmpty("");
     
-    if (! stringsAreEqual(result2, expected2)) { fails = true; }
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
     
     if (fails) { 
         printf("bufferToUpper FAILS!\n");
         exit(1);
     }
     
-    releaseString(result1);
-    releaseString(expected1);
-    releaseString(result2);
-    releaseBuffer(bufferEmpty);
-    releaseBuffer(bufferSource);
+    releaseString(&result1);
+    releaseString(&expected1);
+    releaseString(&result2);
+    releaseBuffer(&bufferEmpty);
+    releaseBuffer(&bufferSource);
 }
 
 void testBufferToOppositeCase()
@@ -93,32 +93,32 @@ void testBufferToOppositeCase()
 
     bufferSource.margin = 3; bufferSource.size -= 6;
           
-    bufferToOppositeCase(bufferSource);
+    bufferToOppositeCase(&bufferSource);
     
-    String result1 = createStringFromBuffer(bufferSource);
+    String result1 = createStringFromBuffer(&bufferSource);
         
     String expected1 = createStringFromLiteral("LIFE IS ∆ ROCK");
     
-    if (! stringsAreEqual(result1, expected1)) { fails = true; }
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
     
-    bufferToOppositeCase(bufferEmpty);
+    bufferToOppositeCase(&bufferEmpty);
     
-    String result2 = createStringFromBuffer(bufferEmpty);
+    String result2 = createStringFromBuffer(&bufferEmpty);
         
     String expected2 = makeStringEmpty("");
     
-    if (! stringsAreEqual(result2, expected2)) { fails = true; }
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
     
     if (fails) { 
         printf("bufferToOppositeCase FAILS!\n");
         exit(1);
     }
     
-    releaseString(result1);
-    releaseString(expected1);
-    releaseString(result2);
-    releaseBuffer(bufferEmpty);
-    releaseBuffer(bufferSource);
+    releaseString(&result1);
+    releaseString(&expected1);
+    releaseString(&result2);
+    releaseBuffer(&bufferEmpty);
+    releaseBuffer(&bufferSource);
 }
 
 void testBufferReverse()
@@ -133,32 +133,32 @@ void testBufferReverse()
 
     bufferSource.margin = 3; bufferSource.size -= 6;
           
-    bufferReverse(bufferSource);
+    bufferReverse(&bufferSource);
     
-    String result1 = createStringFromBuffer(bufferSource);
+    String result1 = createStringFromBuffer(&bufferSource);
         
     String expected1 = createStringFromLiteral("kcor \x86\x88\xe2 si efiL");
     
-    if (! stringsAreEqual(result1, expected1)) { fails = true; }
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
     
-    bufferReverse(bufferEmpty);
+    bufferReverse(&bufferEmpty);
     
-    String result2 = createStringFromBuffer(bufferEmpty);
+    String result2 = createStringFromBuffer(&bufferEmpty);
         
     String expected2 = makeStringEmpty("");
     
-    if (! stringsAreEqual(result2, expected2)) { fails = true; }
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
     
     if (fails) { 
         printf("bufferReverse FAILS!\n");
         exit(1);
     }
     
-    releaseString(result1);
-    releaseString(expected1);
-    releaseString(result2);
-    releaseBuffer(bufferEmpty);
-    releaseBuffer(bufferSource);
+    releaseString(&result1);
+    releaseString(&expected1);
+    releaseString(&result2);
+    releaseBuffer(&bufferEmpty);
+    releaseBuffer(&bufferSource);
 }
 
 void testBufferSort()
@@ -173,31 +173,31 @@ void testBufferSort()
 
     bufferSource.margin = 3; bufferSource.size -= 6;   
       
-    bufferSort(bufferSource);
+    bufferSort(&bufferSource);
     
-    String result1 = createStringFromBuffer(bufferSource);
+    String result1 = createStringFromBuffer(&bufferSource);
     
     String expected1 = makeStringFromLiteral("\x86\x88\xe2   Lcefiikors"); 
     
-    if (! stringsAreEqual(result1, expected1)) { fails = true; }
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
       
-    bufferSort(bufferEmpty);
+    bufferSort(&bufferEmpty);
     
-    String result2 = createStringFromBuffer(bufferEmpty);
+    String result2 = createStringFromBuffer(&bufferEmpty);
     
     String expected2 = makeStringEmpty();    
     
-    if (! stringsAreEqual(result2, expected2)) { fails = true; }
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
     
     if (fails) { 
         printf("bufferSort FAILS!\n");
         exit(1);
     }
     
-    releaseString(result1);
-    releaseString(result2);
-    releaseString(expected2);
-    releaseBuffer(bufferEmpty);
-    releaseBuffer(bufferSource);
+    releaseString(&result1);
+    releaseString(&result2);
+    releaseString(&expected2);
+    releaseBuffer(&bufferEmpty);
+    releaseBuffer(&bufferSource);
 }
 

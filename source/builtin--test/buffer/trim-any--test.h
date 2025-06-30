@@ -7,15 +7,15 @@ bool testBufferTrimStartAny1()
 
     String sample = makeStringFromLiteral(" ∆!");    
 
-    bufferTrimStartAny(&buffer, sample);
+    bufferTrimStartAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -26,15 +26,15 @@ bool testBufferTrimStartAny2()
 
     String sample = makeStringFromLiteral("xy");    
 
-    bufferTrimStartAny(&buffer, sample);
+    bufferTrimStartAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -45,15 +45,15 @@ bool testBufferTrimStartAny3()
 
     String sample = makeStringFromLiteral("");    
 
-    bufferTrimStartAny(&buffer, sample);
+    bufferTrimStartAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -64,15 +64,15 @@ bool testBufferTrimStartAny4()
 
     String sample = makeStringFromLiteral("");    
 
-    bufferTrimStartAny(&buffer, sample);
+    bufferTrimStartAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -97,15 +97,15 @@ bool testBufferTrimEndAny1()
 
     String sample = makeStringFromLiteral(" ∆!");    
 
-    bufferTrimEndAny(&buffer, sample);
+    bufferTrimEndAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -116,15 +116,15 @@ bool testBufferTrimEndAny2()
 
     String sample = makeStringFromLiteral("xy");    
 
-    bufferTrimEndAny(&buffer, sample);
+    bufferTrimEndAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -135,15 +135,15 @@ bool testBufferTrimEndAny3()
 
     String sample = makeStringFromLiteral("");    
 
-    bufferTrimEndAny(&buffer, sample);
+    bufferTrimEndAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -154,15 +154,15 @@ bool testBufferTrimEndAny4()
 
     String sample = makeStringFromLiteral("xy");    
 
-    bufferTrimEndAny(&buffer, sample);
+    bufferTrimEndAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -194,15 +194,15 @@ void testBufferTrimAny()
 
     String sample = makeStringFromLiteral(" ∆!");    
 
-    bufferTrimAny(&buffer, sample);
+    bufferTrimAny(&buffer, &sample);
     
-    String virtual = makeStringFromBuffer(buffer);
+    String virtual = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("Life is ∆ rock");
     
-    bool ok = stringsAreEqual(virtual, expected);
+    bool ok = stringsAreEqual(&virtual, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     if (! ok) { printf("%s", msg); exit(1); }
 }

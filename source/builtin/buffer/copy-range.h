@@ -2,11 +2,11 @@
 
 
 // the exact order of the statements of this function is crucial!
-void bufferCopyRange(Buffer originBuffer, long originPosition, long count, Buffer* destinyBuffer, long destinyPosition) // one base index
+void bufferCopyRange(Buffer* originBuffer, long originPosition, long count, Buffer* destinyBuffer, long destinyPosition) // one base index
 {
     if (count < 1) { return; }
     
-    if (originBuffer.address == destinyBuffer->address)
+    if (originBuffer->address == destinyBuffer->address)
     {
         bufferMoveRange(destinyBuffer, originPosition, count, destinyPosition); return; // 'destinyBuffer' OK
     }
@@ -40,13 +40,13 @@ void bufferCopyRange(Buffer originBuffer, long originPosition, long count, Buffe
 
     if (originEnd < 0) { return; }
     
-    if (originEnd >= originBuffer.size) { originEnd = originBuffer.size - 1; }
+    if (originEnd >= originBuffer->size) { originEnd = originBuffer->size - 1; }
     
     if (originStart < 0) { originStart = 0; }
     
     originStart += deltaForOriginStart; // adjusting to negative destinyStart
     
-    if (originStart >= originBuffer.size) { return; }
+    if (originStart >= originBuffer->size) { return; }
     
     long originSize = originEnd - originStart + 1;    
     
@@ -55,13 +55,13 @@ void bufferCopyRange(Buffer originBuffer, long originPosition, long count, Buffe
     
     if (destinySize < size) { size = destinySize; }
     
-    // copying (expecting no overlapping because buffers are different)
+    // copying (expecting no overlapping, buffers are different)
     for (long n = 0; n < size; n++)
     {
-        long indexOrigin  = originBuffer.margin + originStart  + n;
+        long indexOrigin  = originBuffer->margin + originStart  + n;
         long indexDestiny = destinyBuffer->margin + destinyStart + n;
         
-        destinyBuffer->address[indexDestiny] = originBuffer.address[indexOrigin];
+        destinyBuffer->address[indexDestiny] = originBuffer->address[indexOrigin];
     }
 }
 

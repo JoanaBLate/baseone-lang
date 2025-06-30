@@ -15,6 +15,7 @@
 #include "eat-start-end--test.h"
 #include "replace--test.h"
 #include "remove--test.h"
+#include "pad--test.h"
 #include "print--test.h"
 
 void testBuffer()
@@ -61,9 +62,12 @@ void testBuffer()
     testBufferReplaceLast();
     testBufferReplaceAll();
     
-//    testBufferRemove();
+    testBufferRemove();
     testBufferRemoveLast();
     testBufferRemoveAll();
+    
+    testBufferPadStart();
+    testBufferPadEnd();
     
     testPrintBufferA();
     testPrintBufferB();

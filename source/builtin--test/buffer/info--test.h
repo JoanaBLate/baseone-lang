@@ -11,18 +11,18 @@ void testBufferByteAt()
     buffer.size -= 6;
     
     bool fails = false;
-    if (bufferByteAt(buffer, 3) != 64)   { fails = true; }
+    if (bufferByteAt(&buffer, 3) != 64)   { fails = true; }
     
 //  RAISES ERROR 
-//  printf("%c\n", bufferByteAt(buffer, -1));
-//  printf("%c\n", bufferByteAt(buffer, 333));
+//  printf("%c\n", bufferByteAt(&buffer, -1));
+//  printf("%c\n", bufferByteAt(&buffer, 333));
     
     if (fails) { 
         printf("bufferByteAt FAILS!\n"); 
         exit(1);
     }
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
 }
 
 void testBuffersAreEquals()
@@ -38,25 +38,25 @@ void testBuffersAreEquals()
     buffer1.margin = 3;
     buffer1.size -= 6;
 
-    if (! buffersAreEqual(buffer1, buffer2)) { fails = true; }
-    if (buffersAreEqual(buffer1, buffer3))   { fails = true; }
+    if (! buffersAreEqual(&buffer1, &buffer2)) { fails = true; }
+    if (buffersAreEqual(&buffer1, &buffer3))   { fails = true; }
     
     Buffer empty1 = createBufferFromLiteral("");    
     Buffer empty2 = createBufferFromLiteral("");
     
-    if (! buffersAreEqual(empty1, empty2)) { fails = true; }
-    if (buffersAreEqual(empty1, buffer1))  { fails = true; }
+    if (! buffersAreEqual(&empty1, &empty2)) { fails = true; }
+    if (buffersAreEqual(&empty1, &buffer1))  { fails = true; }
     
     if (fails) { 
         printf("buffersAreEqual FAILS!\n");
         exit(1);
     }
     
-    releaseBuffer(buffer1);
-    releaseBuffer(buffer2);
-    releaseBuffer(buffer3);
-    releaseBuffer(empty1);
-    releaseBuffer(empty2);
+    releaseBuffer(&buffer1);
+    releaseBuffer(&buffer2);
+    releaseBuffer(&buffer3);
+    releaseBuffer(&empty1);
+    releaseBuffer(&empty2);
 }
 
 void testBufferContains()
@@ -76,19 +76,19 @@ void testBufferContains()
     String string2 = makeStringFromLiteral("Life is ∆ rock1");
     String string3 = makeStringFromLiteral("ck ∆");
     
-    if (! bufferContains(buffer1, string1)) { fails = true; }
-    if (bufferContains(buffer1, string2))   { fails = true; }
-    if (bufferContains(buffer1, string0))   { fails = true; }
-    if (bufferContains(buffer1, string3))   { fails = true; }
-    if (bufferContains(buffer0, string1))   { fails = true; }
+    if (! bufferContains(&buffer1, &string1)) { fails = true; }
+    if (bufferContains(&buffer1, &string2))   { fails = true; }
+    if (bufferContains(&buffer1, &string0))   { fails = true; }
+    if (bufferContains(&buffer1, &string3))   { fails = true; }
+    if (bufferContains(&buffer0, &string1))   { fails = true; }
 
     if (fails) { 
         printf("bufferContains FAILS!\n"); 
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
 }
 
 void testBufferStartsWith()
@@ -108,20 +108,20 @@ void testBufferStartsWith()
     String string2 = makeStringFromLiteral("Life is ∆");
     String string3 = makeStringFromLiteral("Life rocks");
     
-    if (bufferStartsWith(buffer1, string0)) { fails = true; }
-    if (bufferStartsWith(buffer0, string1)) { fails = true; }
-    if (bufferStartsWith(buffer0, string0)) { fails = true; }
-    if (bufferStartsWith(buffer1, string3)) { fails = true; }
-    if (! bufferStartsWith(buffer1, string1)) { fails = true; }
-    if (! bufferStartsWith(buffer1, string2)) { fails = true; }
+    if (bufferStartsWith(&buffer1, &string0)) { fails = true; }
+    if (bufferStartsWith(&buffer0, &string1)) { fails = true; }
+    if (bufferStartsWith(&buffer0, &string0)) { fails = true; }
+    if (bufferStartsWith(&buffer1, &string3)) { fails = true; }
+    if (! bufferStartsWith(&buffer1, &string1)) { fails = true; }
+    if (! bufferStartsWith(&buffer1, &string2)) { fails = true; }
 
     if (fails) { 
         printf("bufferStartsWith FAILS!\n");
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
 }
 
 void testBufferEndsWith()
@@ -141,20 +141,20 @@ void testBufferEndsWith()
     String string2 = makeStringFromLiteral("ck ∆");
     String string3 = makeStringFromLiteral("∆ rock");
     
-    if (bufferEndsWith(buffer1, string0))   { fails = true; }
-    if (bufferEndsWith(buffer0, string1))   { fails = true; }
-    if (bufferEndsWith(buffer0, string0))   { fails = true; }
-    if (bufferEndsWith(buffer1, string2))   { fails = true; }
-    if (! bufferEndsWith(buffer1, string1)) { fails = true; }
-    if (! bufferEndsWith(buffer1, string3)) { fails = true; }
+    if (bufferEndsWith(&buffer1, &string0))   { fails = true; }
+    if (bufferEndsWith(&buffer0, &string1))   { fails = true; }
+    if (bufferEndsWith(&buffer0, &string0))   { fails = true; }
+    if (bufferEndsWith(&buffer1, &string2))   { fails = true; }
+    if (! bufferEndsWith(&buffer1, &string1)) { fails = true; }
+    if (! bufferEndsWith(&buffer1, &string3)) { fails = true; }
 
     if (fails) { 
         printf("bufferEndsWith FAILS!\n");
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
 }
 
 void testBufferIndexOf()
@@ -174,20 +174,20 @@ void testBufferIndexOf()
     String string2 = makeStringFromLiteral("∆ like");
     String string3 = makeStringFromLiteral("and#");
 
-    if (bufferIndexOf(buffer1, string1) !=  1) { fails = true; }
-    if (bufferIndexOf(buffer1, string2) != 22) { fails = true; }
-    if (bufferIndexOf(buffer1, string3) !=  0) { fails = true; }
-    if (bufferIndexOf(buffer1, string0) !=  0) { fails = true; }
-    if (bufferIndexOf(buffer0, string1) !=  0) { fails = true; }
-    if (bufferIndexOf(buffer0, string0) !=  0) { fails = true; }
+    if (bufferIndexOf(&buffer1, &string1) !=  1) { fails = true; }
+    if (bufferIndexOf(&buffer1, &string2) != 22) { fails = true; }
+    if (bufferIndexOf(&buffer1, &string3) !=  0) { fails = true; }
+    if (bufferIndexOf(&buffer1, &string0) !=  0) { fails = true; }
+    if (bufferIndexOf(&buffer0, &string1) !=  0) { fails = true; }
+    if (bufferIndexOf(&buffer0, &string0) !=  0) { fails = true; }
     
     if (fails) {
         printf("bufferIndexOf FAILS!\n");
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
 }
 
 void testBufferLastIndexOf()
@@ -207,20 +207,20 @@ void testBufferLastIndexOf()
     String string2 = makeStringFromLiteral("∆");
     String string3 = makeStringFromLiteral("∆#");
 
-    if (bufferLastIndexOf(buffer1, string1) !=  1) { fails = true; }
-    if (bufferLastIndexOf(buffer1, string2) != 22) { fails = true; }
-    if (bufferLastIndexOf(buffer1, string3) !=  0) { fails = true; }
-    if (bufferLastIndexOf(buffer1, string0) !=  0) { fails = true; }
-    if (bufferLastIndexOf(buffer0, string1) !=  0) { fails = true; }
-    if (bufferLastIndexOf(buffer0, string0) !=  0) { fails = true; }    
+    if (bufferLastIndexOf(&buffer1, &string1) !=  1) { fails = true; }
+    if (bufferLastIndexOf(&buffer1, &string2) != 22) { fails = true; }
+    if (bufferLastIndexOf(&buffer1, &string3) !=  0) { fails = true; }
+    if (bufferLastIndexOf(&buffer1, &string0) !=  0) { fails = true; }
+    if (bufferLastIndexOf(&buffer0, &string1) !=  0) { fails = true; }
+    if (bufferLastIndexOf(&buffer0, &string0) !=  0) { fails = true; }    
     
     if (fails) {
         printf("bufferLastIndexOf FAILS!\n");
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
 }
 
 void testBufferIndexOfAfter()
@@ -240,23 +240,23 @@ void testBufferIndexOfAfter()
     String string2 = makeStringFromLiteral("∆");
     String string3 = makeStringFromLiteral("∆#");
     
-    if (bufferIndexOfAfter(buffer1, string1,  0) !=  1) { fails = true; }
-    if (bufferIndexOfAfter(buffer1, string1, -9) !=  1) { fails = true; }
-    if (bufferIndexOfAfter(buffer1, string2,  9) != 22) { fails = true; }
-    if (bufferIndexOfAfter(buffer1, string2, 99) !=  0) { fails = true; }
-    if (bufferIndexOfAfter(buffer1, string2,  0) !=  9) { fails = true; }
-    if (bufferIndexOfAfter(buffer1, string3,  0) !=  0) { fails = true; }
-    if (bufferIndexOfAfter(buffer1, string0, 0) != 0) { fails = true; }  
-    if (bufferIndexOfAfter(buffer0, string1, 0) != 0) { fails = true; }  
-    if (bufferIndexOfAfter(buffer0, string0,   0) != 0) { fails = true; }  
+    if (bufferIndexOfAfter(&buffer1, &string1,  0) !=  1) { fails = true; }
+    if (bufferIndexOfAfter(&buffer1, &string1, -9) !=  1) { fails = true; }
+    if (bufferIndexOfAfter(&buffer1, &string2,  9) != 22) { fails = true; }
+    if (bufferIndexOfAfter(&buffer1, &string2, 99) !=  0) { fails = true; }
+    if (bufferIndexOfAfter(&buffer1, &string2,  0) !=  9) { fails = true; }
+    if (bufferIndexOfAfter(&buffer1, &string3,  0) !=  0) { fails = true; }
+    if (bufferIndexOfAfter(&buffer1, &string0, 0) != 0) { fails = true; }  
+    if (bufferIndexOfAfter(&buffer0, &string1, 0) != 0) { fails = true; }  
+    if (bufferIndexOfAfter(&buffer0, &string0,   0) != 0) { fails = true; }  
          
     if (fails) {
         printf("bufferIndexOfAfter FAILS!\n");
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
 }
 
 void testBufferLastIndexOfBefore()
@@ -276,22 +276,22 @@ void testBufferLastIndexOfBefore()
     String string2 = makeStringFromLiteral("∆");
     String string3 = makeStringFromLiteral("∆#");
     
-    if (bufferLastIndexOfBefore(buffer1, string1, -1) !=  0) { fails = true; }
-    if (bufferLastIndexOfBefore(buffer1, string1,  3) !=  0) { fails = true; }
-    if (bufferLastIndexOfBefore(buffer1, string2, 22) !=  9) { fails = true; }
-    if (bufferLastIndexOfBefore(buffer1, string3, 99) !=  0) { fails = true; }
-    if (bufferLastIndexOfBefore(buffer1, string1, 99) !=  1) { fails = true; }
-    if (bufferLastIndexOfBefore(buffer1, string0, 10) !=  0) { fails = true; } 
-    if (bufferLastIndexOfBefore(buffer0, string1, 10) !=  0) { fails = true; } 
-    if (bufferLastIndexOfBefore(buffer0, string0, 10) !=  0) { fails = true; }  
+    if (bufferLastIndexOfBefore(&buffer1, &string1, -1) !=  0) { fails = true; }
+    if (bufferLastIndexOfBefore(&buffer1, &string1,  3) !=  0) { fails = true; }
+    if (bufferLastIndexOfBefore(&buffer1, &string2, 22) !=  9) { fails = true; }
+    if (bufferLastIndexOfBefore(&buffer1, &string3, 99) !=  0) { fails = true; }
+    if (bufferLastIndexOfBefore(&buffer1, &string1, 99) !=  1) { fails = true; }
+    if (bufferLastIndexOfBefore(&buffer1, &string0, 10) !=  0) { fails = true; } 
+    if (bufferLastIndexOfBefore(&buffer0, &string1, 10) !=  0) { fails = true; } 
+    if (bufferLastIndexOfBefore(&buffer0, &string0, 10) !=  0) { fails = true; }  
          
     if (fails) {
         printf("bufferLastIndexOfBefore FAILS!\n"); 
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
 }
 
 void testBufferCountOf()
@@ -313,22 +313,22 @@ void testBufferCountOf()
     String string2 = makeStringFromLiteral("∆");
     String string3 = makeStringFromLiteral("∆#");
     
-    if (bufferCountOf(buffer1, string2) != 2) { fails = true; }
-    if (bufferCountOf(buffer1, string3) != 0) { fails = true; }
-    if (bufferCountOf(buffer2, string2) != 3) { fails = true; }
-    if (bufferCountOf(buffer3, string3) != 0) { fails = true; }
-    if (bufferCountOf(buffer1, string0) != 0) { fails = true; }
-    if (bufferCountOf(buffer0, string1) != 0) { fails = true; }
-    if (bufferCountOf(buffer0, string0) != 0) { fails = true; }
+    if (bufferCountOf(&buffer1, &string2) != 2) { fails = true; }
+    if (bufferCountOf(&buffer1, &string3) != 0) { fails = true; }
+    if (bufferCountOf(&buffer2, &string2) != 3) { fails = true; }
+    if (bufferCountOf(&buffer3, &string3) != 0) { fails = true; }
+    if (bufferCountOf(&buffer1, &string0) != 0) { fails = true; }
+    if (bufferCountOf(&buffer0, &string1) != 0) { fails = true; }
+    if (bufferCountOf(&buffer0, &string0) != 0) { fails = true; }
          
     if (fails) {
         printf("bufferCountOf FAILS!\n"); 
         exit(1);
     }
     
-    releaseBuffer(buffer0);
-    releaseBuffer(buffer1);
-    releaseBuffer(buffer2);
-    releaseBuffer(buffer3);
+    releaseBuffer(&buffer0);
+    releaseBuffer(&buffer1);
+    releaseBuffer(&buffer2);
+    releaseBuffer(&buffer3);
 }
 

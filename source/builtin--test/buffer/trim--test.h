@@ -7,13 +7,13 @@ bool testBufferTrimStart1()
 
     bufferTrimStart(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆! \n ");
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -24,13 +24,13 @@ bool testBufferTrimStart2()
 
     bufferTrimStart(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringEmpty();
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -41,13 +41,13 @@ bool testBufferTrimStart3()
 
     bufferTrimStart(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringEmpty();
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -71,13 +71,13 @@ bool testBufferTrimEnd1()
 
     bufferTrimEnd(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral(" \n ∆!∆! Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -88,13 +88,13 @@ bool testBufferTrimEnd2()
 
     bufferTrimEnd(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringEmpty();
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -105,13 +105,13 @@ bool testBufferTrimEnd3()
 
     bufferTrimEnd(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringEmpty();
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -135,13 +135,13 @@ bool testBufferTrim1()
 
     bufferTrim(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringFromLiteral("∆!∆! Life is ∆ rock ∆!∆!");
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -152,13 +152,13 @@ bool testBufferTrim2()
 
     bufferTrim(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringEmpty();
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }
@@ -169,13 +169,13 @@ bool testBufferTrim3()
 
     bufferTrim(&buffer);
     
-    String result = makeStringFromBuffer(buffer);
+    String result = makeStringFromBuffer(&buffer);
     
     String expected = makeStringEmpty();
     
-    bool ok = stringsAreEqual(result, expected);
+    bool ok = stringsAreEqual(&result, &expected);
     
-    releaseBuffer(buffer);
+    releaseBuffer(&buffer);
     
     return ok;
 }

@@ -1,14 +1,14 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void _testBufferCopyRange(Buffer originBuffer, long originPosition, long count, 
-                          Buffer destinyBuffer, long destinyPosition, String expected) 
+void _testBufferCopyRange(Buffer* originBuffer, long originPosition, long count, 
+                          Buffer* destinyBuffer, long destinyPosition, String* expected) 
 {
-    bufferCopyRange(originBuffer, originPosition, count, &destinyBuffer, destinyPosition);   
+    bufferCopyRange(originBuffer, originPosition, count, destinyBuffer, destinyPosition);   
     
     String result = makeStringFromBuffer(destinyBuffer);
            
-    if (stringsAreEqual(result, expected)) { return; }
+    if (stringsAreEqual(&result, expected)) { return; }
     
     printf("bufferCopyRange FAILS!\n"); exit(1);
 }
@@ -27,19 +27,19 @@ void testBufferCopyRange()
     
     String expected = makeStringFromLiteral("abcdefghijklmno"); 
     
-    _testBufferCopyRange(originBuffer,  600,  5, destinyBuffer,   7, expected);
-    _testBufferCopyRange(originBuffer, -600,  5, destinyBuffer,   7, expected); 
-    _testBufferCopyRange(originBuffer,    6,  5, destinyBuffer, -700, expected);
-    _testBufferCopyRange(originBuffer,    6,  5, destinyBuffer,  700, expected);
-    _testBufferCopyRange(originBuffer,    6, -5, destinyBuffer,    7, expected);
+    _testBufferCopyRange(&originBuffer,  600,  5, &destinyBuffer,    7, &expected);
+    _testBufferCopyRange(&originBuffer, -600,  5, &destinyBuffer,    7, &expected); 
+    _testBufferCopyRange(&originBuffer,    6,  5, &destinyBuffer, -700, &expected);
+    _testBufferCopyRange(&originBuffer,    6,  5, &destinyBuffer,  700, &expected);
+    _testBufferCopyRange(&originBuffer,    6, -5, &destinyBuffer,    7, &expected);
     
     expected = makeStringFromLiteral("Hellofghijklmno");
-    _testBufferCopyRange(originBuffer, 6, 5, destinyBuffer, 1, expected);
+    _testBufferCopyRange(&originBuffer, 6, 5, &destinyBuffer, 1, &expected);
     
     expected = makeStringFromLiteral("HellofghijkHell"); // remembers the changed data!
-    _testBufferCopyRange(originBuffer, 6, 500, destinyBuffer, 12, expected);
+    _testBufferCopyRange(&originBuffer, 6, 500, &destinyBuffer, 12, &expected);
     
-    releaseBuffer(originBuffer);   
-    releaseBuffer(destinyBuffer); 
+    releaseBuffer(&originBuffer);   
+    releaseBuffer(&destinyBuffer); 
 }
 

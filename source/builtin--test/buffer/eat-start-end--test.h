@@ -6,16 +6,16 @@ void _testBufferEatStart(Buffer* buffer, long size, char* literal1,  char* liter
     bool fails = false;
 
     String result1 = bufferEatStart(buffer, size);    
-    String result2 = createStringFromBuffer(*buffer);
+    String result2 = createStringFromBuffer(buffer);
     
     String expected1 = makeStringFromLiteral(literal1);
     String expected2 = makeStringFromLiteral(literal2);           
     
-    if (! stringsAreEqual(result1, expected1)) { fails = true; }
-    if (! stringsAreEqual(result2, expected2)) { fails = true; }
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
     
-    releaseString(result1);
-    releaseString(result2);
+    releaseString(&result1);
+    releaseString(&result2);
 
     if (fails) { 
         printf("bufferEatStart FAILS!\n"); 
@@ -41,8 +41,8 @@ void testBufferEatStart()
 
     _testBufferEatStart(&bufferSource, 300, "is ∆ rock", ""); 
     
-    releaseBuffer(bufferEmpty);
-    releaseBuffer(bufferSource);
+    releaseBuffer(&bufferEmpty);
+    releaseBuffer(&bufferSource);
 }
 
 void _testBufferEatEnd(Buffer* buffer, long size, char* literal1,  char* literal2) 
@@ -50,16 +50,16 @@ void _testBufferEatEnd(Buffer* buffer, long size, char* literal1,  char* literal
     bool fails = false;
 
     String result1 = bufferEatEnd(buffer, size);    
-    String result2 = createStringFromBuffer(*buffer);
+    String result2 = createStringFromBuffer(buffer);
     
     String expected1 = makeStringFromLiteral(literal1);
     String expected2 = makeStringFromLiteral(literal2); 
     
-    if (! stringsAreEqual(result1, expected1)) { fails = true; }
-    if (! stringsAreEqual(result2, expected2)) { fails = true; }
+    if (! stringsAreEqual(&result1, &expected1)) { fails = true; }
+    if (! stringsAreEqual(&result2, &expected2)) { fails = true; }
     
-    releaseString(result1);
-    releaseString(result2);
+    releaseString(&result1);
+    releaseString(&result2);
 
     if (fails) { 
         printf("bufferEatEnd FAILS!\n"); 
@@ -85,7 +85,7 @@ void testBufferEatEnd()
 
     _testBufferEatEnd(&bufferSource, 300, "Life is ∆", ""); 
     
-    releaseBuffer(bufferEmpty);
-    releaseBuffer(bufferSource);
+    releaseBuffer(&bufferEmpty);
+    releaseBuffer(&bufferSource);
 }
 

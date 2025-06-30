@@ -1,85 +1,85 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void bufferToLower(Buffer buffer)
+void bufferToLower(Buffer* buffer)
 {    
-    long start = buffer.margin;
-    long off = buffer.margin + buffer.size;
+    long start = buffer->margin;
+    long off = buffer->margin + buffer->size;
     
     for (long index = start; index < off; index++)   
     {
-        buffer.address[index] = tolower(buffer.address[index]);
+        buffer->address[index] = tolower(buffer->address[index]);
     }    
 }
 
-void bufferToUpper(Buffer buffer)
+void bufferToUpper(Buffer* buffer)
 {   
-    long start = buffer.margin;
-    long off = buffer.margin + buffer.size;
+    long start = buffer->margin;
+    long off = buffer->margin + buffer->size;
      
     for (long index = start; index < off; index++)   
     {
-        buffer.address[index] = toupper(buffer.address[index]);
+        buffer->address[index] = toupper(buffer->address[index]);
     }    
 }
 
-void bufferToOppositeCase(Buffer buffer)
+void bufferToOppositeCase(Buffer* buffer)
 {
-    long start = buffer.margin;
-    long off = buffer.margin + buffer.size;
+    long start = buffer->margin;
+    long off = buffer->margin + buffer->size;
     
     for (long index = start; index < off; index++)   
     {
-        buffer.address[index] = tolower(buffer.address[index]);
+        buffer->address[index] = tolower(buffer->address[index]);
     
-        char c = buffer.address[index];
+        char c = buffer->address[index];
         
         if (isupper(c)) 
         { 
-            buffer.address[index] = tolower(c);
+            buffer->address[index] = tolower(c);
         }
         else if (islower(c)) 
         { 
-            buffer.address[index] = toupper(c);
+            buffer->address[index] = toupper(c);
         }
     }
 }
 
-void bufferReverse(Buffer buffer)
+void bufferReverse(Buffer* buffer)
 {
-    long halfLength = buffer.size / 2;
+    long halfLength = buffer->size / 2;
      
     for (long position = 0; position < halfLength; position++) 
     {     
-        long indexA = buffer.margin + position;
+        long indexA = buffer->margin + position;
         
-        long indexB = buffer.margin + (buffer.size - 1 - position);
+        long indexB = buffer->margin + (buffer->size - 1 - position);
         
-        char temp = buffer.address[indexA];
+        char temp = buffer->address[indexA];
         
-        buffer.address[indexA] = buffer.address[indexB];
+        buffer->address[indexA] = buffer->address[indexB];
         
-        buffer.address[indexB] = temp;
+        buffer->address[indexB] = temp;
     }
 }
 
-void bufferSort(Buffer buffer) // TODO: make it fast
+void bufferSort(Buffer* buffer) // TODO: make it fast
 {    
-    for (long positionA = 0; positionA < buffer.size - 1; positionA++) 
+    for (long positionA = 0; positionA < buffer->size - 1; positionA++) 
     { 
-        for (long positionB = positionA + 1; positionB < buffer.size; positionB++) 
+        for (long positionB = positionA + 1; positionB < buffer->size; positionB++) 
         { 
-            long indexA = buffer.margin + positionA;
+            long indexA = buffer->margin + positionA;
             
-            long indexB = buffer.margin + positionB;
+            long indexB = buffer->margin + positionB;
             
-            if (buffer.address[indexA] <= buffer.address[indexB]) { continue; }
+            if (buffer->address[indexA] <= buffer->address[indexB]) { continue; }
             
-            char temp = buffer.address[indexA];
+            char temp = buffer->address[indexA];
             
-            buffer.address[indexA] = buffer.address[indexB];
+            buffer->address[indexA] = buffer->address[indexB];
             
-            buffer.address[indexB] = temp;
+            buffer->address[indexB] = temp;
         }
     }
 }

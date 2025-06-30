@@ -36,31 +36,31 @@ void bufferTrim(Buffer* buffer)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void bufferTrimStartTarget(Buffer* buffer, String target)
+void bufferTrimStartTarget(Buffer* buffer, String* target)
 {
     while (true)
     {
-        String virtual = makeStringFromBuffer(*buffer);
+        String virtual = makeStringFromBuffer(buffer);
         
-        if (! stringStartsWith(virtual, target)) { return; }
+        if (! stringStartsWith(&virtual, target)) { return; }
         
-        buffer->margin += target.size; buffer->size -= target.size;
+        buffer->margin += target->size; buffer->size -= target->size;
     }
 }
 
-void bufferTrimEndTarget(Buffer* buffer, String target)
+void bufferTrimEndTarget(Buffer* buffer, String* target)
 {
     while (true)
     {
-        String virtual = makeStringFromBuffer(*buffer);
+        String virtual = makeStringFromBuffer(buffer);
         
-        if (! stringEndsWith(virtual, target)) { return; }
+        if (! stringEndsWith(&virtual, target)) { return; }
         
-        buffer->size -= target.size;
+        buffer->size -= target->size;
     }
 }
 
-void bufferTrimTarget(Buffer* buffer, String target)
+void bufferTrimTarget(Buffer* buffer, String* target)
 {
     bufferTrimStartTarget(buffer, target);
 
@@ -69,7 +69,7 @@ void bufferTrimTarget(Buffer* buffer, String target)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void bufferTrimStartAny(Buffer* buffer, String sample)
+void bufferTrimStartAny(Buffer* buffer, String* sample)
 {
     while (buffer->size > 0)
     {
@@ -77,9 +77,9 @@ void bufferTrimStartAny(Buffer* buffer, String sample)
         
         bool changed = false;
         
-        for (int n = 0; n < sample.size; n++)
+        for (int n = 0; n < sample->size; n++)
         {
-            char c = sample.address[n];
+            char c = sample->address[n];
             
             if (*bufferHead != c) { continue; }
         
@@ -90,7 +90,7 @@ void bufferTrimStartAny(Buffer* buffer, String sample)
     }
 }
 
-void bufferTrimEndAny(Buffer* buffer, String sample)
+void bufferTrimEndAny(Buffer* buffer, String* sample)
 {
     while (buffer->size > 0)
     {
@@ -98,9 +98,9 @@ void bufferTrimEndAny(Buffer* buffer, String sample)
         
         bool changed = false;
         
-        for (int n = 0; n < sample.size; n++)
+        for (int n = 0; n < sample->size; n++)
         {
-            char c = sample.address[n];
+            char c = sample->address[n];
             
             if (*bufferTail != c) { continue; }
         
@@ -111,7 +111,7 @@ void bufferTrimEndAny(Buffer* buffer, String sample)
     }
 }
 
-void bufferTrimAny(Buffer* buffer, String sample)
+void bufferTrimAny(Buffer* buffer, String* sample)
 {
     bufferTrimStartAny(buffer, sample);
     

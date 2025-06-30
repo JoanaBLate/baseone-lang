@@ -1,11 +1,11 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void releaseString(String string)
+void releaseString(String* string)
 {
-    if (string.address == NULL  &&  string.size == 0) { return; } // empty string (not heap allocated)
+    if (string->address == NULL  &&  string->size == 0) { return; } // empty string (not heap allocated)
     
-    heapRelease(string.address);
+    heapRelease(string->address);
 }
 
 String createStringFromByte(int n) // allocates heap memory
@@ -42,14 +42,14 @@ String createStringFromLiteral(char* cString) // allocates heap memory
     return createStringFromSource(cString, size);
 }
 
-String createStringClone(String string) // allocates heap memory
+String createStringClone(String* string) // allocates heap memory
 {   
-    return createStringFromSource(string.address, string.size);
+    return createStringFromSource(string->address, string->size);
 }
 
-String createStringFromBuffer(Buffer buffer) // allocates heap memory
+String createStringFromBuffer(Buffer* buffer) // allocates heap memory
 {   
-    return createStringFromSource(buffer.address + buffer.margin, buffer.size);
+    return createStringFromSource(buffer->address + buffer->margin, buffer->size);
 }
 
 String createStringFromLong(long number) // allocates heap memory

@@ -8,14 +8,14 @@ void testReadTextFile()
     String filename = makeStringFromLiteral("../builtin/builtin.h");        
     String file = readTextFile(filename);
 
-    String string = createSubstring(file, 1, 18);
+    String string = createSubstring(&file, 1, 18);
     String expected = makeStringFromLiteral("// # Copyright (c)");
 
-    if (! stringsAreEqual(expected, string)) { 
+    if (! stringsAreEqual(&expected, &string)) { 
         printf("readTextFile FAILS!\n"); 
         exit(1);
     }
     
-    releaseString(file);
-    releaseString(string);
+    releaseString(&file);
+    releaseString(&string);
 }

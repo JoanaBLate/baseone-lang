@@ -10,11 +10,11 @@ void testPrintStringA()
  // printf("\n");
     
     printf("- printing empty string runes: ");
-    printStringRunes(empty);
+    printStringRunes(&empty);
     printf("\n");
     
     printf("- printing empty string bytes: ");
-    printStringBytes(empty);
+    printStringBytes(&empty);
     printf("\n");
 }
 
@@ -30,11 +30,11 @@ void testPrintStringB()
  // printf("\n");
     
     printf("- printing string runes: ");
-    printStringRunes(string);
+    printStringRunes(&string);
     printf("\n");
     
     printf("- printing string bytes: ");
-    printStringBytes(string);
+    printStringBytes(&string);
     printf("\n");
 }
 
@@ -47,11 +47,11 @@ void testPrintStringC()
  // printf("\n");
     
     printf("- printing string runes: ");
-    printStringRunes(string);
+    printStringRunes(&string);
     printf("\n");
     
     printf("- printing string bytes: ");
-    printStringBytes(string);
+    printStringBytes(&string);
     printf("\n");
 }
 

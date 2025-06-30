@@ -27,18 +27,18 @@ String makeStringFromLiteral(char* cString) // just the struct
     return makeString(cString, size);
 }
 
-String makeStringCopy(String string) // just the struct
+String makeStringCopy(String* string) // just the struct
 {   
-    if (string.size == 0) { return makeStringEmpty(); }
+    if (string->size == 0) { return makeStringEmpty(); }
     
-    return makeString(string.address, string.size);
+    return makeString(string->address, string->size);
 }
 
 // for type compatibility of builtin function arguments ONLY
-String makeStringFromBuffer(Buffer buffer) // just the struct 
+String makeStringFromBuffer(Buffer* buffer) // just the struct 
 {   
-    if (buffer.size == 0) { return makeStringEmpty(); }
+    if (buffer->size == 0) { return makeStringEmpty(); }
     
-    return makeString(buffer.address + buffer.margin, buffer.size);
+    return makeString(buffer->address + buffer->margin, buffer->size);
 }
 

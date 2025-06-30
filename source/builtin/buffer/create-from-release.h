@@ -1,9 +1,9 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void releaseBuffer(Buffer buffer)
+void releaseBuffer(Buffer* buffer)
 {
-    heapRelease(buffer.address);
+    heapRelease(buffer->address);
 }
 
 Buffer createBufferEmpty() // allocates heap memory
