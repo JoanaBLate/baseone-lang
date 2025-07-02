@@ -1,8 +1,6 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-// replace start //////////////////////////////////////////////////////////////
-
 void bufferReplaceStart(Buffer* buffer, long count, String* chunk)
 {    
     if (count < 1) { count = 0; }
@@ -42,8 +40,6 @@ void bufferReplaceStart(Buffer* buffer, long count, String* chunk)
     
     memcpy(buffer->address, chunk->address, chunk->size);
 }
-
-// replace end ////////////////////////////////////////////////////////////////
 
 void bufferReplaceEnd(Buffer* buffer, long count, String* chunk)
 {    

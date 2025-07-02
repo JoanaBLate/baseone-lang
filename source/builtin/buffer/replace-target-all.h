@@ -5,9 +5,9 @@
 
 bool _bufferReplace(Buffer* buffer, String* target, String* chunk, long relativePosition) // may allocate heap memory
 {
-    if (relativePosition == -1) { return false; } // target not found
+    if (relativePosition == 0) { return false; } // target not found
     
-    long absolutePosition = buffer->margin + relativePosition;
+    long absolutePosition = buffer->margin + relativePosition - 1; // adjusted to zero base index
     
     // just enough room
     if (target->size == chunk->size) 
@@ -55,7 +55,7 @@ bool _bufferReplace(Buffer* buffer, String* target, String* chunk, long relative
         
         long b = a + deltaRight;
       
-        bufferMoveRange(buffer, a + 1, buffer->size, b + 1); // arguments adjusted to one base index
+        bufferMoveRange(buffer, a, buffer->size, b); // arguments are one base index
         
         neededSpace -= deltaRight;
     }
@@ -76,7 +76,7 @@ bool _bufferReplace(Buffer* buffer, String* target, String* chunk, long relative
         absolutePosition -= deltaLeft;
     }
     
-    // copyng the chunk
+    // copying the chunk
     memcpy(buffer->address + absolutePosition, chunk->address, chunk->size);
     
     return true;
@@ -84,14 +84,14 @@ bool _bufferReplace(Buffer* buffer, String* target, String* chunk, long relative
    
 bool bufferReplace(Buffer* buffer, String* target, String* chunk) // may allocate heap memory
 {
-    long position = bufferIndexOf(buffer, target) - 1; // '-1' adjusts to zero index
+    long position = bufferIndexOf(buffer, target);
     
     return _bufferReplace(buffer, target, chunk, position);
 }
 
 bool bufferReplaceLast(Buffer* buffer, String* target, String* chunk) // may allocate heap memory
 {
-    long position = bufferLastIndexOf(buffer, target) - 1; // '-1' adjusts to zero index
+    long position = bufferLastIndexOf(buffer, target);
     
     return _bufferReplace(buffer, target, chunk, position);
 }

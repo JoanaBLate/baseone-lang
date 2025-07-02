@@ -45,17 +45,19 @@ Buffer createBufferFromLiteral(char* cString) // allocates heap memory
     return buffer;
 }
 
-Buffer createBufferFromString(String string) // allocates heap memory
+Buffer createBufferFromString(String* string) // allocates heap memory
 {   
-    long capacity = string.size;
+    long capacity = string->size;
     
-    if (capacity < 1) { return createBufferEmpty(); }
+    Buffer buffer = createBuffer(capacity);
     
-    char* address = heapAllocate(capacity);
+    if (capacity < 1) { return buffer; }
     
-    Buffer buffer = { address, capacity, 0, string.size };
+    buffer.address = heapAllocate(capacity);
+    
+    buffer.size = capacity;
 
-    memcpy(buffer.address, string.address, string.size);
+    memcpy(buffer.address, string->address, string->size);
     
     return buffer;
 }

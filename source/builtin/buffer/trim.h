@@ -1,81 +1,115 @@
 // # Copyright (c) 2024 - 2025 Feudal Code Limitada - MIT license #
 
 
-void bufferTrimStart(Buffer* buffer)
+bool bufferTrimStart(Buffer* buffer)
 {
+    bool changed = false;
+    
     while (true)
     {
-        if (buffer->size == 0) { return; }
+        if (buffer->size == 0) { return changed; }
         
-        if ((unsigned char) buffer->address[buffer->margin] > ' ') { return; }
+        if ((unsigned char) buffer->address[buffer->margin] > ' ') { break; }
         
         buffer->margin += 1; buffer->size -= 1;
+        
+        changed = true;
     }
+    
+    return changed;
 }
 
-void bufferTrimEnd(Buffer* buffer)
+bool bufferTrimEnd(Buffer* buffer)
 {
+    bool changed = false;
+    
     while (true)
     {
-        if (buffer->size == 0) { return; }
+        if (buffer->size == 0) { return changed; }
         
         long index = buffer->margin + buffer->size - 1;
         
-        if ((unsigned char) buffer->address[index] > ' ') { return; }
+        if ((unsigned char) buffer->address[index] > ' ') { break; }
     
-        buffer->size -= 1;          
+        buffer->size -= 1;  
+        
+        changed = true;
     }
+    
+    return changed;
 }
 
-void bufferTrim(Buffer* buffer)
+bool bufferTrim(Buffer* buffer)
 {
-    bufferTrimStart(buffer);
+    bool changed = false;
+    
+    if (bufferTrimStart(buffer)) { changed = true; }
 
-    bufferTrimEnd(buffer);
+    if (bufferTrimEnd(buffer)) { changed = true; }
+    
+    return changed;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void bufferTrimStartTarget(Buffer* buffer, String* target)
+bool bufferTrimStartTarget(Buffer* buffer, String* target)
 {
+    bool changed = false;
+    
     while (true)
     {
         String virtual = makeStringFromBuffer(buffer);
         
-        if (! stringStartsWith(&virtual, target)) { return; }
+        if (! stringStartsWith(&virtual, target)) { break; }
         
         buffer->margin += target->size; buffer->size -= target->size;
+        
+        changed = true;
     }
+    
+    return changed;
 }
 
-void bufferTrimEndTarget(Buffer* buffer, String* target)
+bool bufferTrimEndTarget(Buffer* buffer, String* target)
 {
+    bool changed = false;
+    
     while (true)
     {
         String virtual = makeStringFromBuffer(buffer);
         
-        if (! stringEndsWith(&virtual, target)) { return; }
+        if (! stringEndsWith(&virtual, target)) { break; }
         
         buffer->size -= target->size;
+        
+        changed = true;
     }
+    
+    return changed;
 }
 
-void bufferTrimTarget(Buffer* buffer, String* target)
+bool bufferTrimTarget(Buffer* buffer, String* target)
 {
-    bufferTrimStartTarget(buffer, target);
+    bool changed = false;
+    
+    if (bufferTrimStartTarget(buffer, target)) { changed = true; }
 
-    bufferTrimEndTarget(buffer, target);
+    if (bufferTrimEndTarget(buffer, target)) { changed = true; }
+    
+    return changed;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void bufferTrimStartAny(Buffer* buffer, String* sample)
+bool bufferTrimStartAny(Buffer* buffer, String* sample)
 {
+    bool changed = false;
+    
     while (buffer->size > 0)
     {
         char* bufferHead = buffer->address + buffer->margin;
         
-        bool changed = false;
+        bool modified = false;
         
         for (int n = 0; n < sample->size; n++)
         {
@@ -83,20 +117,24 @@ void bufferTrimStartAny(Buffer* buffer, String* sample)
             
             if (*bufferHead != c) { continue; }
         
-            buffer->margin += 1; buffer->size -= 1; changed = true; break;
+            buffer->margin += 1; buffer->size -= 1; modified = true; changed = true; break;
         }
         
-        if (! changed) { return; }
+        if (! modified) { break; }
     }
+    
+    return changed;
 }
 
-void bufferTrimEndAny(Buffer* buffer, String* sample)
+bool bufferTrimEndAny(Buffer* buffer, String* sample)
 {
+    bool changed = false;
+    
     while (buffer->size > 0)
     {
         char* bufferTail = buffer->address + buffer->margin + buffer->size - 1;
         
-        bool changed = false;
+        bool modified = false;
         
         for (int n = 0; n < sample->size; n++)
         {
@@ -104,17 +142,23 @@ void bufferTrimEndAny(Buffer* buffer, String* sample)
             
             if (*bufferTail != c) { continue; }
         
-            buffer->size -= 1; changed = true; break;
+            buffer->size -= 1; modified = true; changed = true; break;
         }
         
-        if (! changed) { return; }
+        if (! modified) { break; }
     }
+    
+    return changed;
 }
 
-void bufferTrimAny(Buffer* buffer, String* sample)
+bool bufferTrimAny(Buffer* buffer, String* sample)
 {
-    bufferTrimStartAny(buffer, sample);
+    bool changed = false;
     
-    bufferTrimEndAny(buffer, sample);
+    if (bufferTrimStartAny(buffer, sample)) { changed = true; }
+    
+    if (bufferTrimEndAny(buffer, sample)) { changed = true; }
+    
+    return changed;
 }
 

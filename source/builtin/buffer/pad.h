@@ -9,20 +9,29 @@ void bufferPadStart(Buffer* buffer, String* chunk, long count)
     
     bufferMaybeExpandCapacity(buffer, padLength);
 
-    buffer->size += padLength;
-    
     if (buffer->margin >= padLength)
     {
         buffer->margin -= padLength;
+        
+        buffer->size += padLength;
     }
     else
     {
         long deltaRight = padLength - buffer->margin;
         
-        bufferMoveRange(buffer, 1, buffer->size, 1 + deltaRight); // adjusted to one base index
+        long origin = buffer->margin + 1; // one base index
         
+        long length = buffer->size;
+        
+        long destiny = origin + deltaRight; // one base index
+
         buffer->margin = 0;
+        
+        buffer->size += padLength;
+        
+        bufferMoveRange(buffer, origin, length, destiny);
     }
+    
     for (long n = 0; n < count; n++)
     {
         long start = buffer->margin + (n * chunk->size);
@@ -31,34 +40,44 @@ void bufferPadStart(Buffer* buffer, String* chunk, long count)
     }
 }
 
-/*
-
-String createStringPadEnd(String string, String chunk, long count)
+void bufferPadEnd(Buffer* buffer, String* chunk, long count)
 {
-    if (count < 1) { return createStringClone(string); }
-    
-    if (chunk->size == 0) { return createStringClone(string); }
-    
-    long bufferSize = (count * chunk->size) + string.size;
-            
-    char* buffer = heapAllocate(bufferSize);
-    
-    memcpy(buffer, string.address, string.size);
-    
-    long index = string.size - 1;
-    
-    while (count > 0) {
-    
-        count -= 1;
+    long padLength = count * chunk->size;
         
-        for (long n = 0; n < chunk->size; n++) {
+    if (padLength < 1) { return; }
     
-            index += 1;
-            
-            buffer[index] = chunk->address[n];
-        }
+    bufferMaybeExpandCapacity(buffer, padLength);
+    
+    long hiddenTail = buffer->capacity - buffer->margin - buffer->size;
+    
+    if (hiddenTail >= padLength)
+    {
+        buffer->size += padLength;
     }
-    
-    return makeString(buffer, bufferSize);
+    else
+    {
+        long length = buffer->size;
+        
+        long deltaLeft = padLength - hiddenTail;
+        
+        buffer->margin -= deltaLeft;
+
+        buffer->size += deltaLeft; // temporary
+        
+        long origin = 1 + deltaLeft; // one base index
+        
+        long destiny = 1; // one base index
+        
+        bufferMoveRange(buffer, origin, length, destiny);
+
+        buffer->size = length + padLength; // definitive
+    }
+   
+    for (long n = 0; n < count; n++)
+    {
+        long start = buffer->margin + buffer->size - padLength + (n * chunk->size);
+  
+        for (long index = 0; index < chunk->size; index++) { buffer->address[start + index] = chunk->address[index]; }
+    }
 }
-*/
+

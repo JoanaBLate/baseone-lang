@@ -15,3 +15,10 @@ void printBufferRunes(Buffer* buffer)
     printStringRunes(&string);
 }
 
+void displayBuffer(Buffer* buffer)
+{
+    printf("[");
+    printBufferRunes(buffer);
+    printf("]  margin: %li   size: %li  capacity: %li\n",  buffer->margin, buffer->size, buffer->capacity);
+}
+
