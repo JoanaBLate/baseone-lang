@@ -16,6 +16,7 @@
 #include "replace--test.h"
 #include "remove--test.h"
 #include "pad--test.h"
+#include "reset-clear-fill--test.h"
 #include "print--test.h"
 
 void testBuffer()
@@ -69,6 +70,10 @@ void testBuffer()
     
     testBufferPadStart();
     testBufferPadEnd();
+    
+    testBufferReset();
+    testBufferClear();
+    testBufferFill();
     
     testPrintBufferA();
     testPrintBufferB();

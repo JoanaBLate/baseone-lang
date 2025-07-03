@@ -26,7 +26,7 @@ unsigned char bufferByteAt(Buffer* buffer, long index) // one base index
     return (unsigned char) buffer->address[buffer->margin + index - 1];
 }
 
-bool buffersAreEqual(Buffer* bufferA, Buffer* bufferB)
+bool buffersAreEqual(Buffer* bufferA, Buffer* bufferB) // just about the 'visible' part!
 {
     String stringA = makeStringFromBuffer(bufferA); // virtual
     String stringB = makeStringFromBuffer(bufferB); // virtual

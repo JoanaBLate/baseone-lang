@@ -36,6 +36,7 @@
 #include "buffer/replace-target-all.h"
 #include "buffer/remove.h"
 #include "buffer/pad.h"
+#include "buffer/reset-clear-fill.h"
 
 //#include "array/array.h"
 

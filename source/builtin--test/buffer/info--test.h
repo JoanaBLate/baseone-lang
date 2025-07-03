@@ -89,6 +89,13 @@ void testBuffersCompare()
         printf("buffersCompare FAILS!\n");
         exit(1);
     }
+    
+    releaseBuffer(&bEmpty1);
+    releaseBuffer(&bEmpty2);
+    releaseBuffer(&bSource1);
+    releaseBuffer(&bSource2);
+    releaseBuffer(&bSource3);
+    releaseBuffer(&bSource4);
 }
 
 void testBufferContains()
