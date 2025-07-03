@@ -21,7 +21,6 @@
 void testBuffer()
 {    
     testBufferByteAt();
-    testBuffersAreEquals();
     testBufferContains();
     testBufferStartsWith();
     testBufferEndsWith();
@@ -30,6 +29,8 @@ void testBuffer()
     testBufferIndexOfAfter();
     testBufferLastIndexOfBefore();
     testBufferCountOf();
+    testBuffersCompare();
+    testBuffersAreEquals();
     
     testBufferMoveRange();
     

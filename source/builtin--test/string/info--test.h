@@ -44,6 +44,31 @@ void testStringsAreEquals()
     }
 }
 
+void testStringsCompare()
+{
+    printf("- testing stringsCompare\n"); 
+    
+    bool fails = false;
+
+    String empty1 = makeStringEmpty();    
+    String empty2 = makeStringEmpty();
+    String source1 = makeStringFromLiteral("Life is ∆ rock");
+    String source2 = makeStringFromLiteral("Life is ∆ rock");
+    String source3 = makeStringFromLiteral("Life is ∆ ");
+    String source4 = makeStringFromLiteral("LIfe is ∆ ");
+
+    if (stringsCompare(&empty1,  &empty2)  !=  0) { fails = true; }
+    if (stringsCompare(&empty1,  &source2) != -1) { fails = true; }
+    if (stringsCompare(&source1, &source2) !=  0) { fails = true; }
+    if (stringsCompare(&source1, &source3) != +1) { fails = true; }
+    if (stringsCompare(&source4, &source3) != -1) { fails = true; }
+    
+    if (fails) { 
+        printf("stringsCompare FAILS!\n");
+        exit(1);
+    }
+}
+
 void testStringContains()
 {
     printf("- testing stringContains\n"); 

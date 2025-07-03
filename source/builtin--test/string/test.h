@@ -21,7 +21,6 @@
 void testString()
 {
     testStringCharCodeAt();
-    testStringsAreEquals();
     testStringContains();
     testStringStartsWith();
     testStringEndsWith();
@@ -30,6 +29,8 @@ void testString()
     testStringIndexOfAfter();
     testStringLastIndexOfBefore();
     testStringCountOf();
+    testStringsCompare();
+    testStringsAreEquals();
 
     testCreateStringFromByte();
     testCreateStringClone();

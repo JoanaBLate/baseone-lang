@@ -59,6 +59,38 @@ void testBuffersAreEquals()
     releaseBuffer(&empty2);
 }
 
+void testBuffersCompare()
+{
+    printf("- testing buffersCompare\n"); 
+    
+    bool fails = false;
+    
+    Buffer bEmpty1 = createBufferEmpty();
+    Buffer bEmpty2 = createBufferEmpty();
+    Buffer bSource1 = createBufferFromLiteral("Life is ∆ rock");
+    Buffer bSource2 = createBufferFromLiteral("Life is ∆ rock");
+    Buffer bSource3 = createBufferFromLiteral("Life is ∆ ");
+    Buffer bSource4 = createBufferFromLiteral("LIfe is ∆ ");
+
+    String empty1  = makeStringFromBuffer(&bEmpty1);    
+    String empty2  = makeStringFromBuffer(&bEmpty2);
+    String source1 = makeStringFromBuffer(&bSource1);
+    String source2 = makeStringFromBuffer(&bSource2);
+    String source3 = makeStringFromBuffer(&bSource3);
+    String source4 = makeStringFromBuffer(&bSource4);
+
+    if (stringsCompare(&empty1,  &empty2)  !=  0) { fails = true; }
+    if (stringsCompare(&empty1,  &source2) != -1) { fails = true; }
+    if (stringsCompare(&source1, &source2) !=  0) { fails = true; }
+    if (stringsCompare(&source1, &source3) != +1) { fails = true; }
+    if (stringsCompare(&source4, &source3) != -1) { fails = true; }
+    
+    if (fails) { 
+        printf("buffersCompare FAILS!\n");
+        exit(1);
+    }
+}
+
 void testBufferContains()
 {
     printf("- testing bufferContains\n"); 

@@ -34,6 +34,14 @@ bool buffersAreEqual(Buffer* bufferA, Buffer* bufferB)
     return stringsAreEqual(&stringA, &stringB);
 }
 
+char buffersCompare(Buffer* bufferA, Buffer* bufferB)
+{
+    String stringA = makeStringFromBuffer(bufferA); // virtual
+    String stringB = makeStringFromBuffer(bufferB); // virtual
+    
+    return stringsCompare(&stringA, &stringB);
+}
+
 bool bufferStartsWith(Buffer* buffer, String* target)
 {  
     String string = makeStringFromBuffer(buffer); // virtual  

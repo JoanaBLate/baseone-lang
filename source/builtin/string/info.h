@@ -27,6 +27,24 @@ bool stringsAreEqual(String* stringA, String* stringB)
     return true;
 }
 
+char stringsCompare(String* stringA, String* stringB)
+{
+    long size = stringA->size;
+    
+    if (stringB->size < size) { size = stringB->size; }    
+        
+    for (long index = 0; index < size; index ++)
+    {
+        if (stringA->address[index] < stringB->address[index]) { return -1; }
+        if (stringA->address[index] > stringB->address[index]) { return +1; }
+    }
+    
+    if (stringA->size < stringB->size) { return -1; }
+    if (stringA->size > stringB->size) { return +1; }
+
+    return 0;
+}
+
 bool stringStartsWith(String* string, String* target)
 {    
     if (target->size == 0) { return false; }
