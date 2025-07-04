@@ -22,6 +22,7 @@
 #include "string/replace.h"
 #include "string/remove.h"
 #include "string/trim.h"
+#include "string/number.h"
 
 #include "buffer/info.h"
 #include "buffer/print.h"

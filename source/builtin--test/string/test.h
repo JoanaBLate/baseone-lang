@@ -17,6 +17,7 @@
 #include "replace--test.h"
 #include "substring--test.h"
 #include "trim--test.h"
+#include "number--test.h"
 
 void testString()
 {
@@ -64,7 +65,9 @@ void testString()
     
     testStringTrimStart();
     testStringTrimEnd();
-    testStringTrim();   
+    testStringTrim();  
+    
+    testStringParseLong(); 
 
     testPrintStringA();
     testPrintStringB();
